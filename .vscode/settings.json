@@ -13,7 +13,22 @@
   "tslint.alwaysShowRuleFailuresAsWarnings": true,
   "tslint.alwaysShowStatus": true,
   "cSpell.words": [
-    "asar"
+    "Guid",
+    "Localstorage",
+    "appbar",
+    "asar",
+    "haspopup",
+    "injectable",
+    "inversify",
+    "middlewares",
+    "onstatechange",
+    "onupdatefound",
+    "precached",
+    "roboto",
+    "selectable",
+    "snackbar",
+    "urljoin",
+    "yxxx"
   ],
   "cSpell.ignoreRegExpList": ["/.*ー/"],
   "editor.formatOnSave": true,
