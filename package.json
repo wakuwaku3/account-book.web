@@ -1,0 +1,39 @@
+{
+  "name": "account-book.web",
+  "version": "0.1.0",
+  "homepage": "./",
+  "private": true,
+  "main": "electron-main.js",
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-scripts-ts": "3.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "test-ci": "CI=true react-scripts-ts test --env=jsdom",
+    "mock": "node .mock/server.js",
+    "electron": "run-s electron-cleanup build electron-move electron-package electron-cleanup-temp",
+    "electron-cleanup": "rimraf ./dist",
+    "electron-cleanup-temp": "rimraf ./dist/temp",
+    "electron-move": "run-p electron-move:*",
+    "electron-move:web": "cpx \"./build/**/*\" ./dist/temp/build",
+    "electron-move:main": "cpx \"./electron-main.js\" ./dist/temp",
+    "electron-move:package": "cpx \"./package.json\" ./dist/temp",
+    "electron-package": "electron-packager ./dist/temp --platform=all --arch=all --out=dist --asar --overwrite --icon=\"./public/favicon.ico\" "
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.13",
+    "@types/node": "^10.12.21",
+    "@types/react": "^16.8.1",
+    "@types/react-dom": "^16.0.11",
+    "typescript": "^3.3.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^src/(.+)": "<rootDir>/src/$1"
+    }
+  }
+}
