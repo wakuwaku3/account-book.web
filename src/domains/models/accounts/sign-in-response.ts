@@ -1,5 +1,5 @@
 import { Claim } from './claim';
 
-export interface SignInResult {
+export interface SignInResponse {
   claim?: Claim;
 }

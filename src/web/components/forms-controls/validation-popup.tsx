@@ -16,6 +16,7 @@ const styles = createStyles({
   root: {
     padding: 10,
     marginBottom: 20,
+    maxWidth: 400,
   },
 });
 interface Props {
@@ -37,7 +38,12 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
           return (
             <div key={i}>
               <FormControlLabel
-                control={<Checkbox checked={state === 'valid'} />}
+                control={
+                  <Checkbox
+                    style={{ padding: '2px 12px' }}
+                    checked={state === 'valid'}
+                  />
+                }
                 label={text}
               />
             </div>

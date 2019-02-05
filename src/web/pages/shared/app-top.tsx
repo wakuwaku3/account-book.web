@@ -6,6 +6,7 @@ import {
   Typography,
   Menu,
   MenuItem,
+  Button,
 } from '@material-ui/core';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
@@ -21,6 +22,7 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
+import { Url } from 'src/infrastructures/routing/url';
 
 const styles = createStyles({
   root: {
@@ -63,6 +65,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
       resources,
       signOut,
       classes,
+      history,
     } = createPropagationProps(this.props);
     const { anchorEl } = this.state;
     const { root, grow } = classes;
@@ -70,9 +73,11 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     return (
       <AppBar position="static" className={root}>
         <Toolbar>
-          <Typography variant="h6" color="inherit" className={grow}>
-            {resources.appName}
-          </Typography>
+          <Button color="inherit" onClick={() => history.push(Url.root)}>
+            <Typography variant="h6" color="inherit" className={grow}>
+              {resources.appName}
+            </Typography>
+          </Button>
           {authenticated && (
             <div>
               <IconButton

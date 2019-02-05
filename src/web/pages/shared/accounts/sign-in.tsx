@@ -3,7 +3,7 @@ import { createStyles, Typography } from '@material-ui/core';
 import * as React from 'react';
 import { OutlinedTextBox } from 'src/web/components/forms-controls/text-box';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { SignInModel } from 'src/domains/models/accounts/sign-in-model';
+import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { resolve } from 'src/use-cases/common/di-container';
 import { Resources } from 'src/domains/common/location/resources';
 import { Form } from 'src/web/components/forms-controls/form';
@@ -11,22 +11,31 @@ import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
-import { Cell } from 'src/web/components/layout/cell';
 import { OutlinedButton } from 'src/web/components/forms-controls/button';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { symbols } from 'src/use-cases/common/di-symbols';
+import { Link } from 'react-router-dom';
+import { Url } from 'src/infrastructures/routing/url';
 
 const styles = createStyles({
   root: {
     padding: 20,
-    maxWidth: 500,
+    maxWidth: 350,
     margin: 'auto',
     paddingBottom: 200,
+    height: '100%',
+    alignContent: 'center',
+  },
+  btn: {
+    marginBottom: 5,
   },
   form: {
     paddingTop: 20,
+  },
+  fullWidth: {
+    width: '100%',
   },
 });
 interface Props {
@@ -34,10 +43,10 @@ interface Props {
   getDefaultEmail: () => string;
 }
 interface Events {
-  signIn: (state: SignInModel) => void;
+  signIn: (state: SignInRequest) => void;
 }
 interface State {
-  model: SignInModel;
+  model: SignInRequest;
 }
 class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
   constructor(props: any) {
@@ -47,7 +56,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
       model: { email: getDefaultEmail(), password: '' },
     };
   }
-  public onChange = (name: keyof SignInModel) => (
+  public onChange = (name: keyof SignInRequest) => (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     this.setState({
@@ -59,7 +68,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
   public render() {
     const { signIn, resources, classes } = this.props;
     const { email, password } = this.state.model;
-    const { form, root } = classes;
+    const { form, root, btn, fullWidth } = classes;
     return (
       <Container className={root}>
         <Row>
@@ -73,6 +82,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 type="email"
                 onChange={this.onChange('email')}
                 label={resources.email}
+                placeholder={resources.emailPlaceholder}
               />
             </Row>
             <Row>
@@ -84,12 +94,16 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
               />
             </Row>
             <Row>
-              <Cell xs={8} />
-              <Cell xs={4}>
-                <OutlinedButton type="submit">
-                  {resources.signIn}
-                </OutlinedButton>
-              </Cell>
+              <OutlinedButton type="submit" className={btn} color="primary">
+                {resources.signIn}
+              </OutlinedButton>
+            </Row>
+            <Row>
+              <Link to={Url.passwordResetRequesting} className={fullWidth}>
+                <Typography variant="caption" color="inherit" align="right">
+                  {resources.forgotPassword}
+                </Typography>
+              </Link>
             </Row>
           </Form>
         </Row>

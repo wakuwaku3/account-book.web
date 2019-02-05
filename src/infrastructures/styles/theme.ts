@@ -28,9 +28,9 @@ export namespace CommonColors {
   export const { white, black } = MuiColors.common;
 }
 
-const { grey, indigo, yellow, red, blueGrey, pink } = colors;
+const { grey, indigo, yellow, red, blueGrey, pink, teal } = colors;
 const isLight = true;
-const primary = grey;
+const primary = teal;
 const secondary = pink;
 const type = isLight ? 'light' : 'dark';
 const muiThemeOption = { palette: { primary, secondary, type } };

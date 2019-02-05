@@ -8,6 +8,11 @@ server.use(
   jsonServer.rewriter({
     '/accounts/refresh': '/accounts-refresh',
     '/accounts/sign-in': '/accounts-sign-in',
+    '/accounts/password-reset-requesting':
+      '/accounts-password-reset-requesting',
+    '/accounts/reset-password': '/accounts-reset-password',
+    '/accounts/email': '/accounts-email',
+    '/accounts/previous-password': '/accounts-previous-password',
   }),
 );
 
@@ -15,7 +20,7 @@ server.use(
 server.use(middlewares);
 
 server.use(function(req, res, next) {
-  if (req.method === 'POST') {
+  if (req.method === 'POST' || req.method === 'PUT') {
     // POST送信を受ける場合、受けたPOST レスポンスをGETに変更する
     req.method = 'GET';
     // req.query = req.body;

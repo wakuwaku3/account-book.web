@@ -11,9 +11,9 @@ const styles = createStyles({
       fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
       height: '100%',
     },
+    div: { alignContent: 'flex-start' },
     '#root': {
       position: 'relative',
-      display: 'flex',
       width: '100%',
       overflow: 'hidden',
       height: '100%',

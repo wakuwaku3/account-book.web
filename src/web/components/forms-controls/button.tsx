@@ -31,3 +31,6 @@ Button.defaultProps = { disabled: false };
 export const OutlinedButton: React.SFC<
   ButtonProps & MuiButtonProps
 > = props => <Button {...props} variant="outlined" />;
+export const ContainedButton: React.SFC<
+  ButtonProps & MuiButtonProps
+> = props => <Button {...props} variant="contained" />;

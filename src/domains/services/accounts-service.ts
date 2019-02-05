@@ -1,6 +1,6 @@
-import { SignInModel } from 'src/domains/models/accounts/sign-in-model';
+import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { injectable } from 'inversify';
-import { SignInResult } from 'src/domains/models/accounts/sign-in-result';
+import { SignInResponse } from 'src/domains/models/accounts/sign-in-response';
 import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { inject } from 'src/infrastructures/services/inversify-helper';
@@ -8,6 +8,10 @@ import { symbols } from 'src/use-cases/common/di-symbols';
 import { IAccountsOperators } from 'src/infrastructures/stores/accounts/operators-interface';
 import { IAccountsService } from 'src/use-cases/services/interfaces/accounts-service';
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
+import { PasswordResetRequestingRequest } from '../models/accounts/password-reset-requesting-request';
+import { IValidateService } from 'src/use-cases/services/interfaces/validate-service';
+import { Message } from '../models/common/message';
+import { ResetPasswordRequest } from '../models/accounts/reset-password-request';
 
 @injectable()
 export class AccountsService implements IAccountsService {
@@ -16,8 +20,10 @@ export class AccountsService implements IAccountsService {
     @inject(symbols.messagesService) private messagesService: IMessagesService,
     @inject(symbols.accountsOperators)
     private accountsOperators: IAccountsOperators,
+    @inject(symbols.validateService)
+    private validateService: IValidateService,
   ) {}
-  public validate = (model: SignInModel) => {
+  public validateSignInModel = (model: SignInRequest) => {
     const { email, password } = model;
     let hasError = false;
     this.messagesService.clear();
@@ -37,9 +43,30 @@ export class AccountsService implements IAccountsService {
     }
     return !hasError;
   };
-  public signInAsync = async (model: SignInModel) => {
+  public validatePasswordResetRequestingModel = (
+    model: PasswordResetRequestingRequest,
+  ) => {
+    const { email } = model;
+    let hasError = false;
+    this.messagesService.clear();
+    if (!email) {
+      this.messagesService.appendMessages(({ messages, resources }) => ({
+        level: 'warning',
+        text: messages.requiredError(resources.email),
+      }));
+      hasError = true;
+    } else if (!this.validateService.validateEmailFormat(email)) {
+      this.messagesService.appendMessages(({ messages, resources }) => ({
+        level: 'warning',
+        text: messages.emailFormatError,
+      }));
+      hasError = true;
+    }
+    return !hasError;
+  };
+  public signInAsync = async (model: SignInRequest) => {
     const { errors, result } = await this.fetchService.fetchAsync<{
-      result: SignInResult;
+      result: SignInResponse;
       errors: string[];
     }>({
       url: ApiUrl.accountsSignIn,
@@ -48,10 +75,12 @@ export class AccountsService implements IAccountsService {
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(
-        ...errors.map(error => () => ({
-          level: 'error' as 'error',
-          text: error,
-        })),
+        ...errors.map(error => () =>
+          ({
+            level: 'error',
+            text: error,
+          } as Message),
+        ),
       );
       return { hasError: true };
     }
@@ -59,7 +88,52 @@ export class AccountsService implements IAccountsService {
     if (result.claim) {
       const { name } = result.claim;
       this.messagesService.appendMessages(({ messages }) => ({
-        level: 'info' as 'info',
+        level: 'info',
+        text: messages.signIn(name),
+        showDuration: 5000,
+      }));
+    }
+    return { hasError: false };
+  };
+  public requestPasswordResetAsync = async (
+    model: PasswordResetRequestingRequest,
+  ) => {
+    await this.fetchService.fetchAsync<{}>({
+      url: ApiUrl.accountsPasswordResetRequesting,
+      methodName: 'PUT',
+      body: model,
+    });
+    this.messagesService.appendMessages(({ messages }) => ({
+      level: 'info',
+      text: messages.sendPasswordResetRequestingMail,
+      showDuration: 5000,
+    }));
+  };
+  public resetPasswordAsync = async (model: ResetPasswordRequest) => {
+    const { errors, result } = await this.fetchService.fetchAsync<{
+      result: SignInResponse;
+      errors: string[];
+    }>({
+      url: ApiUrl.accountsSignIn,
+      methodName: 'POST',
+      body: model,
+    });
+    if (errors && errors.length > 0) {
+      this.messagesService.appendMessages(
+        ...errors.map(error => () =>
+          ({
+            level: 'error',
+            text: error,
+          } as Message),
+        ),
+      );
+      return { hasError: true };
+    }
+    this.accountsOperators.signIn({ result });
+    if (result.claim && model.passwordResetToken) {
+      const { name } = result.claim;
+      this.messagesService.appendMessages(({ messages }) => ({
+        level: 'info',
         text: messages.signIn(name),
         showDuration: 5000,
       }));

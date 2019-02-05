@@ -1,7 +1,7 @@
-import { SignInResult } from 'src/domains/models/accounts/sign-in-result';
+import { SignInResponse } from 'src/domains/models/accounts/sign-in-response';
 
 export interface Action {
   init: {};
-  signIn: { result: SignInResult };
+  signIn: { result: SignInResponse };
 }
 export default Action;
