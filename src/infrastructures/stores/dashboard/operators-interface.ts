@@ -1,4 +1,4 @@
 import { Operators } from '../types';
 import Action from './action';
 
-export interface IHomeIndexOperators extends Operators<Action> {}
+export interface IDashboardOperators extends Operators<Action> {}

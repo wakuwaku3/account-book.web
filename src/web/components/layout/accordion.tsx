@@ -7,7 +7,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { ThemeColorScope } from '../styles/theme-color-scope';
 
 const styles = createStyles({
-  root: {},
+  root: { width: '100%' },
   btn: {},
 });
 interface Props {
@@ -46,7 +46,8 @@ class Inner extends StyledComponentBase<typeof styles, Props, State> {
             className={btn}
             onClick={this.handleCheck}
             color="primary"
-            variant="contained"
+            variant={show ? 'outlined' : 'contained'}
+            size="small"
           >
             {subject}
           </Button>

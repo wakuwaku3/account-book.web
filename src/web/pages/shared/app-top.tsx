@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
-import { AccountCircle } from '@material-ui/icons';
+import { AccountCircle, Apps } from '@material-ui/icons';
 import * as React from 'react';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
@@ -76,6 +76,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
       <AppBar position="static" className={root}>
         <Toolbar>
           <Button color="inherit" onClick={() => history.push(Url.root)}>
+            <Apps style={{ marginRight: 5 }} />
             <Typography variant="h6" color="inherit" className={grow}>
               {resources.appName}
             </Typography>
@@ -104,9 +105,9 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 open={open}
                 onClose={this.handleClose()}
               >
-                <MenuItem onClick={this.handleClose()}>
+                {/* <MenuItem onClick={this.handleClose()}>
                   {resources.profile}
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem onClick={this.handleClose(signOut)}>
                   {resources.signOut}
                 </MenuItem>

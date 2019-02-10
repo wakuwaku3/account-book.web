@@ -13,6 +13,10 @@ server.use(
     '/accounts/reset-password': '/accounts-reset-password',
     '/accounts/email': '/accounts-email',
     '/accounts/previous-password': '/accounts-previous-password',
+    '/dashboard/2018-11-01': '/dashboard-2018-11-01',
+    '/dashboard/2018-12-01': '/dashboard-2018-12-01',
+    '/dashboard/2019-01-01': '/dashboard-2019-01-01',
+    '/dashboard/2019-02-01': '/dashboard-2019-02-01',
   }),
 );
 

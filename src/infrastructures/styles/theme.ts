@@ -60,6 +60,23 @@ const customThemeOption = {
         color: isLight ? red['700'] : red['500'],
       },
     },
+    labelCard: {
+      indigo: {
+        color: isLight ? indigo['700'] : indigo['300'],
+        borderLeftColor: isLight ? indigo['700'] : indigo['300'],
+        backgroundColor: isLight ? indigo['50'] : indigo['900'],
+      },
+      yellow: {
+        color: isLight ? yellow['800'] : yellow['500'],
+        borderLeftColor: isLight ? yellow['800'] : yellow['500'],
+        backgroundColor: isLight ? yellow['50'] : yellow['900'],
+      },
+      red: {
+        color: isLight ? red['700'] : red['500'],
+        borderLeftColor: isLight ? red['700'] : red['500'],
+        backgroundColor: isLight ? red['50'] : red['900'],
+      },
+    },
     drawer: { width: 320 },
     workspaceIcon: {
       image: {

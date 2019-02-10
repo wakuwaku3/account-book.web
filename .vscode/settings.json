@@ -17,6 +17,7 @@
     "Localstorage",
     "appbar",
     "asar",
+    "csstype",
     "haspopup",
     "injectable",
     "inversify",

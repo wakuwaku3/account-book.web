@@ -9,10 +9,11 @@ const styles = (theme: Theme) =>
   createStyles({
     toolbarDummy: theme.mixins.toolbar,
     container: {
-      height: `calc(100% - ${56}px)`,
+      height: `calc(100% - ${56 + 56}px)`,
+      overflowY: 'auto',
       alignSelf: 'center',
       [theme.breakpoints.up('sm')]: {
-        height: `calc(100% - ${64}px)`,
+        height: `calc(100% - ${64 + 56}px)`,
       },
     },
   });

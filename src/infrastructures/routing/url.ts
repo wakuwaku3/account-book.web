@@ -7,9 +7,18 @@ export namespace Url {
   export const root = '/';
   export const passwordResetRequesting = urljoin(root, 'reset-password');
   export const resetPassword = urljoin(
-    root,
-    'reset-password/:passwordResetToken',
+    passwordResetRequesting,
+    ':passwordResetToken',
   );
+  export const plan = urljoin(root, 'plan');
+  export const planCreate = urljoin(plan, 'create');
+  export const planEdit = urljoin(plan, ':id');
+  export const planEnter = urljoin(planEdit, ':month');
+  export const getPlanEnterUrl = (id: string, month: string) =>
+    urljoin(plan, id, month);
+  export const transaction = urljoin(root, 'transaction');
+  export const transactionCreate = urljoin(transaction, 'create');
+  export const transactionEdit = urljoin(transaction, ':id');
 }
 export namespace ApiUrl {
   const resolveHostname = (rootUrl: string) => {
@@ -51,4 +60,11 @@ export namespace ApiUrl {
     accounts,
     'previous-password',
   );
+  const dashboard = 'dashboard';
+  export const dashboardIndex = (month?: string) => {
+    if (month) {
+      return urljoin(mockRoot, dashboard, month);
+    }
+    return urljoin(mockRoot, dashboard);
+  };
 }

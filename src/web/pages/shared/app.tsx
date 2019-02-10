@@ -14,6 +14,7 @@ import { AppBody } from './app-body';
 import { ThemeSelectors } from 'src/infrastructures/stores/theme/selectors';
 import { createBrowserHistory } from 'history';
 import { EventMapper } from 'src/infrastructures/stores/types';
+import { AppFooter } from './app-footer';
 
 interface Props {
   theme: Theme;
@@ -26,6 +27,7 @@ const Inner: React.SFC<Props> = ({ theme }) => {
         <AuthenticateProvider>
           <AppTop />
           <AppBody />
+          <AppFooter />
         </AuthenticateProvider>
       </Router>
     </ThemeProvider>

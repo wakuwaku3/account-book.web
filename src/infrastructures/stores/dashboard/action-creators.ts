@@ -1,8 +1,9 @@
 import Action from './action';
 import { createActionCreators } from 'src/infrastructures/stores/redux-helper';
 
-const actionCreators = createActionCreators('home-index')<Action>(
+const actionCreators = createActionCreators('dashboard')<Action>(
   'setShowState',
+  'setModel',
 );
-export const { setShowState } = actionCreators;
+export const { setShowState, setModel } = actionCreators;
 export default actionCreators;

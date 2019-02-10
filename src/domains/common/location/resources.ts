@@ -15,9 +15,20 @@ export class Resources {
     'パスワード再設定したいアカウントのメールアドレスを入力してください。';
   public forgotPassword = 'パスワードを忘れた方はコチラ';
   public dashboard = 'ダッシュボード';
+  public list = '一覧';
+  public input = '入力';
   public summary = 'サマリ';
   public graph = 'グラフ';
   public plans = '計画';
+  public income = '収入';
+  public expense = '支出';
+  public currentBalance = '今月の残高';
+  public previousBalance = '前月までの残高';
+  public balance = '残高';
+  public planName = 'タイトル';
+  public planAmount = '予定金額';
+  public actualAmount = '実際の金額';
+  public entered = '入力済み';
 }
 export class ResourcesEn extends Resources {
   public email = 'Mail Address';
