@@ -14,6 +14,10 @@ export class Resources {
   public resetPasswordRequesting =
     'パスワード再設定したいアカウントのメールアドレスを入力してください。';
   public forgotPassword = 'パスワードを忘れた方はコチラ';
+  public dashboard = 'ダッシュボード';
+  public summary = 'サマリ';
+  public graph = 'グラフ';
+  public plans = '計画';
 }
 export class ResourcesEn extends Resources {
   public email = 'Mail Address';

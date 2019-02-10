@@ -28,8 +28,10 @@ const styles = createStyles({
   root: {
     position: 'absolute',
   },
-  grow: {
+  grow: {},
+  subMenuAria: {
     flexGrow: 1,
+    textAlign: 'right',
   },
 });
 interface State {
@@ -68,7 +70,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
       history,
     } = createPropagationProps(this.props);
     const { anchorEl } = this.state;
-    const { root, grow } = classes;
+    const { root, grow, subMenuAria } = classes;
     const open = Boolean(anchorEl);
     return (
       <AppBar position="static" className={root}>
@@ -79,7 +81,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
             </Typography>
           </Button>
           {authenticated && (
-            <div>
+            <div className={subMenuAria}>
               <IconButton
                 aria-owns={open ? 'menu-appbar' : undefined}
                 aria-haspopup="true"

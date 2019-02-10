@@ -9,11 +9,13 @@ import { createAccountsOperators } from '../accounts/operators';
 import { Dispatch } from 'redux';
 import { createMessagesOperators } from '../messages/operators';
 import { createThemeOperators } from '../theme/operators';
+import { createHomeIndexOperators } from '../home-index/operators';
 const {
   dispatchProvider,
   accountsOperators,
   messagesOperators,
   themeOperators,
+  homeIndexOperators,
 } = serviceSymbols;
 
 const registerOperators = <TOperators>(
@@ -38,4 +40,5 @@ export const registerServices = (container: Container) => {
   registerOperators(container, accountsOperators, createAccountsOperators);
   registerOperators(container, messagesOperators, createMessagesOperators);
   registerOperators(container, themeOperators, createThemeOperators);
+  registerOperators(container, homeIndexOperators, createHomeIndexOperators);
 };
