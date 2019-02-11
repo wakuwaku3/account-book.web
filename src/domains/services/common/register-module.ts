@@ -7,6 +7,7 @@ import { config } from 'src/domains/common/config';
 import { AccountsService } from '../accounts-service';
 import { MessagesService } from '../messages-service';
 import { DashboardService } from '../dashboard-service';
+import { TransactionService } from '../transaction-service';
 
 export const registerServices = (container: Container) => {
   container.register(serviceSymbols.config, binder =>
@@ -29,5 +30,8 @@ export const registerServices = (container: Container) => {
   );
   container.register(serviceSymbols.dashboardService, binder =>
     binder.to(DashboardService).inSingletonScope(),
+  );
+  container.register(serviceSymbols.transactionService, binder =>
+    binder.to(TransactionService).inSingletonScope(),
   );
 };

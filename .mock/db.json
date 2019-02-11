@@ -195,5 +195,38 @@
         }
       ]
     }
+  },
+  "transaction-1": {
+    "errors": [],
+    "model": {
+      "date": "2019-01-01 12:34:56",
+      "categoryId": "1",
+      "amount": 1000,
+      "note": ""
+    }
+  },
+  "transaction-2": {
+    "errors": [],
+    "model": {
+      "date": "2019-01-02 12:34:56",
+      "categoryId": "1",
+      "amount": 1000,
+      "note": ""
+    }
+  },
+  "transaction-3": {
+    "errors": [],
+    "model": {
+      "date": "2019-01-03 12:34:56",
+      "categoryId": "1",
+      "amount": 1000,
+      "note": ""
+    }
+  },
+  "transaction-create": {
+    "errors": []
+  },
+  "transaction-edit": {
+    "errors": []
   }
 }

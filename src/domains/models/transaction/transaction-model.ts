@@ -3,3 +3,6 @@ export interface TransactionCreationModel {
   categoryId: string;
   note: string;
 }
+export interface TransactionEditModel extends TransactionCreationModel {
+  date?: string;
+}

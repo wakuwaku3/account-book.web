@@ -8,6 +8,8 @@ import { IMessagesService } from './services/interfaces/messages-service';
 import { Message } from 'src/domains/models/common/message';
 import { ITransactionUseCase } from './interfaces/transaction-use-case';
 import { TransactionModel } from 'src/domains/models/transaction/transaction-index-model';
+import { TransactionEditModel } from 'src/domains/models/transaction/transaction-model';
+import { ITransactionService } from './services/interfaces/transaction-service';
 
 @injectable()
 export class TransactionUseCase implements ITransactionUseCase {
@@ -17,6 +19,8 @@ export class TransactionUseCase implements ITransactionUseCase {
     private transactionOperators: ITransactionOperators,
     @inject(symbols.messagesService)
     private messagesService: IMessagesService,
+    @inject(symbols.transactionService)
+    private transactionService: ITransactionService,
   ) {}
   public getModelAsync = async (selectedMonth?: string) => {
     const { model, errors } = await this.fetchService.fetchAsync<{
@@ -39,4 +43,30 @@ export class TransactionUseCase implements ITransactionUseCase {
     }
     this.transactionOperators.setModel(model);
   };
+  public getTransactionAsync: (
+    id: string,
+  ) => Promise<TransactionEditModel | undefined> = async id => {
+    const { model, errors } = await this.fetchService.fetchAsync<{
+      model: TransactionEditModel;
+      errors: string[];
+    }>({
+      url: ApiUrl.transactionEdit(id),
+      methodName: 'GET',
+    });
+    if (errors && errors.length > 0) {
+      this.messagesService.appendMessages(
+        ...errors.map(error => () =>
+          ({
+            level: 'error',
+            text: error,
+          } as Message),
+        ),
+      );
+      return undefined;
+    }
+    return model;
+  };
+  public createTransactionAsync = this.transactionService
+    .createTransactionAsync;
+  public editTransactionAsync = this.transactionService.editTransactionAsync;
 }

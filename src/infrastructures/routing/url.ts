@@ -77,8 +77,16 @@ export namespace ApiUrl {
   const transaction = 'transaction';
   export const transactionIndex = (month?: string) => {
     if (month) {
-      return urljoin(mockRoot, transaction, month);
+      // return urljoin(
+      //   mockRoot,
+      //   `${transaction}?${stringify({ month })}`,
+      // );
     }
     return urljoin(mockRoot, transaction);
   };
+  export const transactionEdit = (id: string) => {
+    return urljoin(mockRoot, transaction, id);
+  };
+  export const transactionCreate = urljoin(mockRoot, transaction, 'create');
+  export const transactionEditPost = urljoin(mockRoot, transaction, 'edit');
 }

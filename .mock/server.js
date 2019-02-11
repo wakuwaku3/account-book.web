@@ -17,6 +17,11 @@ server.use(
     '/dashboard/2018-12-01': '/dashboard-2018-12-01',
     '/dashboard/2019-01-01': '/dashboard-2019-01-01',
     '/dashboard/2019-02-01': '/dashboard-2019-02-01',
+    '/transaction/1': '/transaction-1',
+    '/transaction/2': '/transaction-2',
+    '/transaction/3': '/transaction-3',
+    '/transaction/create': '/transaction-create',
+    '/transaction/edit': '/transaction-edit',
   }),
 );
 

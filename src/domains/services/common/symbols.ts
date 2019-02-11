@@ -6,6 +6,7 @@ import { IValidateService } from 'src/use-cases/services/interfaces/validate-ser
 import { IAccountsService } from 'src/use-cases/services/interfaces/accounts-service';
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
 import { IDashboardService } from 'src/use-cases/services/interfaces/dashboard-service';
+import { ITransactionService } from 'src/use-cases/services/interfaces/transaction-service';
 
 export const serviceSymbols = {
   config: createRegisterSymbol<Config>(),
@@ -15,4 +16,5 @@ export const serviceSymbols = {
   accountsService: createRegisterSymbol<IAccountsService>(),
   messagesService: createRegisterSymbol<IMessagesService>(),
   dashboardService: createRegisterSymbol<IDashboardService>(),
+  transactionService: createRegisterSymbol<ITransactionService>(),
 };

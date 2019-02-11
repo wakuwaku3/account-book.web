@@ -15,7 +15,6 @@ import { PlanEdit } from '../plan/edit';
 import { PlanEnter } from '../plan/enter';
 import { TransactionIndex } from '../transaction';
 import { TransactionEdit } from '../transaction/edit';
-import { TransactionCreate } from '../transaction/create';
 
 interface Props {
   authenticated: boolean;
@@ -30,7 +29,7 @@ export const Inner: React.SFC<Props> = ({ authenticated }) => {
       <Route path={Url.transaction} component={TransactionIndex} exact={true} />
       <Route
         path={Url.transactionCreate}
-        component={TransactionCreate}
+        component={TransactionEdit}
         exact={true}
       />
       <Route
