@@ -135,7 +135,7 @@ export class AccountsService implements IAccountsService {
       this.messagesService.appendMessages(({ messages }) => ({
         level: 'info',
         text: messages.signIn(name),
-        // showDuration: 5000,
+        showDuration: 5000,
       }));
     }
     return { hasError: false };
