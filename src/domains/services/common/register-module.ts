@@ -6,6 +6,7 @@ import { ValidateService } from '../validate-service';
 import { config } from 'src/domains/common/config';
 import { AccountsService } from '../accounts-service';
 import { MessagesService } from '../messages-service';
+import { DashboardService } from '../dashboard-service';
 
 export const registerServices = (container: Container) => {
   container.register(serviceSymbols.config, binder =>
@@ -25,5 +26,8 @@ export const registerServices = (container: Container) => {
   );
   container.register(serviceSymbols.messagesService, binder =>
     binder.to(MessagesService).inSingletonScope(),
+  );
+  container.register(serviceSymbols.dashboardService, binder =>
+    binder.to(DashboardService).inSingletonScope(),
   );
 };

@@ -8,9 +8,9 @@ import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { Localizer } from 'src/domains/common/location/localizer';
 import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
-import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
 import { MonthPicker } from 'src/web/components/forms-controls/month-picker';
 import { MonthPickerModel } from 'src/domains/models/common/month-picker-model';
+import { TransactionSelectors } from 'src/infrastructures/stores/transaction/selectors';
 
 interface Props {
   monthPicker?: MonthPickerModel;
@@ -25,8 +25,8 @@ const mapStateToProps: StateMapperWithRouter<
   Props,
   Param,
   OwnProps
-> = ({ accounts, dashboard }, { history }) => {
-  const { monthPicker } = new DashboardSelectors(dashboard);
+> = ({ accounts, transaction }, { history }) => {
+  const { monthPicker } = new TransactionSelectors(transaction);
   const { localizer } = new AccountsSelectors(accounts);
   return {
     localizer,
@@ -43,7 +43,7 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     onChange: async month => await getModelAsync(month),
   };
 };
-export const DashboardMonthPicker = withConnectedRouter(
+export const TransactionMonthPicker = withConnectedRouter(
   mapStateToProps,
   mapEventToProps,
 )(MonthPicker);

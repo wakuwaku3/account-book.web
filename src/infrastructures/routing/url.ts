@@ -67,4 +67,17 @@ export namespace ApiUrl {
     }
     return urljoin(mockRoot, dashboard);
   };
+  export const dashboardApprove = urljoin(mockRoot, dashboard, 'approve');
+  export const dashboardCancelApprove = urljoin(
+    mockRoot,
+    dashboard,
+    'cancel-approve',
+  );
+  const transaction = 'transaction';
+  export const transactionIndex = (month?: string) => {
+    if (month) {
+      return urljoin(mockRoot, transaction, month);
+    }
+    return urljoin(mockRoot, transaction);
+  };
 }

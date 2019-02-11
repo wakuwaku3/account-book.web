@@ -29,6 +29,9 @@ export class Resources {
   public planAmount = '予定金額';
   public actualAmount = '実際の金額';
   public entered = '入力済み';
+  public approve = '承認';
+  public cancelApprove = '承認取消';
+  public transactionIndex = '一覧';
 }
 export class ResourcesEn extends Resources {
   public email = 'Mail Address';

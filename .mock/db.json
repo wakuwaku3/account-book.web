@@ -92,7 +92,9 @@
         ]
       },
       "summary": { "income": 3011, "expense": 2011 },
-      "plans": []
+      "plans": [],
+      "canApprove": false,
+      "canCancelApprove": true
     }
   },
   "dashboard-2018-12-01": {
@@ -112,7 +114,9 @@
         "expense": 2012,
         "previousBalance": 1000
       },
-      "plans": []
+      "plans": [],
+      "canApprove": true,
+      "canCancelApprove": false
     }
   },
   "dashboard-2019-01-01": {
@@ -132,7 +136,9 @@
         "expense": 2001,
         "previousBalance": 2000
       },
-      "plans": []
+      "plans": [],
+      "canApprove": false,
+      "canCancelApprove": false
     }
   },
   "dashboard-2019-02-01": {
@@ -152,7 +158,42 @@
         "expense": 2002,
         "previousBalance": 2000
       },
-      "plans": []
+      "plans": [],
+      "canApprove": false,
+      "canCancelApprove": false
+    }
+  },
+  "transaction": {
+    "errors": [],
+    "model": {
+      "monthPicker": {
+        "selectedMonth": "2019-01-01",
+        "selectableMonths": ["2019-01-01"]
+      },
+      "editable": true,
+      "items": [
+        {
+          "id": "1",
+          "date": "2019-01-01 12:34:56",
+          "categoryId": "1",
+          "amount": 1000,
+          "note": ""
+        },
+        {
+          "id": "2",
+          "date": "2019-01-02 12:34:56",
+          "categoryId": "1",
+          "amount": 1000,
+          "note": ""
+        },
+        {
+          "id": "3",
+          "date": "2019-01-03 12:34:56",
+          "categoryId": "1",
+          "amount": 1000,
+          "note": ""
+        }
+      ]
     }
   }
 }

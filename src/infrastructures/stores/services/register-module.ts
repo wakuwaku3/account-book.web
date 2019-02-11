@@ -10,12 +10,14 @@ import { Dispatch } from 'redux';
 import { createMessagesOperators } from '../messages/operators';
 import { createThemeOperators } from '../theme/operators';
 import { createDashboardOperators } from '../dashboard/operators';
+import { createTransactionOperators } from '../transaction/operators';
 const {
   dispatchProvider,
   accountsOperators,
   messagesOperators,
   themeOperators,
   dashboardOperators,
+  transactionOperators,
 } = serviceSymbols;
 
 const registerOperators = <TOperators>(
@@ -41,4 +43,9 @@ export const registerServices = (container: Container) => {
   registerOperators(container, messagesOperators, createMessagesOperators);
   registerOperators(container, themeOperators, createThemeOperators);
   registerOperators(container, dashboardOperators, createDashboardOperators);
+  registerOperators(
+    container,
+    transactionOperators,
+    createTransactionOperators,
+  );
 };

@@ -3,6 +3,7 @@ import { useCaseSymbols } from './use-case-symbols';
 import { MessagesUseCase } from '../messages-use-case';
 import { AccountsUseCase } from '../accounts-use-case';
 import { DashboardUseCase } from '../dashboard-use-case';
+import { TransactionUseCase } from '../transaction-use-case';
 
 export const registerUseCases = (container: Container) => {
   container.register(useCaseSymbols.accountsUseCase, binder =>
@@ -13,5 +14,8 @@ export const registerUseCases = (container: Container) => {
   );
   container.register(useCaseSymbols.dashboardUseCase, binder =>
     binder.to(DashboardUseCase).inSingletonScope(),
+  );
+  container.register(useCaseSymbols.transactionUseCase, binder =>
+    binder.to(TransactionUseCase).inSingletonScope(),
   );
 };

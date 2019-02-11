@@ -6,12 +6,14 @@ import { themeReducer } from './theme';
 import { ReducerBuilders } from './types';
 import { createMappedObject } from 'src/infrastructures/common/object-helper';
 import { dashboardReducer } from './dashboard';
+import { transactionReducer } from './transaction';
 
 const builders: ReducerBuilders<StoredState> = {
   accounts: accountsReducer,
   messages: messagesReducer,
   theme: themeReducer,
   dashboard: dashboardReducer,
+  transaction: transactionReducer,
 };
 export const createAppStore = (initialState: StoredState) => {
   const reducers = createMappedObject(initialState, builders);

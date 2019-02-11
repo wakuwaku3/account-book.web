@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
-import { createStyles, Typography } from '@material-ui/core';
+import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -16,17 +16,22 @@ import { Accordion } from 'src/web/components/layout/accordion';
 import { DashboardShowState } from 'src/domains/models/home/dashboard-show-state';
 import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
-import { MonthPicker } from './month-picker';
+import { DashboardMonthPicker } from './month-picker';
 import { Summary } from './summary';
 import { Plans } from './plans';
+import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
 
 const styles = createStyles({
   root: { padding: 20 },
+  subject: { paddingRight: 20 },
 });
 interface Props {
   resources: Resources;
   history: History;
   showState: DashboardShowState;
+  canApprove: boolean;
+  canCancelApprove: boolean;
+  selectedMonth?: string;
 }
 interface Param {}
 interface OwnProps {}
@@ -36,19 +41,41 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts, dashboard }, { history }) => {
-  const { showState } = dashboard;
+  const {
+    showState,
+    canApprove,
+    canCancelApprove,
+    selectedMonth,
+  } = new DashboardSelectors(dashboard);
   const { resources } = new AccountsSelectors(accounts);
-  return { resources, history, showState };
+  return {
+    resources,
+    history,
+    showState,
+    canApprove,
+    canCancelApprove,
+    selectedMonth,
+  };
 };
 interface Events {
   setShowState: (showState: DashboardShowState) => void;
   getModelAsync: () => Promise<void>;
+  approve: (selectedMonth: string) => void;
+  cancelApprove: (selectedMonth: string) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { setShowState, getModelAsync } = resolve(symbols.dashboardUseCase);
+  const {
+    setShowState,
+    getModelAsync,
+    approveAsync,
+    cancelApproveAsync,
+  } = resolve(symbols.dashboardUseCase);
   return {
     setShowState,
     getModelAsync,
+    approve: async selectedMonth => await approveAsync(selectedMonth),
+    cancelApprove: async selectedMonth =>
+      await cancelApproveAsync(selectedMonth),
   };
 };
 interface State {}
@@ -65,16 +92,38 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     setShowState({ ...newShowState });
   };
   public render() {
-    const { resources, classes, showState } = createPropagationProps(
-      this.props,
-    );
+    const {
+      resources,
+      classes,
+      showState,
+      canApprove,
+      canCancelApprove,
+      approve,
+      cancelApprove,
+      selectedMonth,
+    } = createPropagationProps(this.props);
     const { showGraph, showPlans } = showState;
-    const { root } = classes;
+    const { root, subject } = classes;
     return (
       <Container className={root}>
         <Row>
-          <Typography variant="h4">{resources.dashboard}</Typography>
-          <MonthPicker />
+          <Typography variant="h4" className={subject}>
+            {resources.dashboard}
+          </Typography>
+          {selectedMonth && (canApprove || canCancelApprove) && (
+            <Button
+              variant={canApprove ? 'contained' : 'outlined'}
+              onClick={() =>
+                canApprove
+                  ? approve(selectedMonth)
+                  : cancelApprove(selectedMonth)
+              }
+              color="secondary"
+            >
+              {resources.approve}
+            </Button>
+          )}
+          <DashboardMonthPicker />
         </Row>
         <Row>
           <Summary />
@@ -96,7 +145,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
             subject={resources.plans}
             onChange={s => this.handleChange({ showPlans: s })}
           >
-            <Plans/>
+            <Plans />
           </Accordion>
         </Row>
       </Container>

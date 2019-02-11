@@ -5,6 +5,7 @@ import { IGuidProvider } from 'src/infrastructures/common/services/interfaces/gu
 import { IValidateService } from 'src/use-cases/services/interfaces/validate-service';
 import { IAccountsService } from 'src/use-cases/services/interfaces/accounts-service';
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
+import { IDashboardService } from 'src/use-cases/services/interfaces/dashboard-service';
 
 export const serviceSymbols = {
   config: createRegisterSymbol<Config>(),
@@ -13,4 +14,5 @@ export const serviceSymbols = {
   validateService: createRegisterSymbol<IValidateService>(),
   accountsService: createRegisterSymbol<IAccountsService>(),
   messagesService: createRegisterSymbol<IMessagesService>(),
+  dashboardService: createRegisterSymbol<IDashboardService>(),
 };

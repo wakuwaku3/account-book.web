@@ -1,33 +1,29 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from './common/di-symbols';
-import { IDashboardOperators } from 'src/infrastructures/stores/dashboard/operators-interface';
+import { ITransactionOperators } from 'src/infrastructures/stores/transaction/operators-interface';
 import { IFetchService } from './services/interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { DashboardModel } from 'src/domains/models/home/dashboard-model';
 import { IMessagesService } from './services/interfaces/messages-service';
 import { Message } from 'src/domains/models/common/message';
-import { IDashboardService } from './services/interfaces/dashboard-service';
-import { IDashboardUseCase } from './interfaces/dashboard-use-case';
+import { ITransactionUseCase } from './interfaces/transaction-use-case';
+import { TransactionModel } from 'src/domains/models/transaction/transaction-index-model';
 
 @injectable()
-export class DashboardUseCase implements IDashboardUseCase {
+export class TransactionUseCase implements ITransactionUseCase {
   constructor(
     @inject(symbols.fetchService) private fetchService: IFetchService,
-    @inject(symbols.dashboardOperators)
-    private dashboardOperators: IDashboardOperators,
+    @inject(symbols.transactionOperators)
+    private transactionOperators: ITransactionOperators,
     @inject(symbols.messagesService)
     private messagesService: IMessagesService,
-    @inject(symbols.dashboardService)
-    private dashboardService: IDashboardService,
   ) {}
-  public setShowState = this.dashboardOperators.setShowState;
   public getModelAsync = async (selectedMonth?: string) => {
     const { model, errors } = await this.fetchService.fetchAsync<{
-      model: DashboardModel;
+      model: TransactionModel;
       errors: string[];
     }>({
-      url: ApiUrl.dashboardIndex(selectedMonth),
+      url: ApiUrl.transactionIndex(selectedMonth),
       methodName: 'GET',
     });
     if (errors && errors.length > 0) {
@@ -41,8 +37,6 @@ export class DashboardUseCase implements IDashboardUseCase {
       );
       return;
     }
-    this.dashboardOperators.setModel(model);
+    this.transactionOperators.setModel(model);
   };
-  public approveAsync = this.dashboardService.approveAsync;
-  public cancelApproveAsync = this.dashboardService.cancelApproveAsync;
 }
