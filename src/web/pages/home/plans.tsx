@@ -5,7 +5,6 @@ import {
   Table,
   TableHead,
   TableRow,
-  TableCell,
   TableBody,
   Checkbox,
   IconButton,
@@ -24,6 +23,7 @@ import { Localizer } from 'src/domains/common/location/localizer';
 import { Edit } from '@material-ui/icons';
 import { Url } from 'src/infrastructures/routing/url';
 import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
+import { TableCell } from 'src/web/components/table/table-cell';
 
 const styles = createStyles({
   root: { width: '100%', overflow: 'auto' },
@@ -85,9 +85,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
         <TableBody>
           {plans.map(plan => (
             <TableRow key={plan.id}>
-              <TableCell component="th" scope="row">
-                {plan.name}
-              </TableCell>
+              <TableCell>{plan.name}</TableCell>
               <TableCell align="right">
                 {localizer.formatMoney(plan.planAmount)}
               </TableCell>

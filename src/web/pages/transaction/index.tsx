@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
-import { createStyles, Typography, Fab } from '@material-ui/core';
+import { createStyles, Typography } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
-import { History } from 'history';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
@@ -15,15 +14,13 @@ import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { TransactionMonthPicker } from './month-picker';
-import { Add } from '@material-ui/icons';
-import { Url } from 'src/infrastructures/routing/url';
+import { TransactionList } from './list';
 
 const styles = createStyles({
   root: { padding: 20 },
 });
 interface Props {
   resources: Resources;
-  history: History;
 }
 interface Param {}
 interface OwnProps {}
@@ -32,9 +29,9 @@ const mapStateToProps: StateMapperWithRouter<
   Props,
   Param,
   OwnProps
-> = ({ accounts }, { history }) => {
+> = ({ accounts }, {}) => {
   const { resources } = new AccountsSelectors(accounts);
-  return { resources, history };
+  return { resources };
 };
 interface Events {
   getModelAsync: () => Promise<void>;
@@ -55,7 +52,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     await getModelAsync();
   }
   public render() {
-    const { resources, classes, history } = createPropagationProps(this.props);
+    const { resources, classes } = createPropagationProps(this.props);
     const { root } = classes;
     return (
       <Container className={root}>
@@ -64,13 +61,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
           <TransactionMonthPicker />
         </Row>
         <Row>
-          <Fab
-            color="primary"
-            size="small"
-            onClick={() => history.push(Url.transactionCreate)}
-          >
-            <Add />
-          </Fab>
+          <TransactionList />
         </Row>
       </Container>
     );

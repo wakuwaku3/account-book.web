@@ -3,7 +3,10 @@ import { SnackbarOrigin } from '@material-ui/core/Snackbar';
 import { MessageBar } from './message-bar';
 import { Theme } from 'src/infrastructures/styles/theme';
 import { Message } from 'src/domains/models/common/message';
-import { decorate, appendClassName } from 'src/infrastructures/styles/styles-helper';
+import {
+  decorate,
+  appendClassName,
+} from 'src/infrastructures/styles/styles-helper';
 import { createStyles } from '@material-ui/core';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 
@@ -12,17 +15,20 @@ const styles = (theme: Theme) =>
     root: {
       position: 'fixed',
       zIndex: theme.zIndex.snackbar,
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: 0,
-      },
+      width: 0,
     },
-    'root-vertical-top': { top: 0 },
-    'root-vertical-center': { top: 0, bottom: 0 },
-    'root-vertical-bottom': { bottom: 0 },
-    'root-horizontal-left': { left: 0 },
-    'root-horizontal-center': { left: 0, right: 0 },
-    'root-horizontal-right': { right: 0 },
+    bar: {
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+    },
+    'root-vertical-top': { top: 12 },
+    'root-vertical-center': { top: 12, bottom: 12 },
+    'root-vertical-bottom': { bottom: 12 },
+    'root-horizontal-left': { left: 12 },
+    'root-horizontal-center': { left: 12, right: 12 },
+    'root-horizontal-right': { right: 12 },
   });
 export interface MessageContainerProps {
   clear?: () => void;
@@ -39,7 +45,7 @@ export const MessageContainer = decorate(styles)<MessageContainerProps>(
       anchorOrigin,
       classes,
     } = createPropagationProps(props);
-    const { root } = classes;
+    const { root, bar } = classes;
     const classNames = [root];
     if (anchorOrigin) {
       classNames.push(classes['root-vertical-' + anchorOrigin.vertical]);
@@ -61,6 +67,7 @@ export const MessageContainer = decorate(styles)<MessageContainerProps>(
                     close(m.id);
                   }
                 }}
+                className={bar}
               />
             );
           })}

@@ -31,7 +31,32 @@ export class Resources {
   public entered = '入力済み';
   public approve = '承認';
   public cancelApprove = '承認取消';
-  public transactionIndex = '一覧';
+  public transactionIndex = '入出金一覧';
+  public transactionCreate = '入出金登録';
+  public transactionEdit = '入出金編集';
+  public transactionDate = '入出金日';
+  public amount = '金額';
+  public note = '備考';
+  public category = 'カテゴリ';
+  public save = '保存';
+  public reset = 'リセット';
+  public getCategoryName = (categoryId: string) => {
+    switch (categoryId) {
+      case '0':
+        return '食費';
+      case '1':
+        return '交通費';
+      case '2':
+        return '交友費';
+      case '3':
+        return '雑費';
+      case '5':
+        return '収入';
+      case '6':
+        return '貯金';
+    }
+    return 'その他';
+  };
 }
 export class ResourcesEn extends Resources {
   public email = 'Mail Address';

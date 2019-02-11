@@ -51,7 +51,13 @@ export const RadioGroup = decorate(styles)<
                 key={x.value}
                 label=""
                 {...x}
-                control={<Radio disabled={readOnly} color={radioColor} />}
+                control={
+                  <Radio
+                    disabled={readOnly}
+                    color={radioColor}
+                    checked={x.checked}
+                  />
+                }
               />
             ))}
         </MuiRadioGroup>

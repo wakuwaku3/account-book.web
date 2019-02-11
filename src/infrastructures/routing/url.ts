@@ -19,6 +19,7 @@ export namespace Url {
   export const transaction = urljoin(root, 'transaction');
   export const transactionCreate = urljoin(transaction, 'create');
   export const transactionEdit = urljoin(transaction, ':id');
+  export const getTransactionEditUrl = (id: string) => urljoin(transaction, id);
 }
 export namespace ApiUrl {
   const resolveHostname = (rootUrl: string) => {

@@ -27,6 +27,10 @@ const Inner: React.SFC<Events & Props> = ({
       messages={messages}
       close={id => onRemoveMessage(id)}
       clear={onClear}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
     />
   );
 };

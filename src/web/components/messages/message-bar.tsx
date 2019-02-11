@@ -13,15 +13,14 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
-      [theme.breakpoints.up('md')]: {
-        marginBottom: 5,
-      },
+      marginBottom: 5,
     },
     content: {
       color: theme.palette.text.primary,
       background: theme.palette.background.paper,
       display: 'flex',
       flexWrap: 'nowrap',
+      minWidth: '280px',
     },
     contentMessage: {
       overflow: 'hidden',
