@@ -1,7 +1,7 @@
 import { StyledSFC } from 'src/infrastructures/styles/types';
-import { createStyles, Typography } from '@material-ui/core';
+import { createStyles, Typography, Button } from '@material-ui/core';
 import * as React from 'react';
-import { OutlinedTextBox } from 'src/web/components/forms-controls/text-box';
+import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { resolve } from 'src/use-cases/common/di-container';
@@ -11,7 +11,6 @@ import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
-import { OutlinedButton } from 'src/web/components/forms-controls/button';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
@@ -68,7 +67,8 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       <Row>
         <Form onSubmit={() => signIn(model)} className={form}>
           <Row>
-            <OutlinedTextBox
+            <TextBox
+              variant="outlined"
               value={email}
               type="email"
               name="email"
@@ -78,7 +78,8 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             />
           </Row>
           <Row>
-            <OutlinedTextBox
+            <TextBox
+              variant="outlined"
               label={resources.password}
               value={password}
               name="password"
@@ -87,9 +88,14 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             />
           </Row>
           <Row>
-            <OutlinedButton type="submit" className={btn} color="primary">
+            <Button
+              variant="outlined"
+              type="submit"
+              className={btn}
+              color="primary"
+            >
               {resources.signIn}
-            </OutlinedButton>
+            </Button>
           </Row>
           <Row>
             <Link to={Url.passwordResetRequesting} className={fullWidth}>

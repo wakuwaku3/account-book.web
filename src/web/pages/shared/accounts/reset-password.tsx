@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
-import { createStyles, Typography } from '@material-ui/core';
+import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -15,9 +15,7 @@ import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
 import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
-import { OutlinedTextBox } from 'src/web/components/forms-controls/text-box';
 import { Cell } from 'src/web/components/layout/cell';
-import { OutlinedButton } from 'src/web/components/forms-controls/button';
 import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import {
@@ -27,6 +25,7 @@ import {
 } from 'src/domains/models/validation/validator';
 import { Messages } from 'src/domains/common/location/messages';
 import { ValidationPopup } from 'src/web/components/forms-controls/validation-popup';
+import { TextBox } from 'src/web/components/forms-controls/text-box';
 
 const styles = createStyles({
   root: {
@@ -294,7 +293,8 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
             </Row>
             {!passwordResetToken && (
               <Row>
-                <OutlinedTextBox
+                <TextBox
+                  variant="outlined"
                   value={previousPassword}
                   type="password"
                   name="previousPassword"
@@ -310,7 +310,8 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
               </Row>
             )}
             <Row>
-              <OutlinedTextBox
+              <TextBox
+                variant="outlined"
                 value={password}
                 type="password"
                 name="password"
@@ -322,7 +323,8 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
               />
             </Row>
             <Row>
-              <OutlinedTextBox
+              <TextBox
+                variant="outlined"
                 value={confirmPassword}
                 type="password"
                 name="confirmPassword"
@@ -339,9 +341,9 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
             <Row>
               <Cell xs={8} />
               <Cell xs={4}>
-                <OutlinedButton type="submit" color="primary">
+                <Button variant="outlined" type="submit" color="primary">
                   {resources.change}
-                </OutlinedButton>
+                </Button>
               </Cell>
             </Row>
           </Form>

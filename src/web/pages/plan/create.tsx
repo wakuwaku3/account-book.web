@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
-import { createStyles, Typography } from '@material-ui/core';
+import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -15,7 +15,6 @@ import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { getDefaultCategoryId } from 'src/domains/models/transaction/category';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { TransactionCreationModel } from 'src/domains/models/transaction/transaction-model';
-import { OutlinedButton } from 'src/web/components/forms-controls/button';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Url } from 'src/infrastructures/routing/url';
 
@@ -103,9 +102,9 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
             />
           </Row>
           <Row>
-            <OutlinedButton type="submit" color="primary">
+            <Button type="submit" color="primary" variant="outlined">
               {resources.save}
-            </OutlinedButton>
+            </Button>
           </Row>
         </Form>
       </Container>

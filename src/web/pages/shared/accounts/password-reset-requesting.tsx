@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledSFC } from 'src/infrastructures/styles/types';
-import { createStyles, Typography } from '@material-ui/core';
+import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -14,12 +14,11 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
 import { Form } from 'src/web/components/forms-controls/form';
-import { OutlinedTextBox } from 'src/web/components/forms-controls/text-box';
 import { Cell } from 'src/web/components/layout/cell';
-import { OutlinedButton } from 'src/web/components/forms-controls/button';
 import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { Url } from 'src/infrastructures/routing/url';
+import { TextBox } from 'src/web/components/forms-controls/text-box';
 
 const styles = createStyles({
   root: {
@@ -109,7 +108,8 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
           className={form}
         >
           <Row>
-            <OutlinedTextBox
+            <TextBox
+              variant="outlined"
               value={email}
               type="email"
               onChange={handleChange('email')}
@@ -120,9 +120,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
           <Row>
             <Cell xs={8} />
             <Cell xs={4}>
-              <OutlinedButton type="submit" color="primary">
+              <Button variant="outlined" type="submit" color="primary">
                 {resources.submit}
-              </OutlinedButton>
+              </Button>
             </Cell>
           </Row>
         </Form>

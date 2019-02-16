@@ -6,7 +6,7 @@ import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { RadioGroup } from 'src/web/components/forms-controls/radio-group';
 import { categoryIds } from 'src/domains/models/transaction/category';
-import { primaryColor } from 'src/infrastructures/styles/theme';
+import { RadioProps } from 'src/web/components/forms-controls/radio';
 
 const styles = createStyles({
   root: { paddingTop: 20 },
@@ -24,12 +24,11 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
       className={root}
       label={resources.category}
       onChange={(event, v) => onChange && onChange(v)}
-      items={categoryIds.map(categoryId => ({
+      items={categoryIds.map<Partial<RadioProps>>(categoryId => ({
         checked: categoryId === value,
         label: resources.getCategoryName(categoryId),
         value: categoryId,
       }))}
-      themeColor={primaryColor}
     />
   );
 };
