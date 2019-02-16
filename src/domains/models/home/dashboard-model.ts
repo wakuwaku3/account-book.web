@@ -11,6 +11,7 @@ export interface DashboardPlan {
   planAmount: number;
   actualAmount?: number;
   isIncome: boolean;
+  actualId: string;
 }
 export interface DashboardModel {
   monthPicker: MonthPickerModel;

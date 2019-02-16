@@ -5,6 +5,7 @@ import { AccountsUseCase } from '../accounts-use-case';
 import { DashboardUseCase } from '../dashboard-use-case';
 import { TransactionUseCase } from '../transaction-use-case';
 import { PlanUseCase } from '../plan-use-case';
+import { ActualUseCase } from '../actual-use-case';
 
 export const registerUseCases = (container: Container) => {
   container.register(useCaseSymbols.accountsUseCase, binder =>
@@ -21,5 +22,8 @@ export const registerUseCases = (container: Container) => {
   );
   container.register(useCaseSymbols.planUseCase, binder =>
     binder.to(PlanUseCase).inSingletonScope(),
+  );
+  container.register(useCaseSymbols.actualUseCase, binder =>
+    binder.to(ActualUseCase).inSingletonScope(),
   );
 };

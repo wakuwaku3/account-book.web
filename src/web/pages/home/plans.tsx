@@ -75,16 +75,30 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       <Table>
         <TableHead>
           <TableRow>
+            <TableCell />
             <TableCell>{resources.planName}</TableCell>
             <TableCell align="right">{resources.planAmount}</TableCell>
             <TableCell align="right">{resources.actualAmount}</TableCell>
-            <TableCell align="right">{resources.entered}</TableCell>
-            <TableCell />
+            <TableCell align="center">{resources.entered}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {plans.map(plan => (
             <TableRow key={plan.id}>
+              <TableCell align="left">
+                <IconButton
+                  color="primary"
+                  onClick={() => {
+                    if (plan.actualId) {
+                      history.push(Url.getActualUrl(plan.actualId));
+                      return;
+                    }
+                    history.push(Url.getActualUrl(plan.id, selectedMonth));
+                  }}
+                >
+                  <Edit />
+                </IconButton>
+              </TableCell>
               <TableCell>{plan.name}</TableCell>
               <TableCell align="right">
                 {localizer.formatMoney(plan.planAmount)}
@@ -94,24 +108,13 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
                   plan.actualAmount ? plan.actualAmount : 0,
                 )}
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="center">
                 <Checkbox
-                  checked={
-                    Boolean(plan.actualAmount) || plan.actualAmount === 0
-                  }
+                  checked={Boolean(plan.actualId)}
                   readOnly={true}
                   disableRipple={true}
                   disableTouchRipple={true}
                 />
-              </TableCell>
-              <TableCell align="right">
-                <IconButton
-                  onClick={() => {
-                    history.push(Url.getPlanEnterUrl(plan.id, selectedMonth));
-                  }}
-                >
-                  <Edit />
-                </IconButton>
               </TableCell>
             </TableRow>
           ))}

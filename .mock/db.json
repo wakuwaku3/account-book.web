@@ -61,14 +61,16 @@
           "name": "ガス代(前月)",
           "planAmount": 1000,
           "actualAmount": 2000,
-          "isIncome": false
+          "isIncome": false,
+          "actualId": "1"
         },
         {
           "id": "2",
           "name": "給与(前月)",
           "planAmount": 1000,
           "actualAmount": 2000,
-          "isIncome": true
+          "isIncome": true,
+          "actualId": "2"
         },
         {
           "id": "3",

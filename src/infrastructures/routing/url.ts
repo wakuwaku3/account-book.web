@@ -13,14 +13,18 @@ export namespace Url {
   export const plan = urljoin(root, 'plan');
   export const planCreate = urljoin(plan, 'create');
   export const planEdit = urljoin(plan, ':id');
-  export const planEnter = urljoin(planEdit, ':month');
-  export const getPlanEnterUrl = (id: string, month: string) =>
-    urljoin(plan, id, month);
   export const getPlanEditUrl = (id: string) => urljoin(plan, id);
+
   export const transaction = urljoin(root, 'transaction');
   export const transactionCreate = urljoin(transaction, 'create');
   export const transactionEdit = urljoin(transaction, ':id');
   export const getTransactionEditUrl = (id: string) => urljoin(transaction, id);
+
+  const actual = urljoin(root, 'actual');
+  export const actualEdit = urljoin(actual, ':id');
+  export const actualCreate = urljoin(actual, ':id', ':month');
+  export const getActualUrl = (id: string, month?: string) =>
+    month ? urljoin(actual, id, month) : urljoin(actual, id);
 }
 export namespace ApiUrl {
   const resolveHostname = (rootUrl: string) => {
@@ -75,6 +79,7 @@ export namespace ApiUrl {
     dashboard,
     'cancel-approve',
   );
+
   const transaction = 'transaction';
   export const transactionIndex = (month?: string) => {
     if (month) {
@@ -89,10 +94,19 @@ export namespace ApiUrl {
     return urljoin(mockRoot, transaction, id);
   };
   export const transactionCreate = urljoin(mockRoot, transaction, 'create');
+
   const plan = 'plan';
   export const planIndex = urljoin(mockRoot, plan);
   export const planEdit = (id: string) => {
     return urljoin(mockRoot, plan, id);
   };
   export const planCreate = urljoin(mockRoot, plan, 'create');
+
+  const actual = 'actual';
+  export const actualEdit = (id: string, month?: string) => {
+    if (month) {
+      return urljoin(mockRoot, actual, id, month);
+    }
+    return urljoin(mockRoot, actual, id);
+  };
 }

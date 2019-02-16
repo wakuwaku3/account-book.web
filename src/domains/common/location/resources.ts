@@ -45,9 +45,11 @@ export class Resources {
   public category = 'カテゴリ';
   public save = '保存';
   public reset = 'リセット';
+  public copy = 'コピー';
   public interval = '間隔';
   public applyStartDate = '適用開始日';
   public applyEndDate = '適用終了日';
+  public actualEnter = '実績値入力';
   public getCategoryName = (categoryId: string) => {
     switch (categoryId) {
       case '0':

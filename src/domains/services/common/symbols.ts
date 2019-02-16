@@ -8,6 +8,7 @@ import { IMessagesService } from 'src/use-cases/services/interfaces/messages-ser
 import { IDashboardService } from 'src/use-cases/services/interfaces/dashboard-service';
 import { ITransactionService } from 'src/use-cases/services/interfaces/transaction-service';
 import { IPlanService } from 'src/use-cases/services/interfaces/plan-service';
+import { IActualService } from 'src/use-cases/services/interfaces/actual-service';
 
 export const serviceSymbols = {
   config: createRegisterSymbol<Config>(),
@@ -19,4 +20,5 @@ export const serviceSymbols = {
   dashboardService: createRegisterSymbol<IDashboardService>(),
   transactionService: createRegisterSymbol<ITransactionService>(),
   planService: createRegisterSymbol<IPlanService>(),
+  actualService: createRegisterSymbol<IActualService>(),
 };

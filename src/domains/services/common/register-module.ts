@@ -9,6 +9,7 @@ import { MessagesService } from '../messages-service';
 import { DashboardService } from '../dashboard-service';
 import { TransactionService } from '../transaction-service';
 import { PlanService } from '../plan-service';
+import { ActualService } from '../actual-service';
 
 export const registerServices = (container: Container) => {
   container.register(serviceSymbols.config, binder =>
@@ -37,5 +38,8 @@ export const registerServices = (container: Container) => {
   );
   container.register(serviceSymbols.planService, binder =>
     binder.to(PlanService).inSingletonScope(),
+  );
+  container.register(serviceSymbols.actualService, binder =>
+    binder.to(ActualService).inSingletonScope(),
   );
 };
