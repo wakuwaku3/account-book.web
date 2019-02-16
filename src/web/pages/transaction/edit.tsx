@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyledComponentBase } from 'src/infrastructures/styles/types';
+import { StyledSFC } from 'src/infrastructures/styles/types';
 import {
   createStyles,
   Typography,
@@ -84,41 +84,44 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   } = resolve(symbols.transactionUseCase);
   return { createTransactionAsync, editTransactionAsync, getTransactionAsync };
 };
-interface State {
-  model: TransactionEditModel;
-}
-class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
-  constructor(props: any) {
-    super(props);
-    this.state = this.getDefaultState();
-  }
-  private reset = async () => {
-    const { id, getTransactionAsync } = this.props;
+const getDefaultState: () => TransactionEditModel = () => {
+  return { categoryId: getDefaultCategoryId(), note: '' };
+};
+const Inner: StyledSFC<typeof styles, Props & Events> = props => {
+  const {
+    resources,
+    classes,
+    localizer,
+    id,
+    getTransactionAsync,
+    editTransactionAsync,
+    createTransactionAsync,
+    history,
+  } = createPropagationProps(props);
+  const { root, btnRow, btn, progressContainer } = classes;
+  const [model, setModel] = React.useState(getDefaultState());
+  const { amount, categoryId, note, date } = model;
+  const resetById = async (tid: string) => {
+    const newModel = await getTransactionAsync(tid);
+    if (newModel) {
+      setModel(newModel);
+    }
+  };
+  React.useEffect(() => {
+    reset();
+  }, [id]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setModel({ ...model, [name]: value });
+  };
+  const reset = async () => {
     if (id) {
-      const model = await getTransactionAsync(id);
-      if (model) {
-        this.setState({ model });
-      }
+      resetById(id);
       return;
     }
-    this.setState(this.getDefaultState());
+    setModel(getDefaultState());
   };
-  private getDefaultState = () => {
-    return { model: { categoryId: getDefaultCategoryId(), note: '' } };
-  };
-  private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { model } = this.state;
-    const { name, value } = e.currentTarget;
-    this.setState({ model: { ...model, [name]: value } });
-  };
-  private submit = async () => {
-    const { id } = this.props;
-    const { model } = this.state;
-    const {
-      editTransactionAsync,
-      createTransactionAsync,
-      history,
-    } = this.props;
+  const submit = async () => {
     const hasError = id
       ? await editTransactionAsync(id, model)
       : await createTransactionAsync(model);
@@ -126,92 +129,70 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
       history.push(Url.transaction);
     }
   };
-  public async componentDidMount() {
-    const { id, getTransactionAsync } = this.props;
-    if (id) {
-      const model = await getTransactionAsync(id);
-      if (model) {
-        this.setState({ model });
-      }
-    }
-  }
-  public render() {
-    const { resources, classes, localizer, id } = createPropagationProps(
-      this.props,
-    );
-    const { root, btnRow, btn, progressContainer } = classes;
-    const { model } = this.state;
-    const { amount, categoryId, note, date } = model;
-    if (id && !date) {
-      return (
-        <div className={progressContainer}>
-          <CircularProgress />
-        </div>
-      );
-    }
-    return (
-      <Container className={root}>
-        <Form onSubmit={this.submit}>
+  return id && !date ? (
+    <div className={progressContainer}>
+      <CircularProgress />
+    </div>
+  ) : (
+    <Container className={root}>
+      <Form onSubmit={submit}>
+        <Row>
+          <Typography variant="h4">
+            {id ? resources.transactionEdit : resources.transactionCreate}
+          </Typography>
+          <div className={btnRow}>
+            <Button
+              type="button"
+              color="secondary"
+              className={btn}
+              onClick={reset}
+            >
+              <Clear />
+              {resources.reset}
+            </Button>
+            <Button type="submit" color="primary" className={btn}>
+              <Save />
+              {resources.save}
+            </Button>
+          </div>
+        </Row>
+        {date && (
           <Row>
-            <Typography variant="h4">
-              {id ? resources.transactionEdit : resources.transactionCreate}
+            <Typography variant="h6">
+              {localizer.formatDate(new Date(date))}
             </Typography>
-            <div className={btnRow}>
-              <Button
-                type="button"
-                color="secondary"
-                className={btn}
-                onClick={this.reset}
-              >
-                <Clear />
-                {resources.reset}
-              </Button>
-              <Button type="submit" color="primary" className={btn}>
-                <Save />
-                {resources.save}
-              </Button>
-            </div>
           </Row>
-          {date && (
-            <Row>
-              <Typography variant="h6">
-                {localizer.formatDate(new Date(date))}
-              </Typography>
-            </Row>
-          )}
-          <Row>
-            <TextBox
-              value={amount ? amount : amount === 0 ? amount : ''}
-              name="amount"
-              type="number"
-              label={resources.amount}
-              onChange={this.handleChange}
-              autoFocus={true}
-            />
-          </Row>
-          <Row>
-            <TextBox
-              value={note}
-              name="note"
-              label={resources.note}
-              onChange={this.handleChange}
-              multiline={true}
-            />
-          </Row>
-          <Row>
-            <CategorySelector
-              value={categoryId}
-              resources={resources}
-              onChange={v =>
-                this.setState({ model: { ...this.state.model, categoryId: v } })
-              }
-            />
-          </Row>
-        </Form>
-      </Container>
-    );
-  }
-}
+        )}
+        <Row>
+          <TextBox
+            value={amount ? amount : amount === 0 ? amount : ''}
+            name="amount"
+            type="number"
+            label={resources.amount}
+            onChange={handleChange}
+            autoFocus={true}
+          />
+        </Row>
+        <Row>
+          <TextBox
+            value={note}
+            name="note"
+            label={resources.note}
+            onChange={handleChange}
+            multiline={true}
+          />
+        </Row>
+        <Row>
+          <CategorySelector
+            value={categoryId}
+            resources={resources}
+            onChange={v => setModel({ ...model, categoryId: v })}
+          />
+        </Row>
+      </Form>
+    </Container>
+  );
+};
 const StyledInner = decorate(styles)(Inner);
 export const TransactionEdit = withConnectedRouter(
   mapStateToProps,

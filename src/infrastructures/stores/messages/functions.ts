@@ -4,30 +4,26 @@ import Action from './action';
 
 const functions: ReducerFunctions<State, Action> = {
   clear: s => {
-    const newState = Object.assign({}, s, { messageGeneratorArgs: [] });
-    return newState;
+    return { ...s, messageGeneratorArgs: [] };
   },
   removeMessage: (s, { id }) => {
-    return Object.assign({}, s, {
+    return {
+      ...s,
       messageGeneratorArgs: s.messageGeneratorArgs.filter(x => x.id !== id),
-    });
+    };
   },
   showMessage: (s, { messageGeneratorArgs, append }) => {
     const array = (append ? s.messageGeneratorArgs : []).concat(
       messageGeneratorArgs,
     );
-    return Object.assign({}, s, {
-      messageGeneratorArgs: array,
-    });
+    return { ...s, messageGeneratorArgs: array };
   },
 
   showMessages: (s, { messageGeneratorArgs, append }) => {
     const array = (append ? s.messageGeneratorArgs : []).concat(
       messageGeneratorArgs,
     );
-    return Object.assign({}, s, {
-      messageGeneratorArgs: array,
-    });
+    return { ...s, messageGeneratorArgs: array };
   },
 };
 export default functions;

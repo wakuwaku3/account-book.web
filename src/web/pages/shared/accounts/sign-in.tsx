@@ -1,4 +1,4 @@
-import { StyledComponentBase } from 'src/infrastructures/styles/types';
+import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles, Typography } from '@material-ui/core';
 import * as React from 'react';
 import { OutlinedTextBox } from 'src/web/components/forms-controls/text-box';
@@ -45,72 +45,64 @@ interface Props {
 interface Events {
   signIn: (state: SignInRequest) => void;
 }
-interface State {
-  model: SignInRequest;
-}
-class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
-  constructor(props: any) {
-    super(props);
-    const { getDefaultEmail } = this.props;
-    this.state = {
-      model: { email: getDefaultEmail(), password: '' },
-    };
-  }
-  public onChange = (name: keyof SignInRequest) => (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    this.setState({
-      model: Object.assign({}, this.state.model, {
-        [name]: e.currentTarget.value,
-      }),
+const Inner: StyledSFC<typeof styles, Props & Events> = props => {
+  const { signIn, resources, classes, getDefaultEmail } = props;
+  const [model, setModel] = React.useState({
+    email: getDefaultEmail(),
+    password: '',
+  });
+  const { email, password } = model;
+  const { form, root, btn, fullWidth } = classes;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setModel({
+      ...model,
+      [name]: value,
     });
   };
-  public render() {
-    const { signIn, resources, classes } = this.props;
-    const { email, password } = this.state.model;
-    const { form, root, btn, fullWidth } = classes;
-    return (
-      <Container className={root}>
-        <Row>
-          <Typography variant="h4">{resources.signIn}</Typography>
-        </Row>
-        <Row>
-          <Form onSubmit={() => signIn(this.state.model)} className={form}>
-            <Row>
-              <OutlinedTextBox
-                value={email}
-                type="email"
-                onChange={this.onChange('email')}
-                label={resources.email}
-                placeholder={resources.emailPlaceholder}
-              />
-            </Row>
-            <Row>
-              <OutlinedTextBox
-                label={resources.password}
-                value={password}
-                type="password"
-                onChange={this.onChange('password')}
-              />
-            </Row>
-            <Row>
-              <OutlinedButton type="submit" className={btn} color="primary">
-                {resources.signIn}
-              </OutlinedButton>
-            </Row>
-            <Row>
-              <Link to={Url.passwordResetRequesting} className={fullWidth}>
-                <Typography variant="caption" color="inherit" align="right">
-                  {resources.forgotPassword}
-                </Typography>
-              </Link>
-            </Row>
-          </Form>
-        </Row>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container className={root}>
+      <Row>
+        <Typography variant="h4">{resources.signIn}</Typography>
+      </Row>
+      <Row>
+        <Form onSubmit={() => signIn(model)} className={form}>
+          <Row>
+            <OutlinedTextBox
+              value={email}
+              type="email"
+              name="email"
+              onChange={handleChange}
+              label={resources.email}
+              placeholder={resources.emailPlaceholder}
+            />
+          </Row>
+          <Row>
+            <OutlinedTextBox
+              label={resources.password}
+              value={password}
+              name="password"
+              type="password"
+              onChange={handleChange}
+            />
+          </Row>
+          <Row>
+            <OutlinedButton type="submit" className={btn} color="primary">
+              {resources.signIn}
+            </OutlinedButton>
+          </Row>
+          <Row>
+            <Link to={Url.passwordResetRequesting} className={fullWidth}>
+              <Typography variant="caption" color="inherit" align="right">
+                {resources.forgotPassword}
+              </Typography>
+            </Link>
+          </Row>
+        </Form>
+      </Row>
+    </Container>
+  );
+};
 const mapEventToProps: EventMapper<Events> = () => {
   const { signInAsync } = resolve(symbols.accountsUseCase);
   return {

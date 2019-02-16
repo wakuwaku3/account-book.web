@@ -125,7 +125,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       {false && (
         <Row>
           <Accordion
-            show={showGraph}
+            defaultShow={showGraph}
             subject={resources.graph}
             onChange={s => handleChange({ showGraph: s })}
           >
@@ -135,7 +135,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       )}
       <Row>
         <Accordion
-          show={showPlans}
+          defaultShow={showPlans}
           subject={resources.plans}
           onChange={s => handleChange({ showPlans: s })}
         >

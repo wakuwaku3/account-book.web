@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyledComponentBase } from 'src/infrastructures/styles/types';
+import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles, Typography } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
@@ -42,31 +42,24 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     getModelAsync,
   };
 };
-interface State {}
-class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
-  constructor(props: any) {
-    super(props);
-  }
-  public async componentDidMount() {
-    const { getModelAsync } = this.props;
-    await getModelAsync();
-  }
-  public render() {
-    const { resources, classes } = createPropagationProps(this.props);
-    const { root } = classes;
-    return (
-      <Container className={root}>
-        <Row>
-          <Typography variant="h4">{resources.transactionIndex}</Typography>
-          <TransactionMonthPicker />
-        </Row>
-        <Row>
-          <TransactionList />
-        </Row>
-      </Container>
-    );
-  }
-}
+const Inner: StyledSFC<typeof styles, Props & Events> = props => {
+  const { resources, classes, getModelAsync } = createPropagationProps(props);
+  const { root } = classes;
+  React.useEffect(() => {
+    getModelAsync();
+  }, []);
+  return (
+    <Container className={root}>
+      <Row>
+        <Typography variant="h4">{resources.transactionIndex}</Typography>
+        <TransactionMonthPicker />
+      </Row>
+      <Row>
+        <TransactionList />
+      </Row>
+    </Container>
+  );
+};
 const StyledInner = decorate(styles)(Inner);
 export const TransactionIndex = withConnectedRouter(
   mapStateToProps,

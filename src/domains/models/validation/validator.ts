@@ -64,7 +64,7 @@ export abstract class Validator<TModel extends {}> {
   };
   public getDefaultState = () => this.defaultState;
   protected validateInner = async (key: keyof TModel, model: TModel) => {
-    const newState = Object.assign({}, this.defaultState);
+    const newState = { ...this.defaultState };
     for (const x of newState[key]) {
       x.state = await this.valid(x, model);
     }
@@ -86,7 +86,7 @@ export abstract class Validator<TModel extends {}> {
     return newState;
   };
   public validateAll = async (model: TModel) => {
-    const newState = Object.assign({}, this.defaultState);
+    const newState = { ...this.defaultState };
     let hasError = false;
     for (const v of Object.values(newState)) {
       for (const x of v as Array<ValidationMessage<TModel>>) {

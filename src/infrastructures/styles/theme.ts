@@ -34,7 +34,12 @@ export const primaryColor = 'teal';
 const primary = colors[primaryColor];
 const secondary = pink;
 const type = isLight ? 'light' : 'dark';
-const muiThemeOption = { palette: { primary, secondary, type } };
+const muiThemeOption = {
+  palette: { primary, secondary, type },
+  typography: {
+    useNextVariants: true,
+  },
+};
 const customThemeOption = {
   typography: {
     useNextVariants: true,

@@ -18,17 +18,19 @@ export const mergeClasses = <TStyles>(
   ...classesList: Array<Partial<Record<keyof TStyles, string>>>
 ) => {
   const copy = {} as Record<keyof TStyles, string>;
-  classesList.filter(c => c).forEach(c => {
-    Object.keys(c)
-      .filter(key => c[key])
-      .forEach(key => {
-        if (copy[key]) {
-          copy[key] += ' ' + c[key];
-        } else {
-          copy[key] = c[key];
-        }
-      });
-  });
+  classesList
+    .filter(c => c)
+    .forEach(c => {
+      Object.keys(c)
+        .filter(key => c[key])
+        .forEach(key => {
+          if (copy[key]) {
+            copy[key] += ' ' + c[key];
+          } else {
+            copy[key] = c[key];
+          }
+        });
+    });
   return copy;
 };
 
@@ -67,5 +69,5 @@ export const createPropagationProps = <
 > => {
   const c = getInjectClasses(props, ...appendClasses);
   const { theme, className, injectClasses, ...others } = props as any;
-  return Object.assign({}, others, { classes: c });
+  return { ...others, classes: c };
 };

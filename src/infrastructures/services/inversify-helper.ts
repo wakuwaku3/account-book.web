@@ -21,7 +21,7 @@ export const createContainer = (
     resolveService: <T>(symbol: RegisterSymbol<T>): T =>
       tmp.get<T>(symbol.symbol),
   };
-  return Object.assign(tmp, extensions);
+  return { ...tmp, ...extensions };
 };
 export type Container = ReturnType<typeof createContainer>;
 export function inject<T>(symbol: RegisterSymbol<T>) {

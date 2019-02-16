@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyledComponentBase } from 'src/infrastructures/styles/types';
+import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles, Typography } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
@@ -74,71 +74,62 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     },
   };
 };
-interface State {
-  model: PasswordResetRequestingRequest;
-}
-class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
-  constructor(props: any) {
-    super(props);
-    const { getDefaultEmail } = this.props;
-    this.state = { model: { email: getDefaultEmail() } };
-  }
-  public onChange = (name: keyof PasswordResetRequestingRequest) => (
+const Inner: StyledSFC<typeof styles, Props & Events> = props => {
+  const {
+    resources,
+    classes,
+    requestPasswordReset,
+    history,
+    getDefaultEmail,
+  } = createPropagationProps(props);
+  const [model, setModel] = React.useState({ email: getDefaultEmail() });
+  const { email } = model;
+  const { root, form } = classes;
+  const handleChange = (name: keyof PasswordResetRequestingRequest) => (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    this.setState({
-      model: Object.assign({}, this.state.model, {
-        [name]: e.currentTarget.value,
-      }),
+    setModel({
+      ...model,
+      [name]: e.currentTarget.value,
     });
   };
-  public render() {
-    const {
-      resources,
-      classes,
-      requestPasswordReset,
-      history,
-    } = createPropagationProps(this.props);
-    const { email } = this.state.model;
-    const { root, form } = classes;
-    return (
-      <Container className={root}>
-        <Row>
-          <Typography variant="h4">{resources.resetPassword}</Typography>
-        </Row>
-        <Row>
-          <Typography variant="subtitle2">
-            {resources.resetPasswordRequesting}
-          </Typography>
-        </Row>
-        <Row>
-          <Form
-            onSubmit={() => requestPasswordReset(this.state.model, history)}
-            className={form}
-          >
-            <Row>
-              <OutlinedTextBox
-                value={email}
-                type="email"
-                onChange={this.onChange('email')}
-                label={resources.email}
-                placeholder={resources.emailPlaceholder}
-              />
-            </Row>
-            <Row>
-              <Cell xs={8} />
-              <Cell xs={4}>
-                <OutlinedButton type="submit" color="primary">
-                  {resources.submit}
-                </OutlinedButton>
-              </Cell>
-            </Row>
-          </Form>
-        </Row>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container className={root}>
+      <Row>
+        <Typography variant="h4">{resources.resetPassword}</Typography>
+      </Row>
+      <Row>
+        <Typography variant="subtitle2">
+          {resources.resetPasswordRequesting}
+        </Typography>
+      </Row>
+      <Row>
+        <Form
+          onSubmit={() => requestPasswordReset(model, history)}
+          className={form}
+        >
+          <Row>
+            <OutlinedTextBox
+              value={email}
+              type="email"
+              onChange={handleChange('email')}
+              label={resources.email}
+              placeholder={resources.emailPlaceholder}
+            />
+          </Row>
+          <Row>
+            <Cell xs={8} />
+            <Cell xs={4}>
+              <OutlinedButton type="submit" color="primary">
+                {resources.submit}
+              </OutlinedButton>
+            </Cell>
+          </Row>
+        </Form>
+      </Row>
+    </Container>
+  );
+};
 const StyledInner = decorate(styles)(Inner);
 export const PasswordResetRequesting = withConnectedRouter(
   mapStateToProps,

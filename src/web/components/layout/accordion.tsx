@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyledComponentBase } from 'src/infrastructures/styles/types';
+import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles, Collapse, Button } from '@material-ui/core';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { Colors } from 'src/infrastructures/styles/theme';
@@ -11,50 +11,43 @@ const styles = createStyles({
   btn: {},
 });
 interface Props {
-  show?: boolean;
+  defaultShow?: boolean;
   subject: string;
   themeColor?: keyof Colors;
   onChange?: (show: boolean) => void;
 }
-interface State {
-  show?: boolean;
-}
-class Inner extends StyledComponentBase<typeof styles, Props, State> {
-  constructor(props: any) {
-    super(props);
-    const { show } = this.props;
-    this.state = { show };
-  }
-  private handleCheck = () => {
-    const { onChange } = this.props;
-    const { show } = this.state;
+const Inner: StyledSFC<typeof styles, Props> = props => {
+  const {
+    classes,
+    children,
+    subject,
+    themeColor,
+    onChange,
+    defaultShow,
+  } = createPropagationProps(props);
+  const { root, btn } = classes;
+  const [show, setShow] = React.useState(defaultShow);
+  const handleCheck = () => {
     if (onChange) {
       onChange(!show);
     }
-    this.setState({ show: !show });
+    setShow(!show);
   };
-  public render() {
-    const { classes, children, subject, themeColor } = createPropagationProps(
-      this.props,
-    );
-    const { show } = this.state;
-    const { btn, root } = classes;
-    return (
-      <ThemeColorScope themeColor={themeColor}>
-        <div className={root}>
-          <Button
-            className={btn}
-            onClick={this.handleCheck}
-            color="primary"
-            variant={show ? 'outlined' : 'contained'}
-            size="small"
-          >
-            {subject}
-          </Button>
-          <Collapse in={show}>{children}</Collapse>
-        </div>
-      </ThemeColorScope>
-    );
-  }
-}
+  return (
+    <ThemeColorScope themeColor={themeColor}>
+      <div className={root}>
+        <Button
+          className={btn}
+          onClick={handleCheck}
+          color="primary"
+          variant={show ? 'outlined' : 'contained'}
+          size="small"
+        >
+          {subject}
+        </Button>
+        <Collapse in={show}>{children}</Collapse>
+      </div>
+    </ThemeColorScope>
+  );
+};
 export const Accordion = decorate(styles)(Inner);
