@@ -12,10 +12,15 @@ const filePath = path.join(
   __dirname,
   '../node_modules/@date-io/date-fns/build/date-fns-utils.d.ts',
 );
-const text = read(filePath).replace(
-  'import SampleLocale from',
-  'import { enUS as SampleLocale } from',
-);
+const text = read(filePath)
+  .replace(
+    'import SampleLocale from "date-fns/locale/en-US";',
+    'import { enUS as SampleLocale } from "date-fns/locale";',
+  )
+  .replace(
+    "import SampleLocale from 'date-fns/locale/en-US';",
+    "import { enUS as SampleLocale } from 'date-fns/locale';",
+  );
 console.info(filePath);
 console.info(text);
 write(filePath, text);
