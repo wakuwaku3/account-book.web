@@ -5,6 +5,7 @@ import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { LabelCard } from 'src/web/components/layout/label-card';
 import { Localizer } from 'src/domains/common/location/localizer';
+
 const styles = createStyles({
   root: {
     minWidth: 160,

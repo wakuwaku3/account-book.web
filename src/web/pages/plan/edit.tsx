@@ -29,6 +29,7 @@ import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { Clear, Save } from '@material-ui/icons';
 import { Checkbox } from 'src/web/components/forms-controls/checkbox';
+import { DatePicker } from 'src/web/components/forms-controls/date-picker';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },
@@ -96,6 +97,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     editPlanAsync,
     createPlanAsync,
     history,
+    localizer,
   } = createPropagationProps(props);
   const { root, btnRow, btn, progressContainer } = classes;
   const [model, setModel] = React.useState(getDefault());
@@ -173,7 +175,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
         </Row>
         <Row>
           <Checkbox
-            value={isIncome}
+            value={String(isIncome)}
             label={resources.isIncome}
             onChange={(e, v) => {
               setModel({ ...model, isIncome: v });
@@ -199,19 +201,23 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
           />
         </Row>
         <Row>
-          <TextBox
-            value={applyStartDate}
-            name="applyStartDate"
+          <DatePicker
+            localizer={localizer}
+            value={applyStartDate ? new Date(applyStartDate) : null}
             label={resources.applyStartDate}
-            onChange={handleChange}
+            onChange={date => {
+              setModel({ ...model, applyStartDate: date });
+            }}
           />
         </Row>
         <Row>
-          <TextBox
+          <DatePicker
+            localizer={localizer}
             value={applyEndDate}
-            name="applyEndDate"
             label={resources.applyEndDate}
-            onChange={handleChange}
+            onChange={date => {
+              setModel({ ...model, applyEndDate: date });
+            }}
           />
         </Row>
       </Form>

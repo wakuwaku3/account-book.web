@@ -1,3 +1,15 @@
+import { ja } from 'date-fns/locale';
+import DateFnsUtils from '@date-io/date-fns';
+import format from 'date-fns/esm/format';
+
+class JaLocalizedUtils extends DateFnsUtils {
+  public getDatePickerHeaderText(date: Date) {
+    return format(date, 'MMM', { locale: this.locale });
+  }
+  public getCalendarHeaderText(date: Date) {
+    return format(date, 'yyyy/MM', { locale: this.locale });
+  }
+}
 export class Localizer {
   public formatDate = (date: Date) =>
     `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()}`;
@@ -26,6 +38,12 @@ export class Localizer {
   });
   public formatMoney = (money: number) => {
     return this.formatter.format(money);
+  };
+  public datePicker = {
+    locale: ja,
+    localizedUtils: JaLocalizedUtils,
+    datePlaceholder: 'yyyy/MM/dd',
+    mask: [/\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/],
   };
 }
 export class LocalizerEn extends Localizer {
