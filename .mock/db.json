@@ -228,5 +228,76 @@
   },
   "transaction-edit": {
     "errors": []
+  },
+  "plan": {
+    "errors": [],
+    "items": [
+      {
+        "id": "1",
+        "name": "plan1",
+        "isIncome": true,
+        "amount": 1000,
+        "interval": 1,
+        "applyStartDate": "2019-01-01",
+        "applyEndDate": "2020-01-01"
+      },
+      {
+        "id": "2",
+        "name": "plan2",
+        "isIncome": true,
+        "amount": 2000,
+        "interval": 12,
+        "applyStartDate": "2019-01-02",
+        "applyEndDate": "2020-01-02"
+      },
+      {
+        "id": "3",
+        "name": "plan3",
+        "isIncome": true,
+        "amount": 3000,
+        "interval": 3,
+        "applyStartDate": "2019-01-03",
+        "applyEndDate": "2020-01-03"
+      }
+    ]
+  },
+  "plan-1": {
+    "errors": [],
+    "model": {
+      "name": "plan1",
+      "isIncome": true,
+      "amount": 1000,
+      "interval": 1,
+      "applyStartDate": "2019-01-01",
+      "applyEndDate": "2020-01-01"
+    }
+  },
+  "plan-2": {
+    "errors": [],
+    "model": {
+      "name": "plan2",
+      "isIncome": true,
+      "amount": 2000,
+      "interval": 12,
+      "applyStartDate": "2019-01-02",
+      "applyEndDate": "2020-01-02"
+    }
+  },
+  "plan-3": {
+    "errors": [],
+    "model": {
+      "name": "plan3",
+      "isIncome": true,
+      "amount": 3000,
+      "interval": 3,
+      "applyStartDate": "2019-01-03",
+      "applyEndDate": "2020-01-03"
+    }
+  },
+  "plan-create": {
+    "errors": []
+  },
+  "plan-edit": {
+    "errors": []
   }
 }

@@ -5,6 +5,7 @@ import { IMessagesOperators } from '../messages/operators-interface';
 import { IThemeOperators } from '../theme/operators-interface';
 import { IDashboardOperators } from '../dashboard/operators-interface';
 import { ITransactionOperators } from '../transaction/operators-interface';
+import { IPlanOperators } from '../plan/operators-interface';
 
 export const serviceSymbols = {
   dispatchProvider: createRegisterSymbol<IDispatchProvider>(),
@@ -13,4 +14,5 @@ export const serviceSymbols = {
   themeOperators: createRegisterSymbol<IThemeOperators>(),
   dashboardOperators: createRegisterSymbol<IDashboardOperators>(),
   transactionOperators: createRegisterSymbol<ITransactionOperators>(),
+  planOperators: createRegisterSymbol<IPlanOperators>(),
 };

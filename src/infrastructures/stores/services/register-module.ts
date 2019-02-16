@@ -11,6 +11,7 @@ import { createMessagesOperators } from '../messages/operators';
 import { createThemeOperators } from '../theme/operators';
 import { createDashboardOperators } from '../dashboard/operators';
 import { createTransactionOperators } from '../transaction/operators';
+import { createPlanOperators } from '../plan/operators';
 const {
   dispatchProvider,
   accountsOperators,
@@ -18,6 +19,7 @@ const {
   themeOperators,
   dashboardOperators,
   transactionOperators,
+  planOperators,
 } = serviceSymbols;
 
 const registerOperators = <TOperators>(
@@ -48,4 +50,5 @@ export const registerServices = (container: Container) => {
     transactionOperators,
     createTransactionOperators,
   );
+  registerOperators(container, planOperators, createPlanOperators);
 };

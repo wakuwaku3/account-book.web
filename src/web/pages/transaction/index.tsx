@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyledSFC } from 'src/infrastructures/styles/types';
-import { createStyles, Typography } from '@material-ui/core';
+import { createStyles, Typography, Fab } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -15,12 +15,17 @@ import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { TransactionMonthPicker } from './month-picker';
 import { TransactionList } from './list';
+import { Url } from 'src/infrastructures/routing/url';
+import { Add } from '@material-ui/icons';
+import { History } from 'history';
 
 const styles = createStyles({
   root: { padding: 20 },
+  addBtn: { marginLeft: 20 },
 });
 interface Props {
   resources: Resources;
+  history: History;
 }
 interface Param {}
 interface OwnProps {}
@@ -29,29 +34,39 @@ const mapStateToProps: StateMapperWithRouter<
   Props,
   Param,
   OwnProps
-> = ({ accounts }, {}) => {
+> = ({ accounts }, { history }) => {
   const { resources } = new AccountsSelectors(accounts);
-  return { resources };
+  return { resources, history };
 };
 interface Events {
-  getModelAsync: () => Promise<void>;
+  loadAsync: () => Promise<void>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { getModelAsync } = resolve(symbols.transactionUseCase);
+  const { loadAsync } = resolve(symbols.transactionUseCase);
   return {
-    getModelAsync,
+    loadAsync,
   };
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
-  const { resources, classes, getModelAsync } = createPropagationProps(props);
-  const { root } = classes;
+  const { resources, classes, loadAsync, history } = createPropagationProps(
+    props,
+  );
+  const { root, addBtn } = classes;
   React.useEffect(() => {
-    getModelAsync();
+    loadAsync();
   }, []);
   return (
     <Container className={root}>
       <Row>
         <Typography variant="h4">{resources.transactionIndex}</Typography>
+        <Fab
+          size="small"
+          color="primary"
+          className={addBtn}
+          onClick={() => history.push(Url.planCreate)}
+        >
+          <Add />
+        </Fab>
         <TransactionMonthPicker />
       </Row>
       <Row>

@@ -10,7 +10,6 @@ import { Dashboard } from 'src/web/pages/home';
 import { PasswordResetRequesting } from './accounts/password-reset-requesting';
 import { ResetPassword } from './accounts/reset-password';
 import { PlanIndex } from '../plan';
-import { PlanCreate } from '../plan/create';
 import { PlanEdit } from '../plan/edit';
 import { PlanEnter } from '../plan/enter';
 import { TransactionIndex } from '../transaction';
@@ -23,7 +22,7 @@ export const Inner: React.SFC<Props> = ({ authenticated }) => {
   return authenticated ? (
     <Switch>
       <Route path={Url.plan} component={PlanIndex} exact={true} />
-      <Route path={Url.planCreate} component={PlanCreate} exact={true} />
+      <Route path={Url.planCreate} component={PlanEdit} exact={true} />
       <Route path={Url.planEdit} component={PlanEdit} exact={true} />
       <Route path={Url.planEnter} component={PlanEnter} exact={true} />
       <Route path={Url.transaction} component={TransactionIndex} exact={true} />

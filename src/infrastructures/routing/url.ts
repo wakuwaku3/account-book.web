@@ -16,6 +16,7 @@ export namespace Url {
   export const planEnter = urljoin(planEdit, ':month');
   export const getPlanEnterUrl = (id: string, month: string) =>
     urljoin(plan, id, month);
+  export const getPlanEditUrl = (id: string) => urljoin(plan, id);
   export const transaction = urljoin(root, 'transaction');
   export const transactionCreate = urljoin(transaction, 'create');
   export const transactionEdit = urljoin(transaction, ':id');
@@ -88,5 +89,10 @@ export namespace ApiUrl {
     return urljoin(mockRoot, transaction, id);
   };
   export const transactionCreate = urljoin(mockRoot, transaction, 'create');
-  export const transactionEditPost = urljoin(mockRoot, transaction, 'edit');
+  const plan = 'plan';
+  export const planIndex = urljoin(mockRoot, plan);
+  export const planEdit = (id: string) => {
+    return urljoin(mockRoot, plan, id);
+  };
+  export const planCreate = urljoin(mockRoot, plan, 'create');
 }

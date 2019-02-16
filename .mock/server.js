@@ -22,6 +22,11 @@ server.use(
     '/transaction/3': '/transaction-3',
     '/transaction/create': '/transaction-create',
     '/transaction/edit': '/transaction-edit',
+    '/plan/1': '/plan-1',
+    '/plan/2': '/plan-2',
+    '/plan/3': '/plan-3',
+    '/plan/create': '/plan-create',
+    '/plan/edit': '/plan-edit',
   }),
 );
 
@@ -29,7 +34,7 @@ server.use(
 server.use(middlewares);
 
 server.use(function(req, res, next) {
-  if (req.method === 'POST' || req.method === 'PUT') {
+  if (req.method !== 'GET') {
     // POST送信を受ける場合、受けたPOST レスポンスをGETに変更する
     req.method = 'GET';
     // req.query = req.body;

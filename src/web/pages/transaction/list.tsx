@@ -23,6 +23,8 @@ import { TransactionSelectors } from 'src/infrastructures/stores/transaction/sel
 import { Create, Clear } from '@material-ui/icons';
 import { Url } from 'src/infrastructures/routing/url';
 import { TableCell } from 'src/web/components/table/table-cell';
+import { resolve } from 'src/use-cases/common/di-container';
+import { symbols } from 'src/use-cases/common/di-symbols';
 
 const styles = createStyles({
   root: { width: '100%', overflow: 'auto' },
@@ -63,10 +65,11 @@ const mapStateToProps: StateMapperWithRouter<
   };
 };
 interface Events {
-  deleteTransaction: (id: string) => void;
+  deleteTransactionAsync: (id: string) => Promise<void>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  return {};
+  const { deleteTransactionAsync } = resolve(symbols.transactionUseCase);
+  return { deleteTransactionAsync };
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const {
@@ -74,8 +77,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     items,
     resources,
     history,
-    deleteTransaction,
+    deleteTransactionAsync,
     localizer,
+    editable,
   } = createPropagationProps(props);
   if (!items) {
     return null;
@@ -104,7 +108,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             <TableCell align="right" className={amountColumn}>
               {resources.amount}
             </TableCell>
-            <TableCell align="right" className={noteColumn}>
+            <TableCell align="left" className={noteColumn}>
               {resources.note}
             </TableCell>
           </TableRow>
@@ -119,18 +123,20 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
                     history.push(Url.getTransactionEditUrl(item.id))
                   }
                   className={editBtn}
+                  disabled={!editable}
                 >
                   <Create />
                 </IconButton>
                 <IconButton
                   color="secondary"
-                  onClick={() => deleteTransaction(item.id)}
+                  onClick={() => deleteTransactionAsync(item.id)}
+                  disabled={!editable}
                 >
                   <Clear />
                 </IconButton>
               </TableCell>
               <TableCell align="right" className={dateColumn}>
-                {localizer.formatDate(new Date(item.date))}
+                {localizer.formatDateTime(new Date(item.date))}
               </TableCell>
               <TableCell align="right" className={categoryColumn}>
                 {resources.getCategoryName(item.categoryId)}
@@ -138,7 +144,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
               <TableCell align="right" className={amountColumn}>
                 {localizer.formatMoney(item.amount)}
               </TableCell>
-              <TableCell align="right" className={noteColumn}>
+              <TableCell align="left" className={noteColumn}>
                 {item.note}
               </TableCell>
             </TableRow>

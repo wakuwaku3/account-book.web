@@ -19,7 +19,10 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { getDefaultCategoryId } from 'src/domains/models/transaction/category';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
-import { TransactionEditModel } from 'src/domains/models/transaction/transaction-model';
+import {
+  TransactionEditModel,
+  TransactionCreationModel,
+} from 'src/domains/models/transaction/transaction-model';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Url } from 'src/infrastructures/routing/url';
 import { CategorySelector } from './category-selector';
@@ -67,7 +70,7 @@ const mapStateToProps: StateMapperWithRouter<
   return { resources, localizer, history, id };
 };
 interface Events {
-  createTransactionAsync: (model: TransactionEditModel) => Promise<boolean>;
+  createTransactionAsync: (model: TransactionCreationModel) => Promise<boolean>;
   editTransactionAsync: (
     id: string,
     model: TransactionEditModel,
@@ -159,7 +162,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
         {date && (
           <Row>
             <Typography variant="h6">
-              {localizer.formatDate(new Date(date))}
+              {localizer.formatDateTime(new Date(date))}
             </Typography>
           </Row>
         )}

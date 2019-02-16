@@ -1,8 +1,5 @@
-import { ITransactionService } from 'src/use-cases/services/interfaces/transaction-service';
-import {
-  TransactionEditModel,
-  TransactionCreationModel,
-} from '../models/transaction/transaction-model';
+import { IPlanService } from 'src/use-cases/services/interfaces/plan-service';
+import { PlanEditModel } from '../models/plan/plan-model';
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from 'src/use-cases/common/di-symbols';
@@ -10,23 +7,23 @@ import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { Message } from '../models/common/message';
-import { TransactionModel } from '../models/transaction/transaction-index-model';
-import { ITransactionOperators } from 'src/infrastructures/stores/transaction/operators-interface';
+import { PlanItem } from '../models/plan/plan-item';
+import { IPlanOperators } from 'src/infrastructures/stores/plan/operators-interface';
 
 @injectable()
-export class TransactionService implements ITransactionService {
+export class PlanService implements IPlanService {
   constructor(
     @inject(symbols.fetchService) private fetchService: IFetchService,
     @inject(symbols.messagesService)
     private messagesService: IMessagesService,
-    @inject(symbols.transactionOperators)
-    private transactionOperators: ITransactionOperators,
+    @inject(symbols.planOperators)
+    private planOperators: IPlanOperators,
   ) {}
-  public createTransactionAsync = async (model: TransactionCreationModel) => {
+  public createPlanAsync = async (model: PlanEditModel) => {
     const { errors } = await this.fetchService.fetchAsync<{
       errors: string[];
     }>({
-      url: ApiUrl.transactionCreate,
+      url: ApiUrl.planCreate,
       methodName: 'POST',
       body: model,
     });
@@ -43,14 +40,11 @@ export class TransactionService implements ITransactionService {
     }
     return true;
   };
-  public editTransactionAsync = async (
-    id: string,
-    model: TransactionEditModel,
-  ) => {
+  public editPlanAsync = async (id: string, model: PlanEditModel) => {
     const { errors } = await this.fetchService.fetchAsync<{
       errors: string[];
     }>({
-      url: ApiUrl.transactionEdit(id),
+      url: ApiUrl.planEdit(id),
       methodName: 'PUT',
       body: { ...model },
     });
@@ -67,12 +61,12 @@ export class TransactionService implements ITransactionService {
     }
     return true;
   };
-  public deleteTransactionAsync = async (id: string) => {
-    const { errors, model } = await this.fetchService.fetchAsync<{
-      model: TransactionModel;
+  public deletePlanAsync = async (id: string) => {
+    const { errors, items } = await this.fetchService.fetchAsync<{
+      items: PlanItem[];
       errors: string[];
     }>({
-      url: ApiUrl.transactionEdit(id),
+      url: ApiUrl.planEdit(id),
       methodName: 'DELETE',
     });
     if (errors && errors.length > 0) {
@@ -86,6 +80,6 @@ export class TransactionService implements ITransactionService {
       );
       return;
     }
-    this.transactionOperators.setModel(model);
+    this.planOperators.setPlans(items);
   };
 }

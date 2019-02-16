@@ -4,6 +4,7 @@ import { MessagesUseCase } from '../messages-use-case';
 import { AccountsUseCase } from '../accounts-use-case';
 import { DashboardUseCase } from '../dashboard-use-case';
 import { TransactionUseCase } from '../transaction-use-case';
+import { PlanUseCase } from '../plan-use-case';
 
 export const registerUseCases = (container: Container) => {
   container.register(useCaseSymbols.accountsUseCase, binder =>
@@ -17,5 +18,8 @@ export const registerUseCases = (container: Container) => {
   );
   container.register(useCaseSymbols.transactionUseCase, binder =>
     binder.to(TransactionUseCase).inSingletonScope(),
+  );
+  container.register(useCaseSymbols.planUseCase, binder =>
+    binder.to(PlanUseCase).inSingletonScope(),
   );
 };

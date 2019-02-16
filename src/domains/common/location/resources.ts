@@ -20,12 +20,16 @@ export class Resources {
   public summary = 'サマリ';
   public graph = 'グラフ';
   public plans = '計画';
+  public planIndex = '計画一覧';
+  public planEdit = '計画編集';
+  public planCreate = '計画追加';
   public income = '収入';
+  public isIncome = '収入フラグ';
   public expense = '支出';
   public currentBalance = '今月の残高';
   public previousBalance = '前月までの残高';
   public balance = '残高';
-  public planName = 'タイトル';
+  public planName = '計画名';
   public planAmount = '予定金額';
   public actualAmount = '実際の金額';
   public entered = '入力済み';
@@ -35,11 +39,15 @@ export class Resources {
   public transactionCreate = '入出金登録';
   public transactionEdit = '入出金編集';
   public transactionDate = '入出金日';
+  public intervalPerMonth = '間隔(月)';
   public amount = '金額';
   public note = '備考';
   public category = 'カテゴリ';
   public save = '保存';
   public reset = 'リセット';
+  public interval = '間隔';
+  public applyStartDate = '適用開始日';
+  public applyEndDate = '適用終了日';
   public getCategoryName = (categoryId: string) => {
     switch (categoryId) {
       case '0':

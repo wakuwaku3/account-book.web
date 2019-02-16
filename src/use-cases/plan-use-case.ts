@@ -1,33 +1,33 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from './common/di-symbols';
-import { ITransactionOperators } from 'src/infrastructures/stores/transaction/operators-interface';
+import { IPlanOperators } from 'src/infrastructures/stores/plan/operators-interface';
 import { IFetchService } from './services/interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { IMessagesService } from './services/interfaces/messages-service';
 import { Message } from 'src/domains/models/common/message';
-import { ITransactionUseCase } from './interfaces/transaction-use-case';
-import { TransactionModel } from 'src/domains/models/transaction/transaction-index-model';
-import { TransactionEditModel } from 'src/domains/models/transaction/transaction-model';
-import { ITransactionService } from './services/interfaces/transaction-service';
+import { IPlanUseCase } from './interfaces/plan-use-case';
+import { PlanEditModel } from 'src/domains/models/plan/plan-model';
+import { IPlanService } from './services/interfaces/plan-service';
+import { PlanItem } from 'src/domains/models/plan/plan-item';
 
 @injectable()
-export class TransactionUseCase implements ITransactionUseCase {
+export class PlanUseCase implements IPlanUseCase {
   constructor(
     @inject(symbols.fetchService) private fetchService: IFetchService,
-    @inject(symbols.transactionOperators)
-    private transactionOperators: ITransactionOperators,
+    @inject(symbols.planOperators)
+    private planOperators: IPlanOperators,
     @inject(symbols.messagesService)
     private messagesService: IMessagesService,
-    @inject(symbols.transactionService)
-    private transactionService: ITransactionService,
+    @inject(symbols.planService)
+    private planService: IPlanService,
   ) {}
-  public loadAsync = async (selectedMonth?: string) => {
-    const { model, errors } = await this.fetchService.fetchAsync<{
-      model: TransactionModel;
+  public loadAsync = async () => {
+    const { items, errors } = await this.fetchService.fetchAsync<{
+      items: PlanItem[];
       errors: string[];
     }>({
-      url: ApiUrl.transactionIndex(selectedMonth),
+      url: ApiUrl.planIndex,
       methodName: 'GET',
     });
     if (errors && errors.length > 0) {
@@ -41,16 +41,16 @@ export class TransactionUseCase implements ITransactionUseCase {
       );
       return;
     }
-    this.transactionOperators.setModel(model);
+    this.planOperators.setPlans(items);
   };
-  public getTransactionAsync: (
+  public getPlanAsync: (
     id: string,
-  ) => Promise<TransactionEditModel | undefined> = async id => {
+  ) => Promise<PlanEditModel | undefined> = async id => {
     const { model, errors } = await this.fetchService.fetchAsync<{
-      model: TransactionEditModel;
+      model: PlanEditModel;
       errors: string[];
     }>({
-      url: ApiUrl.transactionEdit(id),
+      url: ApiUrl.planEdit(id),
       methodName: 'GET',
     });
     if (errors && errors.length > 0) {
@@ -66,9 +66,7 @@ export class TransactionUseCase implements ITransactionUseCase {
     }
     return model;
   };
-  public createTransactionAsync = this.transactionService
-    .createTransactionAsync;
-  public editTransactionAsync = this.transactionService.editTransactionAsync;
-  public deleteTransactionAsync = this.transactionService
-    .deleteTransactionAsync;
+  public createPlanAsync = this.planService.createPlanAsync;
+  public editPlanAsync = this.planService.editPlanAsync;
+  public deletePlanAsync = this.planService.deletePlanAsync;
 }

@@ -2,6 +2,7 @@ import { createRegisterSymbol } from 'src/infrastructures/services/inversify-hel
 import { IAccountsUseCase } from '../interfaces/accounts-use-case';
 import { IMessagesUseCase } from '../interfaces/messages-use-case';
 import { IDashboardUseCase } from '../interfaces/dashboard-use-case';
+import { IPlanUseCase } from '../interfaces/plan-use-case';
 import { ITransactionUseCase } from '../interfaces/transaction-use-case';
 
 export const useCaseSymbols = {
@@ -9,4 +10,5 @@ export const useCaseSymbols = {
   messagesUseCase: createRegisterSymbol<IMessagesUseCase>(),
   dashboardUseCase: createRegisterSymbol<IDashboardUseCase>(),
   transactionUseCase: createRegisterSymbol<ITransactionUseCase>(),
+  planUseCase: createRegisterSymbol<IPlanUseCase>(),
 };
