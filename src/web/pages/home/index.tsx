@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyledComponentBase } from 'src/infrastructures/styles/types';
+import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
@@ -78,80 +78,74 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
       await cancelApproveAsync(selectedMonth),
   };
 };
-interface State {}
-class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
-  constructor(props: any) {
-    super(props);
-  }
-  public async componentDidMount() {
-    const { getModelAsync } = this.props;
-    await getModelAsync();
-  }
-  private handleChange = (newShowState: DashboardShowState) => {
-    const { setShowState } = this.props;
+
+const Inner: StyledSFC<typeof styles, Props & Events> = props => {
+  const {
+    resources,
+    classes,
+    showState,
+    canApprove,
+    canCancelApprove,
+    approve,
+    cancelApprove,
+    selectedMonth,
+    setShowState,
+    getModelAsync,
+  } = createPropagationProps(props);
+  const { showGraph, showPlans } = showState;
+  const { root, subject } = classes;
+  const handleChange = (newShowState: DashboardShowState) => {
     setShowState({ ...newShowState });
   };
-  public render() {
-    const {
-      resources,
-      classes,
-      showState,
-      canApprove,
-      canCancelApprove,
-      approve,
-      cancelApprove,
-      selectedMonth,
-    } = createPropagationProps(this.props);
-    const { showGraph, showPlans } = showState;
-    const { root, subject } = classes;
-    return (
-      <Container className={root}>
-        <Row>
-          <Typography variant="h4" className={subject}>
-            {resources.dashboard}
-          </Typography>
-          {selectedMonth && (canApprove || canCancelApprove) && (
-            <Button
-              variant={canApprove ? 'contained' : 'outlined'}
-              onClick={() =>
-                canApprove
-                  ? approve(selectedMonth)
-                  : cancelApprove(selectedMonth)
-              }
-              color="secondary"
-            >
-              {resources.approve}
-            </Button>
-          )}
-          <DashboardMonthPicker />
-        </Row>
-        <Row>
-          <Summary />
-        </Row>
-        {false && (
-          <Row>
-            <Accordion
-              show={showGraph}
-              subject={resources.graph}
-              onChange={s => this.handleChange({ showGraph: s })}
-            >
-              {resources.change}
-            </Accordion>
-          </Row>
+  React.useEffect(() => {
+    getModelAsync();
+  }, []);
+  return (
+    <Container className={root}>
+      <Row>
+        <Typography variant="h4" className={subject}>
+          {resources.dashboard}
+        </Typography>
+        {selectedMonth && (canApprove || canCancelApprove) && (
+          <Button
+            variant={canApprove ? 'contained' : 'outlined'}
+            onClick={() =>
+              canApprove ? approve(selectedMonth) : cancelApprove(selectedMonth)
+            }
+            color="secondary"
+          >
+            {resources.approve}
+          </Button>
         )}
+        <DashboardMonthPicker />
+      </Row>
+      <Row>
+        <Summary />
+      </Row>
+      {false && (
         <Row>
           <Accordion
-            show={showPlans}
-            subject={resources.plans}
-            onChange={s => this.handleChange({ showPlans: s })}
+            show={showGraph}
+            subject={resources.graph}
+            onChange={s => handleChange({ showGraph: s })}
           >
-            <Plans />
+            {resources.change}
           </Accordion>
         </Row>
-      </Container>
-    );
-  }
-}
+      )}
+      <Row>
+        <Accordion
+          show={showPlans}
+          subject={resources.plans}
+          onChange={s => handleChange({ showPlans: s })}
+        >
+          <Plans />
+        </Accordion>
+      </Row>
+    </Container>
+  );
+};
+
 const StyledInner = decorate(styles)(Inner);
 export const Dashboard = withConnectedRouter(mapStateToProps, mapEventToProps)(
   StyledInner,
