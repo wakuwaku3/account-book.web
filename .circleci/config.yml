@@ -25,6 +25,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: 'install firebase'
+          command: npm i -g firebase-tools
+      - run:
           name: install packages
           command: npm i
       - run:
@@ -35,7 +38,7 @@ jobs:
           command: npm run build
       - run:
           name: 'Publish'
-          command: npx firebase deploy --only hosting --project product --token $FIREBASE_TOKEN
+          command: firebase deploy --only hosting --project product --token $FIREBASE_TOKEN
 workflows:
   version: 2
   build:
