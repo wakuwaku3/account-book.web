@@ -7,7 +7,6 @@
     "**/build": true,
     "**/dist": true,
     "**/.firebase": true,
-    ".firebaserc": true,
     "firebase-debug.log": true
   },
   "editor.tabSize": 2,

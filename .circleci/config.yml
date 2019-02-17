@@ -1,8 +1,10 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+executors:
+  node:
     docker:
-      - image: node
+      - image: circleci/node:latest:
+  build:
+    executor: node
     steps:
       - checkout
       - run:
@@ -17,3 +19,36 @@ jobs:
       - run:
           name: test
           command: npm run test
+  publish:
+    executor: node
+    steps:
+      - checkout
+      - run:
+          name: install packages
+          command: npm i
+      - run:
+          name: post install
+          command: npm run postinstall
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: "Publish"
+          command: npx firebase deploy --only hosting --project product --token $FIREBASE_TOKEN
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              ignore: /.*/
+      - publish:
+          context: account-book-firebase-publish
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^[0-9]+\.[0-9]+\.[0-9]+$/
