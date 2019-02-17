@@ -25,9 +25,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: 'install firebase'
-          command: npm i -g firebase-tools
-      - run:
           name: install packages
           command: npm i
       - run:
