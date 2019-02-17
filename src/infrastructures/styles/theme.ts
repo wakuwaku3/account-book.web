@@ -30,7 +30,7 @@ export namespace CommonColors {
 
 const { grey, indigo, yellow, red, blueGrey, pink } = colors;
 const isLight = true;
-export const primaryColor = 'teal';
+export const primaryColor: keyof typeof colors = 'blue';
 const primary = colors[primaryColor];
 const secondary = pink;
 const type = isLight ? 'light' : 'dark';

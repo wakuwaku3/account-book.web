@@ -17,11 +17,6 @@ import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import {
-  ActualCreationModel,
-  ActualEditModel,
-  ActualModel,
-} from 'src/domains/actual/actual-model';
 import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Localizer } from 'src/domains/common/location/localizer';
@@ -29,6 +24,11 @@ import { Clear, Save, Sync } from '@material-ui/icons';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
+import {
+  ActualModel,
+  ActualCreationModel,
+  ActualEditModel,
+} from 'src/domains/models/actual/actual-model';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },

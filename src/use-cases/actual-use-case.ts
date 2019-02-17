@@ -5,9 +5,9 @@ import { IFetchService } from './services/interfaces/fetch-service';
 import { IMessagesService } from './services/interfaces/messages-service';
 import { IActualUseCase } from './interfaces/actual-use-case';
 import { IActualService } from './services/interfaces/actual-service';
-import { ActualModel } from 'src/domains/actual/actual-model';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { Message } from 'src/domains/models/common/message';
+import { ActualModel } from 'src/domains/models/actual/actual-model';
 
 @injectable()
 export class ActualUseCase implements IActualUseCase {

@@ -2,7 +2,7 @@ import {
   ActualModel,
   ActualCreationModel,
   ActualEditModel,
-} from 'src/domains/actual/actual-model';
+} from 'src/domains/models/actual/actual-model';
 
 export interface IActualUseCase {
   getActualAsync: (

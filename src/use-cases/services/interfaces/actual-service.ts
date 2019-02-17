@@ -1,7 +1,7 @@
 import {
   ActualCreationModel,
   ActualEditModel,
-} from 'src/domains/actual/actual-model';
+} from 'src/domains/models/actual/actual-model';
 
 export interface IActualService {
   addActualAsync: (model: ActualCreationModel) => Promise<boolean>;
