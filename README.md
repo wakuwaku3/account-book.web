@@ -41,3 +41,10 @@ account-book の Web サーバー
 `npm run electron`
 
 ※ linux 環境で windows 用パッケージを作成する場合 `wine` がインストールされている必要がある
+
+#### Release
+
+```sh
+git tag 1.0.0
+git push origin --tags
+```
