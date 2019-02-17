@@ -34,8 +34,8 @@ jobs:
           name: build
           command: npm run build
       - run:
-          name: 'Publish'
-          command: npx firebase deploy --only hosting --project product --token $FIREBASE_TOKEN
+          name: publish
+          command: npx firebase deploy --only hosting --project product --token ${FIREBASE_TOKEN}
 workflows:
   version: 2
   build:
