@@ -5,7 +5,10 @@
     "**/.git": true,
     "**/node_modules": true,
     "**/build": true,
-    "**/dist": true
+    "**/dist": true,
+    "**/.firebase": true,
+    ".firebaserc": true,
+    "firebase-debug.log": true
   },
   "editor.tabSize": 2,
   "prettier.trailingComma": "all",

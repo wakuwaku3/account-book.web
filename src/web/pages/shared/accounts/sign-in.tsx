@@ -29,6 +29,7 @@ const styles = createStyles({
   },
   btn: {
     marginBottom: 5,
+    width: '100%',
   },
   form: {
     paddingTop: 20,

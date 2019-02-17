@@ -46,6 +46,7 @@ const styles = createStyles({
     margin: 0,
     border: 0,
   },
+  btn: { width: '100%' },
 });
 interface Props {
   resources: Resources;
@@ -271,7 +272,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     const { resources, classes, passwordResetToken } = createPropagationProps(
       this.props,
     );
-    const { root, form, hidden } = classes;
+    const { root, form, hidden, btn } = classes;
     const { email, model, anchor, validationState } = this.state;
     const { password, previousPassword, confirmPassword } = model;
     const validationMessages =
@@ -341,7 +342,12 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
             <Row>
               <Cell xs={8} />
               <Cell xs={4}>
-                <Button variant="outlined" type="submit" color="primary">
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  color="primary"
+                  className={btn}
+                >
                   {resources.change}
                 </Button>
               </Cell>

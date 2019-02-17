@@ -32,6 +32,7 @@ const styles = createStyles({
   form: {
     paddingTop: 20,
   },
+  btn: { width: '100%' },
 });
 interface Props {
   resources: Resources;
@@ -83,7 +84,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   } = createPropagationProps(props);
   const [model, setModel] = React.useState({ email: getDefaultEmail() });
   const { email } = model;
-  const { root, form } = classes;
+  const { root, form, btn } = classes;
   const handleChange = (name: keyof PasswordResetRequestingRequest) => (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -120,7 +121,12 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
           <Row>
             <Cell xs={8} />
             <Cell xs={4}>
-              <Button variant="outlined" type="submit" color="primary">
+              <Button
+                variant="outlined"
+                type="submit"
+                color="primary"
+                className={btn}
+              >
                 {resources.submit}
               </Button>
             </Cell>
