@@ -1,5 +1,6 @@
 import { Theme as MuiTheme, colors as MuiColors } from '@material-ui/core';
 import { FontWeightProperty } from 'csstype';
+import { ThemeOptions as MuiThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
 export const colors = {
   amber: MuiColors.amber,
@@ -34,8 +35,8 @@ export const primaryColor: keyof typeof colors = 'blue';
 const primary = colors[primaryColor];
 const secondary = pink;
 const type = isLight ? 'light' : 'dark';
-const muiThemeOption = {
-  palette: { primary, secondary, type },
+const muiThemeOption: MuiThemeOptions = {
+  palette: { primary, secondary, type, background: { default: '#fff' } },
   typography: {
     useNextVariants: true,
   },
