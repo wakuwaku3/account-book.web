@@ -15,7 +15,6 @@ import { Popup, PopupProps } from '../layout/popup';
 const styles = createStyles({
   root: {
     padding: 10,
-    marginBottom: 20,
     maxWidth: 400,
   },
 });

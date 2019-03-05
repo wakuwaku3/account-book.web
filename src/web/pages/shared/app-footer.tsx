@@ -4,6 +4,7 @@ import {
   createStyles,
   BottomNavigation,
   BottomNavigationAction,
+  createMuiTheme,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
@@ -16,6 +17,8 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { List, Atm, CalendarToday } from '@material-ui/icons';
 import { Url } from 'src/infrastructures/routing/url';
+import { ThemeProvider } from 'src/web/components/styles/theme-provider';
+import { ThemeOption } from 'src/infrastructures/styles/theme';
 
 const styles = createStyles({
   root: {},
@@ -25,6 +28,7 @@ interface Props {
   resources: Resources;
   history: History;
   authenticated: boolean;
+  themeOption: ThemeOption;
 }
 interface Param {}
 interface OwnProps {}
@@ -33,15 +37,16 @@ const mapStateToProps: StateMapperWithRouter<
   Props,
   Param,
   OwnProps
-> = ({ accounts }, { history }) => {
+> = ({ accounts, theme }, { history }) => {
   const { resources, authenticated } = new AccountsSelectors(accounts);
-  return { resources, authenticated, history };
+  return { resources, authenticated, history, themeOption: theme };
 };
 interface Events {}
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   return {};
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
+  const { themeOption } = props;
   const { resources, authenticated, classes, history } = createPropagationProps(
     props,
   );
@@ -49,24 +54,32 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   if (!authenticated) {
     return <div className={dummy} />;
   }
+  const opt = { ...themeOption };
+  if (themeOption.palette) {
+    const type = themeOption.palette.type === 'dark' ? 'light' : 'dark';
+    opt.palette = { ...themeOption.palette, type };
+  }
+  const theme = createMuiTheme(opt);
   return (
-    <BottomNavigation showLabels={true} className={root}>
-      <BottomNavigationAction
-        label={resources.input}
-        icon={<Atm />}
-        onClick={() => history.push(Url.transactionCreate)}
-      />
-      <BottomNavigationAction
-        label={resources.list}
-        icon={<List />}
-        onClick={() => history.push(Url.transaction)}
-      />
-      <BottomNavigationAction
-        label={resources.plans}
-        icon={<CalendarToday />}
-        onClick={() => history.push(Url.plan)}
-      />
-    </BottomNavigation>
+    <ThemeProvider theme={theme}>
+      <BottomNavigation showLabels={true} className={root}>
+        <BottomNavigationAction
+          label={resources.input}
+          icon={<Atm />}
+          onClick={() => history.push(Url.transactionCreate)}
+        />
+        <BottomNavigationAction
+          label={resources.list}
+          icon={<List />}
+          onClick={() => history.push(Url.transaction)}
+        />
+        <BottomNavigationAction
+          label={resources.plans}
+          icon={<CalendarToday />}
+          onClick={() => history.push(Url.plan)}
+        />
+      </BottomNavigation>
+    </ThemeProvider>
   );
 };
 const StyledInner = decorate(styles)(Inner);

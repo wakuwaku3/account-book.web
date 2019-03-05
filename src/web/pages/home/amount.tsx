@@ -8,7 +8,7 @@ import { Localizer } from 'src/domains/common/location/localizer';
 
 const styles = createStyles({
   root: {
-    minWidth: 160,
+    minWidth: 150,
     padding: 5,
     marginRight: 10,
     marginBottom: 10,

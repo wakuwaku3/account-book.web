@@ -33,6 +33,7 @@ const styles = createStyles({
     paddingTop: 50,
     maxWidth: 800,
     margin: 'auto',
+    paddingBottom: 50,
   },
   form: {
     paddingTop: 20,
@@ -47,6 +48,7 @@ const styles = createStyles({
     border: 0,
   },
   btn: { width: '100%' },
+  popover: { top: -25, left: -5, position: 'relative' },
 });
 interface Props {
   resources: Resources;
@@ -272,7 +274,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     const { resources, classes, passwordResetToken } = createPropagationProps(
       this.props,
     );
-    const { root, form, hidden, btn } = classes;
+    const { root, form, hidden, btn, popover } = classes;
     const { email, model, anchor, validationState } = this.state;
     const { password, previousPassword, confirmPassword } = model;
     const validationMessages =
@@ -356,6 +358,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
         </Row>
         {validationMessages && (
           <ValidationPopup
+            className={popover}
             popupProps={{
               anchorEl: anchor && anchor.el,
               popperProps: { placement: 'top-end' },

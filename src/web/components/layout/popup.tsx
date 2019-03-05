@@ -14,7 +14,6 @@ import { EventMapper } from 'src/infrastructures/stores/types';
 import { RefElement } from '../types';
 
 const styles = createStyles({
-  root: {},
   popper: {},
 });
 interface Props {
@@ -41,7 +40,7 @@ const mapEventToProps: EventMapper<Events, PopupProps> = () => {
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { popperProps, children, classes } = createPropagationProps(props);
   const [anchorEl1, setAnchorEl1] = React.useState<RefElement>(undefined);
-  const { root, popper } = classes;
+  const { popper } = classes;
   const open1 = Boolean(anchorEl1);
   const appendedPopper = appendClassName(popper, popperProps.className);
   const handleClose = () => {
@@ -54,17 +53,15 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   }, []);
 
   return (
-    <div className={root}>
-      <Popper
-        {...popperProps}
-        open={open1}
-        className={appendedPopper}
-        anchorEl={anchorEl1}
-        transition={true}
-      >
-        {open1 && children}
-      </Popper>
-    </div>
+    <Popper
+      {...popperProps}
+      open={open1}
+      className={appendedPopper}
+      anchorEl={anchorEl1}
+      transition={true}
+    >
+      {open1 && children}
+    </Popper>
   );
 };
 const StyledInner = decorate(styles)(Inner);

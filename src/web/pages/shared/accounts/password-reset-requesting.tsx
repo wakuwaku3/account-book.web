@@ -25,9 +25,8 @@ const styles = createStyles({
     padding: 20,
     maxWidth: 550,
     margin: 'auto',
-    paddingBottom: 200,
-    height: '100%',
     alignContent: 'center',
+    height: '90%',
   },
   form: {
     paddingTop: 20,

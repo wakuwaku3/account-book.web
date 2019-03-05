@@ -23,8 +23,7 @@ const styles = createStyles({
     padding: 20,
     maxWidth: 350,
     margin: 'auto',
-    paddingBottom: 200,
-    height: '100%',
+    height: '90%',
     alignContent: 'center',
   },
   btn: {
