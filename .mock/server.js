@@ -11,8 +11,8 @@ server.use(
     '/accounts/password-reset-requesting':
       '/accounts-password-reset-requesting',
     '/accounts/reset-password': '/accounts-reset-password',
-    '/accounts/email': '/accounts-email',
-    '/accounts/previous-password': '/accounts-previous-password',
+    '/accounts/reset-password': '/accounts-reset-password-get',
+    '/accounts/check-previous-password': '/accounts-check-previous-password',
     '/dashboard/2018-11-01': '/dashboard-2018-11-01',
     '/dashboard/2018-12-01': '/dashboard-2018-12-01',
     '/dashboard/2019-01-01': '/dashboard-2019-01-01',

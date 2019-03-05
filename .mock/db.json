@@ -29,11 +29,11 @@
       }
     }
   },
-  "accounts-email": {
+  "accounts-reset-password-get": {
     "errors": [],
     "email": "user01@example.com"
   },
-  "accounts-previous-password": {
+  "accounts-check-previous-password": {
     "errors": [],
     "same": true
   },

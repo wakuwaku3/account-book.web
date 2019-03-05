@@ -24,7 +24,7 @@ export class PlanService implements IPlanService {
       errors: string[];
     }>({
       url: ApiUrl.planCreate,
-      methodName: 'POST',
+      method: 'POST',
       body: model,
     });
     if (errors && errors.length > 0) {
@@ -45,7 +45,7 @@ export class PlanService implements IPlanService {
       errors: string[];
     }>({
       url: ApiUrl.planEdit(id),
-      methodName: 'PUT',
+      method: 'PUT',
       body: { ...model },
     });
     if (errors && errors.length > 0) {
@@ -67,7 +67,7 @@ export class PlanService implements IPlanService {
       errors: string[];
     }>({
       url: ApiUrl.planEdit(id),
-      methodName: 'DELETE',
+      method: 'DELETE',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(

@@ -10,7 +10,7 @@ export interface IAccountsService {
   signInAsync: (model: SignInRequest) => Promise<{ hasError: boolean }>;
   requestPasswordResetAsync: (
     model: PasswordResetRequestingRequest,
-  ) => Promise<void>;
+  ) => Promise<{ hasError: boolean }>;
   resetPasswordAsync: (
     request: ResetPasswordRequest,
   ) => Promise<{ hasError: boolean }>;

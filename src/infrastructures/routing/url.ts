@@ -41,30 +41,30 @@ export namespace ApiUrl {
   export const mockRoot = resolveHostname('http://localhost:3001');
   export const root = resolveHostname(config.apiUrl);
   const accounts = 'accounts';
-  export const accountsRefresh = urljoin(mockRoot, accounts, 'refresh');
-  export const accountsSignIn = urljoin(mockRoot, accounts, 'sign-in');
+  export const accountsRefresh = urljoin(root, accounts, 'refresh');
+  export const accountsSignIn = urljoin(root, accounts, 'sign-in');
   export const accountsResetPassword = urljoin(
     mockRoot,
     accounts,
     'reset-password',
   );
   export const accountsPasswordResetRequesting = urljoin(
-    mockRoot,
+    root,
     accounts,
-    'password-rest-requesting',
+    'password-reset-requesting',
   );
   export const accountsEmail = (passwordResetToken: string) => {
-    return urljoin(mockRoot, accounts, 'email');
+    return urljoin(mockRoot, accounts, 'reset-password');
     // return urljoin(
     //   mockRoot,
     //   accounts,
-    //   `email?${stringify({ passwordResetToken })}`,
+    //   `password-reset-requesting?${stringify({ passwordResetToken })}`,
     // );
   };
   export const accountsPreviousPassword = urljoin(
     mockRoot,
     accounts,
-    'previous-password',
+    'check-previous-password',
   );
   const dashboard = 'dashboard';
   export const dashboardIndex = (month?: string) => {

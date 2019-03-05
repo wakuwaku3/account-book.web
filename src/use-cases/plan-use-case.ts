@@ -28,7 +28,7 @@ export class PlanUseCase implements IPlanUseCase {
       errors: string[];
     }>({
       url: ApiUrl.planIndex,
-      methodName: 'GET',
+      method: 'GET',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(
@@ -51,7 +51,7 @@ export class PlanUseCase implements IPlanUseCase {
       errors: string[];
     }>({
       url: ApiUrl.planEdit(id),
-      methodName: 'GET',
+      method: 'GET',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(

@@ -32,12 +32,20 @@ export class AccountsUseCase implements IAccountsUseCase {
     if (!claim) {
       return;
     }
-    const result = await this.fetchService.fetchAsync<SignInResponse>({
-      url: ApiUrl.accountsRefresh,
-      methodName: 'POST',
-      body: claim,
-    });
-    this.accountsOperators.signIn({ result });
+    const { result } = await this.fetchService.fetch<SignInResponse>(
+      {
+        url: ApiUrl.accountsRefresh,
+        method: 'POST',
+        body: claim,
+      },
+      claim.token,
+    );
+    if (result) {
+      if (result.claim) {
+        this.fetchService.setCredential(result.claim.token);
+      }
+      this.accountsOperators.signIn({ result });
+    }
   };
   public signInAsync = async (model: SignInRequest) => {
     if (!(await this.accountsService.validateSignInModel(model))) {
@@ -53,8 +61,7 @@ export class AccountsUseCase implements IAccountsUseCase {
     ) {
       return { hasError: true };
     }
-    await this.accountsService.requestPasswordResetAsync(model);
-    return { hasError: false };
+    return await this.accountsService.requestPasswordResetAsync(model);
   };
   public validatePasswordFormat = (password: string) =>
     this.validateService.validatePasswordFormat(password);
@@ -71,7 +78,7 @@ export class AccountsUseCase implements IAccountsUseCase {
       errors: string[];
     }>({
       url: ApiUrl.accountsEmail(passwordResetToken),
-      methodName: 'GET',
+      method: 'GET',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(
@@ -92,7 +99,7 @@ export class AccountsUseCase implements IAccountsUseCase {
       errors: string[];
     }>({
       url: ApiUrl.accountsPreviousPassword,
-      methodName: 'POST',
+      method: 'POST',
       body: { previousPassword },
     });
     if (errors && errors.length > 0) {

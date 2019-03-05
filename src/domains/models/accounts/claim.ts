@@ -3,7 +3,7 @@ export interface Claim {
   token: string;
   userId: string;
   email: string;
-  name: string;
+  userName: string;
   isInitialized: boolean;
   cultureName: Culture;
 }

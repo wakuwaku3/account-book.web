@@ -27,7 +27,7 @@ export class TransactionService implements ITransactionService {
       errors: string[];
     }>({
       url: ApiUrl.transactionCreate,
-      methodName: 'POST',
+      method: 'POST',
       body: model,
     });
     if (errors && errors.length > 0) {
@@ -51,7 +51,7 @@ export class TransactionService implements ITransactionService {
       errors: string[];
     }>({
       url: ApiUrl.transactionEdit(id),
-      methodName: 'PUT',
+      method: 'PUT',
       body: { ...model },
     });
     if (errors && errors.length > 0) {
@@ -73,7 +73,7 @@ export class TransactionService implements ITransactionService {
       errors: string[];
     }>({
       url: ApiUrl.transactionEdit(id),
-      methodName: 'DELETE',
+      method: 'DELETE',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(

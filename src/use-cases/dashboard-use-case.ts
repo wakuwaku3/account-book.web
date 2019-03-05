@@ -28,7 +28,7 @@ export class DashboardUseCase implements IDashboardUseCase {
       errors: string[];
     }>({
       url: ApiUrl.dashboardIndex(selectedMonth),
-      methodName: 'GET',
+      method: 'GET',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(

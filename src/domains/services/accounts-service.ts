@@ -65,12 +65,9 @@ export class AccountsService implements IAccountsService {
     return !hasError;
   };
   public signInAsync = async (model: SignInRequest) => {
-    const { errors, result } = await this.fetchService.fetchAsync<{
-      result: SignInResponse;
-      errors: string[];
-    }>({
+    const { errors, result } = await this.fetchService.fetch<SignInResponse>({
       url: ApiUrl.accountsSignIn,
-      methodName: 'POST',
+      method: 'POST',
       body: model,
     });
     if (errors && errors.length > 0) {
@@ -84,30 +81,48 @@ export class AccountsService implements IAccountsService {
       );
       return { hasError: true };
     }
-    this.accountsOperators.signIn({ result });
-    if (result.claim) {
-      const { name } = result.claim;
-      this.messagesService.appendMessages(({ messages }) => ({
-        level: 'info',
-        text: messages.signIn(name),
-        showDuration: 5000,
-      }));
+    if (result) {
+      if (result.claim) {
+        this.fetchService.setCredential(result.claim.token);
+      }
+      this.accountsOperators.signIn({ result });
+      if (result.claim) {
+        const { userName: name } = result.claim;
+        this.messagesService.appendMessages(({ messages }) => ({
+          level: 'info',
+          text: messages.signIn(name),
+          showDuration: 5000,
+        }));
+      }
+      return { hasError: false };
     }
-    return { hasError: false };
+    return { hasError: true };
   };
   public requestPasswordResetAsync = async (
     model: PasswordResetRequestingRequest,
   ) => {
-    await this.fetchService.fetchAsync<{}>({
+    const { errors } = await this.fetchService.fetch({
       url: ApiUrl.accountsPasswordResetRequesting,
-      methodName: 'PUT',
+      method: 'PUT',
       body: model,
     });
+    if (errors && errors.length > 0) {
+      this.messagesService.appendMessages(
+        ...errors.map(error => () =>
+          ({
+            level: 'error',
+            text: error,
+          } as Message),
+        ),
+      );
+      return { hasError: true };
+    }
     this.messagesService.appendMessages(({ messages }) => ({
       level: 'info',
       text: messages.sendPasswordResetRequestingMail,
       showDuration: 5000,
     }));
+    return { hasError: false };
   };
   public resetPasswordAsync = async (model: ResetPasswordRequest) => {
     const { errors, result } = await this.fetchService.fetchAsync<{
@@ -115,7 +130,7 @@ export class AccountsService implements IAccountsService {
       errors: string[];
     }>({
       url: ApiUrl.accountsSignIn,
-      methodName: 'POST',
+      method: 'POST',
       body: model,
     });
     if (errors && errors.length > 0) {
@@ -131,7 +146,7 @@ export class AccountsService implements IAccountsService {
     }
     this.accountsOperators.signIn({ result });
     if (result.claim && model.passwordResetToken) {
-      const { name } = result.claim;
+      const { userName: name } = result.claim;
       this.messagesService.appendMessages(({ messages }) => ({
         level: 'info',
         text: messages.signIn(name),

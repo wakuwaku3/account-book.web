@@ -27,7 +27,7 @@ export class ActualUseCase implements IActualUseCase {
       errors: string[];
     }>({
       url: ApiUrl.actualEdit(id, month),
-      methodName: 'GET',
+      method: 'GET',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(

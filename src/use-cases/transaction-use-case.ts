@@ -28,7 +28,7 @@ export class TransactionUseCase implements ITransactionUseCase {
       errors: string[];
     }>({
       url: ApiUrl.transactionIndex(selectedMonth),
-      methodName: 'GET',
+      method: 'GET',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(
@@ -51,7 +51,7 @@ export class TransactionUseCase implements ITransactionUseCase {
       errors: string[];
     }>({
       url: ApiUrl.transactionEdit(id),
-      methodName: 'GET',
+      method: 'GET',
     });
     if (errors && errors.length > 0) {
       this.messagesService.appendMessages(

@@ -24,7 +24,7 @@ export class DashboardService implements IDashboardService {
       errors: string[];
     }>({
       url: ApiUrl.dashboardApprove,
-      methodName: 'POST',
+      method: 'POST',
       body: { month: selectedMonth },
     });
     if (errors && errors.length > 0) {
@@ -46,7 +46,7 @@ export class DashboardService implements IDashboardService {
       errors: string[];
     }>({
       url: ApiUrl.dashboardCancelApprove,
-      methodName: 'POST',
+      method: 'POST',
       body: { month: selectedMonth },
     });
     if (errors && errors.length > 0) {

@@ -25,7 +25,7 @@ export class ActualService implements IActualService {
       errors: string[];
     }>({
       url: ApiUrl.actualEdit(model.planId, model.month),
-      methodName: 'POST',
+      method: 'POST',
       body: { ...model },
     });
     if (errors && errors.length > 0) {
@@ -49,7 +49,7 @@ export class ActualService implements IActualService {
       errors: string[];
     }>({
       url: ApiUrl.actualEdit(id),
-      methodName: 'PUT',
+      method: 'PUT',
       body: { ...model },
     });
     if (errors && errors.length > 0) {
