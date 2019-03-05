@@ -8,6 +8,7 @@
         "destination": "/index.html"
       }
     ],
+    "redirects": [],
     "headers": [
       {
         "source": "**/*.@(eot|otf|ttf|ttc|woff|woff2|js|css|jpg|jpeg|gif|png|font.css)",
