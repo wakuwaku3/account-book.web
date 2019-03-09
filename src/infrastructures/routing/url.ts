@@ -2,6 +2,7 @@
 import { format, parse } from 'url';
 import * as urljoin from 'url-join';
 import { config } from 'src/domains/common/config';
+import { stringify } from 'querystring';
 
 export namespace Url {
   export const root = '/';
@@ -44,7 +45,7 @@ export namespace ApiUrl {
   export const accountsRefresh = urljoin(root, accounts, 'refresh');
   export const accountsSignIn = urljoin(root, accounts, 'sign-in');
   export const accountsResetPassword = urljoin(
-    mockRoot,
+    root,
     accounts,
     'reset-password',
   );
@@ -54,12 +55,11 @@ export namespace ApiUrl {
     'password-reset-requesting',
   );
   export const accountsEmail = (passwordResetToken: string) => {
-    return urljoin(mockRoot, accounts, 'reset-password');
-    // return urljoin(
-    //   mockRoot,
-    //   accounts,
-    //   `password-reset-requesting?${stringify({ passwordResetToken })}`,
-    // );
+    return urljoin(
+      root,
+      accounts,
+      `reset-password?${stringify({ passwordResetToken })}`,
+    );
   };
   export const accountsPreviousPassword = urljoin(
     mockRoot,

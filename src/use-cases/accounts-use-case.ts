@@ -12,7 +12,6 @@ import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/pass
 import { IValidateService } from './services/interfaces/validate-service';
 import { IMessagesService } from './services/interfaces/messages-service';
 import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
-import { Message } from 'src/domains/models/common/message';
 
 @injectable()
 export class AccountsUseCase implements IAccountsUseCase {
@@ -61,47 +60,16 @@ export class AccountsUseCase implements IAccountsUseCase {
     }));
   };
   public getEmailAsync = async (passwordResetToken: string) => {
-    const { email, errors } = await this.fetchService.fetchAsync<{
+    const response = await this.fetchService.fetch<{
       email: string;
-      errors: string[];
     }>({
       url: ApiUrl.accountsEmail(passwordResetToken),
       method: 'GET',
     });
-    if (errors && errors.length > 0) {
-      this.messagesService.appendMessages(
-        ...errors.map(error => () =>
-          ({
-            level: 'error',
-            text: error,
-          } as Message),
-        ),
-      );
-      return { email: '', hasError: true };
-    }
-    return { email, hasError: false };
-  };
-  public checkPreviousPasswordAsync = async (previousPassword: string) => {
-    const { same, errors } = await this.fetchService.fetchAsync<{
-      same: boolean;
-      errors: string[];
-    }>({
-      url: ApiUrl.accountsPreviousPassword,
-      method: 'POST',
-      body: { previousPassword },
-    });
-    if (errors && errors.length > 0) {
-      this.messagesService.appendMessages(
-        ...errors.map(error => () =>
-          ({
-            level: 'error',
-            text: error,
-          } as Message),
-        ),
-      );
-      return false;
-    }
-    return same;
+    return {
+      email: response.result ? response.result.email : '',
+      hasError: response.hasError,
+    };
   };
   public resetPasswordAsync = async (request: ResetPasswordRequest) => {
     return await this.fetchService.resetPasswordAsync(request);

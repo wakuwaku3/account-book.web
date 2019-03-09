@@ -14,7 +14,6 @@ export interface IAccountsUseCase {
     passwordResetToken: string,
   ) => Promise<{ email: string; hasError: boolean }>;
   showResetPasswordErrorMessage: () => void;
-  checkPreviousPasswordAsync: (previousPassword: string) => Promise<boolean>;
   validatePasswordFormat: (password: string) => boolean;
   resetPasswordAsync: (
     request: ResetPasswordRequest,

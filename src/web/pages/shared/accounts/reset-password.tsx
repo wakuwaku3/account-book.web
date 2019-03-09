@@ -82,7 +82,6 @@ interface Events {
     passwordResetToken: string,
   ) => Promise<{ email: string; hasError: boolean }>;
   showResetPasswordErrorMessage: () => void;
-  checkPreviousPasswordAsync: (previousPassword: string) => Promise<boolean>;
   validatePasswordFormat: (password: string) => boolean;
   resetPasswordAsync: (
     request: ResetPasswordRequest,
@@ -94,14 +93,12 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     getEmailAsync,
     validatePasswordFormat,
     showResetPasswordErrorMessage,
-    checkPreviousPasswordAsync,
     resetPasswordAsync,
   } = resolve(symbols.accountsUseCase);
   return {
     getEmailAsync,
     validatePasswordFormat,
     showResetPasswordErrorMessage,
-    checkPreviousPasswordAsync,
     resetPasswordAsync: async (request, history) => {
       const { hasError } = await resetPasswordAsync(request);
       if (!hasError) {
@@ -138,9 +135,6 @@ class ModelValidator extends Validator<ResetPasswordModel> {
   private get validatePasswordFormat() {
     return this.props.validatePasswordFormat;
   }
-  private get checkPreviousPassword() {
-    return this.props.checkPreviousPasswordAsync;
-  }
   protected defaultState: ValidationState<ResetPasswordModel> = {
     previousPassword: this.props.passwordResetToken
       ? []
@@ -148,17 +142,6 @@ class ModelValidator extends Validator<ResetPasswordModel> {
           {
             text: this.messages.required(this.resources.previousPassword),
             validate: model => (model.previousPassword ? 'valid' : 'inValid'),
-          },
-          {
-            text: this.messages.notSamePreviousPassword,
-            validateAsync: async model => {
-              if (!model.previousPassword) {
-                return 'valid';
-              }
-              return (await this.checkPreviousPassword(model.previousPassword))
-                ? 'valid'
-                : 'inValid';
-            },
           },
         ],
     password: [
@@ -260,6 +243,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
       showResetPasswordErrorMessage,
       resetPasswordAsync,
       history,
+      passwordResetToken,
     } = this.props;
     const { model } = this.state;
     const validationState = await this.validator.validateAll(model);
@@ -268,7 +252,8 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
       this.setState({ validationState });
       return;
     }
-    await resetPasswordAsync(model, history);
+    const { password } = model;
+    await resetPasswordAsync({ passwordResetToken, password }, history);
   };
   public render() {
     const { resources, classes, passwordResetToken } = createPropagationProps(

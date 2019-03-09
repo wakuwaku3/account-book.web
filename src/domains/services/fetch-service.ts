@@ -71,9 +71,15 @@ export class FetchService implements IFetchService {
       );
     }
     if (response.status >= 400) {
-      if (response.status === 400) {
-        const { errors } = (await response.json()) as { errors: string[] };
+      const { errors, message } = (await response.json()) as {
+        errors: string[];
+        message: string;
+      };
+      if (errors && errors.length > 0) {
         return this.writeErrors(...errors);
+      }
+      if (message) {
+        return this.writeErrors(message);
       }
       const text = await response.text();
       return this.writeErrors(text);
@@ -97,6 +103,7 @@ export class FetchService implements IFetchService {
     refreshed: boolean,
   ): Promise<FetchResponse<TResult>> => {
     if (!this.claim) {
+      console.error('fetchWithCredentialAsync required credential.');
       return { hasError: true };
     }
     if (this.claim.tokenExpired <= now()) {
@@ -130,10 +137,6 @@ export class FetchService implements IFetchService {
       );
     }
     if (response.status >= 400) {
-      if (response.status === 400) {
-        const { errors } = (await response.json()) as { errors: string[] };
-        return this.writeErrors(...errors);
-      }
       if (response.status === 401) {
         if (!refreshed) {
           // refresh する
@@ -152,6 +155,16 @@ export class FetchService implements IFetchService {
         // 認証エラー
         this.accountsOperators.signOut({});
         return { hasError: true };
+      }
+      const { errors, message } = (await response.json()) as {
+        errors: string[];
+        message: string;
+      };
+      if (errors && errors.length > 0) {
+        return this.writeErrors(...errors);
+      }
+      if (message) {
+        return this.writeErrors(message);
       }
       const text = await response.text();
       return this.writeErrors(text);
@@ -187,9 +200,15 @@ export class FetchService implements IFetchService {
       }),
     });
     if (response.status >= 400) {
-      if (response.status === 400) {
-        const { errors } = (await response.json()) as { errors: string[] };
+      const { errors, message } = (await response.json()) as {
+        errors: string[];
+        message: string;
+      };
+      if (errors && errors.length > 0) {
         return this.writeErrors(...errors);
+      }
+      if (message) {
+        return this.writeErrors(message);
       }
       const text = await response.text();
       return this.writeErrors(text);
@@ -238,9 +257,15 @@ export class FetchService implements IFetchService {
       }),
     });
     if (response.status >= 400) {
-      if (response.status === 400) {
-        const { errors } = (await response.json()) as { errors: string[] };
+      const { errors, message } = (await response.json()) as {
+        errors: string[];
+        message: string;
+      };
+      if (errors && errors.length > 0) {
         return this.writeErrors(...errors);
+      }
+      if (message) {
+        return this.writeErrors(message);
       }
       const text = await response.text();
       return this.writeErrors(text);

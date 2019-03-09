@@ -62,7 +62,7 @@ export class AccountsService implements IAccountsService {
   public requestPasswordResetAsync = async (
     model: PasswordResetRequestingRequest,
   ) => {
-    const { hasError } = await this.fetchService.fetchWithCredentialAsync({
+    const { hasError } = await this.fetchService.fetch({
       url: ApiUrl.accountsPasswordResetRequesting,
       method: 'PUT',
       body: model,
