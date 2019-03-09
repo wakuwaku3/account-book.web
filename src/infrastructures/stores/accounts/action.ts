@@ -1,7 +1,7 @@
-import { SignInResponse } from 'src/domains/models/accounts/sign-in-response';
+import { Claim } from 'src/domains/models/accounts/claim';
 
 export interface Action {
-  init: {};
-  signIn: { result: SignInResponse };
+  signOut: {};
+  signIn: { claim: Claim };
 }
 export default Action;

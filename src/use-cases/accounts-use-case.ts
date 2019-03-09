@@ -1,6 +1,5 @@
 import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { injectable } from 'inversify';
-import { SignInResponse } from 'src/domains/models/accounts/sign-in-response';
 import { Claim } from 'src/domains/models/accounts/claim';
 import { IAccountsUseCase } from 'src/use-cases/interfaces/accounts-use-case';
 import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
@@ -27,31 +26,20 @@ export class AccountsUseCase implements IAccountsUseCase {
     @inject(symbols.messagesService)
     private messagesService: IMessagesService,
   ) {}
-  public signOut = () => this.accountsOperators.signIn({ result: {} });
+  public signOut = () => this.accountsOperators.signOut({});
   public refreshTokenAsync = async (claim?: Claim) => {
     if (!claim) {
       return;
     }
-    const { result } = await this.fetchService.fetch<SignInResponse>(
-      {
-        url: ApiUrl.accountsRefresh,
-        method: 'POST',
-        body: claim,
-      },
-      claim.token,
-    );
-    if (result) {
-      if (result.claim) {
-        this.fetchService.setCredential(result.claim.token);
-      }
-      this.accountsOperators.signIn({ result });
-    }
+    await this.fetchService.refreshAsync({
+      refreshToken: claim.refreshToken,
+    });
   };
   public signInAsync = async (model: SignInRequest) => {
     if (!(await this.accountsService.validateSignInModel(model))) {
       return { hasError: true };
     }
-    return await this.accountsService.signInAsync(model);
+    return await this.fetchService.signInAsync(model);
   };
   public requestPasswordResetAsync = async (
     model: PasswordResetRequestingRequest,
@@ -116,6 +104,6 @@ export class AccountsUseCase implements IAccountsUseCase {
     return same;
   };
   public resetPasswordAsync = async (request: ResetPasswordRequest) => {
-    return await this.accountsService.resetPasswordAsync(request);
+    return await this.fetchService.resetPasswordAsync(request);
   };
 }

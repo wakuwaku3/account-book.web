@@ -10,6 +10,7 @@ import { DashboardService } from '../dashboard-service';
 import { TransactionService } from '../transaction-service';
 import { PlanService } from '../plan-service';
 import { ActualService } from '../actual-service';
+import { JWTService } from '../jwt-service';
 
 export const registerServices = (container: Container) => {
   container.register(serviceSymbols.config, binder =>
@@ -41,5 +42,8 @@ export const registerServices = (container: Container) => {
   );
   container.register(serviceSymbols.actualService, binder =>
     binder.to(ActualService).inSingletonScope(),
+  );
+  container.register(serviceSymbols.jwtService, binder =>
+    binder.to(JWTService).inSingletonScope(),
   );
 };

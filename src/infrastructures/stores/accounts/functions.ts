@@ -8,19 +8,13 @@ const setLocalStorage = (state: State) => {
   }
 };
 const functions: ReducerFunctions<State, Action> = {
-  init: state => {
-    const newState = { ...state };
-    if (newState.claim) {
-      newState.claim.isInitialized = false;
-    }
-    return newState;
-  },
-  signIn: (s, { result }) => {
-    const { claim } = result;
-    if (claim) {
-      claim.isInitialized = true;
-    }
+  signIn: (s, { claim }) => {
     const state = { claim };
+    setLocalStorage(state);
+    return state;
+  },
+  signOut: (s, {}) => {
+    const state = {};
     setLocalStorage(state);
     return state;
   },

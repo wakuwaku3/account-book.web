@@ -10,6 +10,9 @@ export interface StoreProviderProps {
 }
 export const StoreProvider: React.SFC<StoreProviderProps> = props => {
   const { initialState } = props;
+  if (initialState.accounts.claim) {
+    initialState.accounts.claim.isInitialized = false;
+  }
   const store = createAppStore(initialState);
   resolve(symbols.dispatchProvider).dispatch = store.dispatch;
   return <Provider store={store}>{props.children}</Provider>;
