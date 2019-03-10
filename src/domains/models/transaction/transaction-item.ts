@@ -3,5 +3,6 @@ export interface TransactionItem {
   date: string;
   categoryId: string;
   amount: number;
-  note: string;
+  notes: string;
+  editable: boolean;
 }

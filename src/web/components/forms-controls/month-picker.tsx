@@ -30,7 +30,7 @@ interface Props {
   resources: Resources;
   localizer: Localizer;
   history: History;
-  onChange: (month?: string) => void;
+  onChange: (month?: Date) => void;
 }
 const Inner: StyledSFC<typeof styles, Props> = props => {
   const { localizer, classes, monthPicker, onChange } = createPropagationProps(
@@ -40,8 +40,9 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
     return null;
   }
   const { selectedMonth, selectableMonths } = monthPicker;
-  const month = new Date(selectedMonth);
-  const index = selectableMonths.indexOf(selectedMonth);
+  const index = selectableMonths.findIndex(
+    x => x.getTime() === selectedMonth.getTime(),
+  );
   const beforeDisabled = index <= 0;
   const nextDisabled = index >= selectableMonths.length - 1;
   const { root, btn } = classes;
@@ -54,7 +55,9 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
         <NavigateBefore />
       </IconButton>
       <Button className={btn} onClick={() => onChange()}>
-        <Typography variant="h6">{localizer.formatMonth(month)}</Typography>
+        <Typography variant="h6">
+          {localizer.formatMonth(selectedMonth)}
+        </Typography>
       </Button>
       <IconButton
         disabled={nextDisabled}

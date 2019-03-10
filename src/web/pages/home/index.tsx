@@ -31,7 +31,7 @@ interface Props {
   showState: DashboardShowState;
   canApprove: boolean;
   canCancelApprove: boolean;
-  selectedMonth?: string;
+  selectedMonth: Date;
 }
 interface Param {}
 interface OwnProps {}
@@ -60,8 +60,8 @@ const mapStateToProps: StateMapperWithRouter<
 interface Events {
   setShowState: (showState: DashboardShowState) => void;
   getModelAsync: () => Promise<void>;
-  approve: (selectedMonth: string) => void;
-  cancelApprove: (selectedMonth: string) => void;
+  approve: (selectedMonth: Date) => void;
+  cancelApprove: (selectedMonth: Date) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   const {

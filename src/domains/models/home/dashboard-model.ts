@@ -1,5 +1,3 @@
-import { MonthPickerModel } from '../common/month-picker-model';
-
 export interface DashboardSummary {
   income: number;
   expense: number;
@@ -14,7 +12,7 @@ export interface DashboardPlan {
   actualId: string;
 }
 export interface DashboardModel {
-  monthPicker: MonthPickerModel;
+  selectedMonth: Date;
   summary: DashboardSummary;
   plans: DashboardPlan[];
   canApprove: boolean;

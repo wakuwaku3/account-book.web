@@ -63,7 +63,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
           size="small"
           color="primary"
           className={addBtn}
-          onClick={() => history.push(Url.planCreate)}
+          onClick={() => history.push(Url.transactionCreate)}
         >
           <Add />
         </Fab>

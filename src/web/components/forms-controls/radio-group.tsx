@@ -4,11 +4,13 @@ import {
   RadioGroup as MuiRadioGroup,
   FormControl,
   createStyles,
+  FormControlLabel,
+  Radio,
 } from '@material-ui/core';
 import { RadioGroupProps as MuiRadioGroupProps } from '@material-ui/core/RadioGroup';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
-import { RadioProps, Radio } from './radio';
+import { RadioProps as MuiRadioProps } from '@material-ui/core/Radio';
 
 const styles = createStyles({
   root: {
@@ -16,9 +18,12 @@ const styles = createStyles({
   },
   group: { flexDirection: 'row' },
 });
+export interface RadioProps extends Partial<MuiRadioProps> {
+  label: string;
+}
 interface RadioGroupProps {
   label?: string;
-  items?: Array<Partial<RadioProps>>;
+  items?: RadioProps[];
   readOnly?: boolean;
 }
 export const RadioGroup = decorate(styles)<
@@ -33,14 +38,15 @@ export const RadioGroup = decorate(styles)<
       <FormLabel>{label}</FormLabel>
       <MuiRadioGroup {...others} className={group}>
         {items &&
-          items.map(x => (
-            <Radio
-              key={typeof x.value === 'boolean' ? String(x.value) : x.value}
-              {...x}
-              disabled={readOnly}
-              checked={x.checked}
-            />
-          ))}
+          items.map(({ label: itemLabel, value, ...os }) => {
+            return (
+              <FormControlLabel
+                key={String(value)}
+                control={<Radio {...os} value={value} />}
+                label={itemLabel}
+              />
+            );
+          })}
       </MuiRadioGroup>
     </FormControl>
   );

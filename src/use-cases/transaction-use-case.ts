@@ -4,12 +4,11 @@ import { symbols } from './common/di-symbols';
 import { ITransactionOperators } from 'src/infrastructures/stores/transaction/operators-interface';
 import { IFetchService } from './services/interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { IMessagesService } from './services/interfaces/messages-service';
-import { Message } from 'src/domains/models/common/message';
 import { ITransactionUseCase } from './interfaces/transaction-use-case';
 import { TransactionModel } from 'src/domains/models/transaction/transaction-index-model';
 import { TransactionEditModel } from 'src/domains/models/transaction/transaction-model';
 import { ITransactionService } from './services/interfaces/transaction-service';
+import { now, getMonthStartDay } from 'src/infrastructures/common/date-helper';
 
 @injectable()
 export class TransactionUseCase implements ITransactionUseCase {
@@ -17,58 +16,41 @@ export class TransactionUseCase implements ITransactionUseCase {
     @inject(symbols.fetchService) private fetchService: IFetchService,
     @inject(symbols.transactionOperators)
     private transactionOperators: ITransactionOperators,
-    @inject(symbols.messagesService)
-    private messagesService: IMessagesService,
     @inject(symbols.transactionService)
     private transactionService: ITransactionService,
   ) {}
-  public loadAsync = async (selectedMonth?: string) => {
-    const { model, errors } = await this.fetchService.fetchAsync<{
-      model: TransactionModel;
-      errors: string[];
-    }>({
-      url: ApiUrl.transactionIndex(selectedMonth),
+  public loadAsync = async (selectedMonth?: Date) => {
+    const { result } = await this.fetchService.fetchWithCredentialAsync<
+      TransactionModel
+    >({
+      url: ApiUrl.transactionsIndex(selectedMonth),
       method: 'GET',
     });
-    if (errors && errors.length > 0) {
-      this.messagesService.appendMessages(
-        ...errors.map(error => () =>
-          ({
-            level: 'error',
-            text: error,
-          } as Message),
-        ),
-      );
-      return;
+    if (result) {
+      result.selectedMonth = selectedMonth
+        ? selectedMonth
+        : getMonthStartDay(now());
+      this.transactionOperators.setModel(result);
     }
-    this.transactionOperators.setModel(model);
   };
   public getTransactionAsync: (
     id: string,
   ) => Promise<TransactionEditModel | undefined> = async id => {
-    const { model, errors } = await this.fetchService.fetchAsync<{
-      model: TransactionEditModel;
-      errors: string[];
-    }>({
-      url: ApiUrl.transactionEdit(id),
+    const { result } = await this.fetchService.fetchWithCredentialAsync<
+      TransactionEditModel
+    >({
+      url: ApiUrl.transactionsEdit(id),
       method: 'GET',
     });
-    if (errors && errors.length > 0) {
-      this.messagesService.appendMessages(
-        ...errors.map(error => () =>
-          ({
-            level: 'error',
-            text: error,
-          } as Message),
-        ),
-      );
-      return undefined;
-    }
-    return model;
+    return result;
   };
   public createTransactionAsync = this.transactionService
     .createTransactionAsync;
   public editTransactionAsync = this.transactionService.editTransactionAsync;
-  public deleteTransactionAsync = this.transactionService
-    .deleteTransactionAsync;
+  public deleteTransactionAsync = async (id: string) => {
+    const res = await this.transactionService.deleteTransactionAsync(id);
+    if (res) {
+      await this.loadAsync();
+    }
+  };
 }

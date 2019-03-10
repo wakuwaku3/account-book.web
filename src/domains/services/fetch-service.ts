@@ -166,8 +166,7 @@ export class FetchService implements IFetchService {
       if (message) {
         return this.writeErrors(message);
       }
-      const text = await response.text();
-      return this.writeErrors(text);
+      return this.writeErrors('error');
     }
     if (response.status === 204) {
       return { hasError: false };
@@ -210,8 +209,7 @@ export class FetchService implements IFetchService {
       if (message) {
         return this.writeErrors(message);
       }
-      const text = await response.text();
-      return this.writeErrors(text);
+      return this.writeErrors('error');
     }
     await this.signInInner(response);
     this.messagesService.appendMessages(({ messages }) => ({
@@ -267,8 +265,7 @@ export class FetchService implements IFetchService {
       if (message) {
         return this.writeErrors(message);
       }
-      const text = await response.text();
-      return this.writeErrors(text);
+      return this.writeErrors('error');
     }
     await this.signInInner(response);
     this.messagesService.appendMessages(({ messages }) => ({

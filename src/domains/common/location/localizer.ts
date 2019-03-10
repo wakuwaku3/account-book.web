@@ -12,10 +12,18 @@ class JaLocalizedUtils extends DateFnsUtils {
 }
 export class Localizer {
   public formatDate = (date: Date) =>
-    `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()}`;
+    `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(
+      2,
+      '0',
+    )}/${String(date.getDate()).padStart(2, '0')}`;
   public formatDateTime = (date: Date) =>
-    `${date.getFullYear()}/${date.getMonth() +
-      1}/${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(
+      2,
+      '0',
+    )}/${String(date.getDate()).padStart(
+      2,
+      '0',
+    )} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   public formatMonth = (month: Date) =>
     `${month.getFullYear()}年${month.getMonth() + 1}月`;
   public formatInterval = (month: number) => {

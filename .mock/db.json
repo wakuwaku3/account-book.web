@@ -1,55 +1,8 @@
 {
-  "accounts-refresh": {
-    "claim": {
-      "token": "token",
-      "userId": "user01",
-      "name": "User 01",
-      "email": "user01@example.com"
-    }
-  },
-  "accounts-sign-in": {
-    "errors": [],
-    "result": {
-      "claim": {
-        "token": "token",
-        "userId": "user01",
-        "name": "User 01",
-        "email": "user01@example.com"
-      }
-    }
-  },
-  "accounts-reset-password": {
-    "errors": [],
-    "result": {
-      "claim": {
-        "token": "token",
-        "userId": "user01",
-        "name": "User 01",
-        "email": "user01@example.com"
-      }
-    }
-  },
-  "accounts-reset-password-get": {
-    "errors": [],
-    "email": "user01@example.com"
-  },
-  "accounts-check-previous-password": {
-    "errors": [],
-    "same": true
-  },
-  "accounts-password-reset-requesting": {},
   "dashboard": {
     "errors": [],
     "model": {
-      "monthPicker": {
-        "selectedMonth": "2019-01-01",
-        "selectableMonths": [
-          "2018-11-01",
-          "2018-12-01",
-          "2019-01-01",
-          "2019-02-01"
-        ]
-      },
+      "selectedMonth": "2019-01-01",
       "summary": {
         "income": 3001,
         "expense": 2001,
@@ -84,15 +37,7 @@
   "dashboard-2018-11-01": {
     "errors": [],
     "model": {
-      "monthPicker": {
-        "selectedMonth": "2018-11-01",
-        "selectableMonths": [
-          "2018-11-01",
-          "2018-12-01",
-          "2019-01-01",
-          "2019-02-01"
-        ]
-      },
+      "selectedMonth": "2018-11-01",
       "summary": { "income": 3011, "expense": 2011 },
       "plans": [],
       "canApprove": false,
@@ -102,15 +47,7 @@
   "dashboard-2018-12-01": {
     "errors": [],
     "model": {
-      "monthPicker": {
-        "selectedMonth": "2018-12-01",
-        "selectableMonths": [
-          "2018-11-01",
-          "2018-12-01",
-          "2019-01-01",
-          "2019-02-01"
-        ]
-      },
+      "selectedMonth": "2018-12-01",
       "summary": {
         "income": 3012,
         "expense": 2012,
@@ -124,15 +61,7 @@
   "dashboard-2019-01-01": {
     "errors": [],
     "model": {
-      "monthPicker": {
-        "selectedMonth": "2019-01-01",
-        "selectableMonths": [
-          "2018-11-01",
-          "2018-12-01",
-          "2019-01-01",
-          "2019-02-01"
-        ]
-      },
+      "selectedMonth": "2019-01-01",
       "summary": {
         "income": 3001,
         "expense": 2001,
@@ -146,15 +75,7 @@
   "dashboard-2019-02-01": {
     "errors": [],
     "model": {
-      "monthPicker": {
-        "selectedMonth": "2019-02-01",
-        "selectableMonths": [
-          "2018-11-01",
-          "2018-12-01",
-          "2019-01-01",
-          "2019-02-01"
-        ]
-      },
+      "selectedMonth": "2019-02-01",
       "summary": {
         "income": 3002,
         "expense": 2002,
@@ -168,10 +89,7 @@
   "transaction": {
     "errors": [],
     "model": {
-      "monthPicker": {
-        "selectedMonth": "2019-01-01",
-        "selectableMonths": ["2019-01-01"]
-      },
+      "selectedMonth": "2019-01-01",
       "editable": true,
       "items": [
         {

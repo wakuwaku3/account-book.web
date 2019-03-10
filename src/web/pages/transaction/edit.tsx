@@ -88,7 +88,7 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   return { createTransactionAsync, editTransactionAsync, getTransactionAsync };
 };
 const getDefaultState: () => TransactionEditModel = () => {
-  return { categoryId: getDefaultCategoryId(), note: '' };
+  return { categoryId: getDefaultCategoryId(), notes: '' };
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const {
@@ -103,7 +103,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   } = createPropagationProps(props);
   const { root, btnRow, btn, progressContainer } = classes;
   const [model, setModel] = React.useState(getDefaultState());
-  const { amount, categoryId, note, date } = model;
+  const { amount, categoryId, notes, date } = model;
   const resetById = async (tid: string) => {
     const newModel = await getTransactionAsync(tid);
     if (newModel) {
@@ -113,9 +113,11 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   React.useEffect(() => {
     reset();
   }, [id]);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    setModel({ ...model, [name]: value });
+  const handleChange = <K extends keyof TransactionEditModel>(
+    key: K,
+    value: TransactionEditModel[K],
+  ) => {
+    setModel({ ...model, [key]: value });
   };
   const reset = async () => {
     if (id) {
@@ -124,11 +126,16 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     }
     setModel(getDefaultState());
   };
+  const disableSubmit =
+    !(amount || amount === 0) || !(categoryId || categoryId === '0');
   const submit = async () => {
-    const hasError = id
+    if (disableSubmit) {
+      return;
+    }
+    const res = id
       ? await editTransactionAsync(id, model)
       : await createTransactionAsync(model);
-    if (!hasError) {
+    if (res) {
       history.push(Url.transaction);
     }
   };
@@ -153,7 +160,12 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
               <Clear />
               {resources.reset}
             </Button>
-            <Button type="submit" color="primary" className={btn}>
+            <Button
+              type="submit"
+              color="primary"
+              className={btn}
+              disabled={disableSubmit}
+            >
               <Save />
               {resources.save}
             </Button>
@@ -172,16 +184,18 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             name="amount"
             type="number"
             label={resources.amount}
-            onChange={handleChange}
+            onChange={e =>
+              handleChange('amount', Number(e.currentTarget.value))
+            }
             autoFocus={true}
           />
         </Row>
         <Row>
           <TextBox
-            value={note}
-            name="note"
-            label={resources.note}
-            onChange={handleChange}
+            value={notes}
+            name="notes"
+            label={resources.notes}
+            onChange={e => handleChange('notes', e.currentTarget.value)}
             multiline={true}
           />
         </Row>

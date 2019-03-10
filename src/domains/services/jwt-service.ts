@@ -12,6 +12,7 @@ export class JWTService implements IJWTService {
         locale: 'ja' | 'en';
         email: string;
         exp: number;
+        nbf: number;
         nonce: string;
         name: string;
       };
@@ -24,6 +25,7 @@ export class JWTService implements IJWTService {
       tokenExpired: fromUtc(payload.exp),
       userId: payload.nonce,
       userName: payload.name,
+      useStartDate: fromUtc(payload.nbf),
     };
   };
 }

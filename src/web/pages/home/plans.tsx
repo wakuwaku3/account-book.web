@@ -33,7 +33,7 @@ interface Props {
   history: History;
   localizer: Localizer;
   plans: DashboardPlan[];
-  selectedMonth?: string;
+  selectedMonth?: Date;
 }
 interface Param {}
 interface OwnProps {}

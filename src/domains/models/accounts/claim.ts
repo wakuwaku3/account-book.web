@@ -10,4 +10,5 @@ export interface Claim extends ClaimResponse {
   userName: string;
   isInitialized: boolean;
   cultureName: Culture;
+  useStartDate: Date;
 }

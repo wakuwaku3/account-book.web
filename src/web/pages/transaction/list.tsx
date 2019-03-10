@@ -33,15 +33,14 @@ const styles = createStyles({
   dateColumn: { width: 150, minWidth: 150 },
   categoryColumn: { width: 100, minWidth: 100 },
   amountColumn: { width: 100, minWidth: 100 },
-  noteColumn: { minWidth: 100 },
+  notesColumn: { minWidth: 100 },
 });
 interface Props {
   resources: Resources;
   history: History;
   localizer: Localizer;
   items: TransactionItem[];
-  selectedMonth?: string;
-  editable: boolean;
+  selectedMonth?: Date;
 }
 interface Param {}
 interface OwnProps {}
@@ -51,9 +50,7 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts, transaction }, { history }) => {
-  const { items, selectedMonth, editable } = new TransactionSelectors(
-    transaction,
-  );
+  const { items, selectedMonth } = new TransactionSelectors(transaction);
   const { resources, localizer } = new AccountsSelectors(accounts);
   return {
     resources,
@@ -61,7 +58,6 @@ const mapStateToProps: StateMapperWithRouter<
     localizer,
     items,
     selectedMonth,
-    editable,
   };
 };
 interface Events {
@@ -79,7 +75,6 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     history,
     deleteTransactionAsync,
     localizer,
-    editable,
   } = createPropagationProps(props);
   if (!items) {
     return null;
@@ -91,7 +86,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     dateColumn,
     categoryColumn,
     amountColumn,
-    noteColumn,
+    notesColumn,
   } = classes;
   return (
     <div className={root}>
@@ -108,8 +103,8 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             <TableCell align="right" className={amountColumn}>
               {resources.amount}
             </TableCell>
-            <TableCell align="left" className={noteColumn}>
-              {resources.note}
+            <TableCell align="left" className={notesColumn}>
+              {resources.notes}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -123,14 +118,14 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
                     history.push(Url.getTransactionEditUrl(item.id))
                   }
                   className={editBtn}
-                  disabled={!editable}
+                  disabled={!item.editable}
                 >
                   <Create />
                 </IconButton>
                 <IconButton
                   color="secondary"
                   onClick={() => deleteTransactionAsync(item.id)}
-                  disabled={!editable}
+                  disabled={!item.editable}
                 >
                   <Clear />
                 </IconButton>
@@ -144,8 +139,8 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
               <TableCell align="right" className={amountColumn}>
                 {localizer.formatMoney(item.amount)}
               </TableCell>
-              <TableCell align="left" className={noteColumn}>
-                {item.note}
+              <TableCell align="left" className={notesColumn}>
+                {item.notes}
               </TableCell>
             </TableRow>
           ))}

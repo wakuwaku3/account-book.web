@@ -9,5 +9,5 @@ export interface ITransactionService {
     id: string,
     model: TransactionEditModel,
   ) => Promise<boolean>;
-  deleteTransactionAsync: (id: string) => Promise<void>;
+  deleteTransactionAsync: (id: string) => Promise<boolean>;
 }

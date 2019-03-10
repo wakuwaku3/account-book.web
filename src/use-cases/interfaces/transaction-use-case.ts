@@ -1,7 +1,7 @@
 import { TransactionEditModel } from 'src/domains/models/transaction/transaction-model';
 
 export interface ITransactionUseCase {
-  loadAsync: (selectedMonth?: string) => Promise<void>;
+  loadAsync: (selectedMonth?: Date) => Promise<void>;
   createTransactionAsync: (model: TransactionEditModel) => Promise<boolean>;
   editTransactionAsync: (
     id: string,

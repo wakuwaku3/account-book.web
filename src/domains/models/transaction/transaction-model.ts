@@ -1,7 +1,7 @@
 export interface TransactionCreationModel {
   amount?: number;
   categoryId: string;
-  note: string;
+  notes: string;
 }
 export interface TransactionEditModel extends TransactionCreationModel {
   date?: string;

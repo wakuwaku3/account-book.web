@@ -4,9 +4,11 @@ import { createStyles } from '@material-ui/core';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
-import { RadioGroup } from 'src/web/components/forms-controls/radio-group';
+import {
+  RadioGroup,
+  RadioProps,
+} from 'src/web/components/forms-controls/radio-group';
 import { categoryIds } from 'src/domains/models/transaction/category';
-import { RadioProps } from 'src/web/components/forms-controls/radio';
 
 const styles = createStyles({
   root: { paddingTop: 20 },
@@ -24,7 +26,7 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
       className={root}
       label={resources.category}
       onChange={(event, v) => onChange && onChange(v)}
-      items={categoryIds.map<Partial<RadioProps>>(categoryId => ({
+      items={categoryIds.map<RadioProps>(categoryId => ({
         checked: categoryId === value,
         label: resources.getCategoryName(categoryId),
         value: categoryId,

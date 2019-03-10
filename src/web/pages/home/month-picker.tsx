@@ -26,16 +26,16 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts, dashboard }, { history }) => {
-  const { monthPicker } = new DashboardSelectors(dashboard);
-  const { localizer } = new AccountsSelectors(accounts);
+  const { selectedMonth } = new DashboardSelectors(dashboard);
+  const { localizer, selectableMonths } = new AccountsSelectors(accounts);
   return {
     localizer,
     history,
-    monthPicker,
+    monthPicker: { selectedMonth, selectableMonths },
   };
 };
 interface Events {
-  onChange: (month?: string) => void;
+  onChange: (month?: Date) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   const { getModelAsync } = resolve(symbols.dashboardUseCase);

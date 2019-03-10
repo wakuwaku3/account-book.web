@@ -1,4 +1,4 @@
 export interface MonthPickerModel {
-  selectedMonth: string;
-  selectableMonths: string[];
+  selectedMonth: Date;
+  selectableMonths: Date[];
 }

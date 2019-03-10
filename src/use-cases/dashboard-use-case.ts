@@ -22,7 +22,7 @@ export class DashboardUseCase implements IDashboardUseCase {
     private dashboardService: IDashboardService,
   ) {}
   public setShowState = this.dashboardOperators.setShowState;
-  public getModelAsync = async (selectedMonth?: string) => {
+  public getModelAsync = async (selectedMonth?: Date) => {
     const { model, errors } = await this.fetchService.fetchAsync<{
       model: DashboardModel;
       errors: string[];
@@ -41,6 +41,7 @@ export class DashboardUseCase implements IDashboardUseCase {
       );
       return;
     }
+    model.selectedMonth = new Date(model.selectedMonth);
     this.dashboardOperators.setModel(model);
   };
   public approveAsync = this.dashboardService.approveAsync;

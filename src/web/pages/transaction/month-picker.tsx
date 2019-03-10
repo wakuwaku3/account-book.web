@@ -26,21 +26,21 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts, transaction }, { history }) => {
-  const { monthPicker } = new TransactionSelectors(transaction);
-  const { localizer } = new AccountsSelectors(accounts);
+  const { selectedMonth } = new TransactionSelectors(transaction);
+  const { localizer, selectableMonths } = new AccountsSelectors(accounts);
   return {
     localizer,
     history,
-    monthPicker,
+    monthPicker: { selectedMonth, selectableMonths },
   };
 };
 interface Events {
-  onChange: (month?: string) => void;
+  onChange: (month?: Date) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { getModelAsync } = resolve(symbols.dashboardUseCase);
+  const { loadAsync } = resolve(symbols.transactionUseCase);
   return {
-    onChange: async month => await getModelAsync(month),
+    onChange: async month => await loadAsync(month),
   };
 };
 export const TransactionMonthPicker = withConnectedRouter(

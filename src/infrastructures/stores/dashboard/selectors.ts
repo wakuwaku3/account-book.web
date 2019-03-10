@@ -1,4 +1,5 @@
 import State from './state';
+import { now, getMonthStartDay } from 'src/infrastructures/common/date-helper';
 
 export class DashboardSelectors {
   constructor(private state: State) {}
@@ -14,11 +15,8 @@ export class DashboardSelectors {
   public get plans() {
     return this.model ? this.model.plans : [];
   }
-  public get monthPicker() {
-    return this.model ? this.model.monthPicker : undefined;
-  }
   public get selectedMonth() {
-    return this.monthPicker ? this.monthPicker.selectedMonth : undefined;
+    return this.model ? this.model.selectedMonth : getMonthStartDay(now());
   }
   public get canApprove() {
     return this.model ? this.model.canApprove : false;

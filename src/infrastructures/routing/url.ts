@@ -4,6 +4,11 @@ import * as urljoin from 'url-join';
 import { config } from 'src/domains/common/config';
 import { stringify } from 'querystring';
 
+const toUrl = (date: Date) =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+    2,
+    '0',
+  )}-${String(date.getDate()).padStart(2, '0')}`;
 export namespace Url {
   export const root = '/';
   export const passwordResetRequesting = urljoin(root, 'reset-password');
@@ -24,8 +29,8 @@ export namespace Url {
   const actual = urljoin(root, 'actual');
   export const actualEdit = urljoin(actual, ':id');
   export const actualCreate = urljoin(actual, ':id', ':month');
-  export const getActualUrl = (id: string, month?: string) =>
-    month ? urljoin(actual, id, month) : urljoin(actual, id);
+  export const getActualUrl = (id: string, month?: Date) =>
+    month ? urljoin(actual, id, toUrl(month)) : urljoin(actual, id);
 }
 export namespace ApiUrl {
   const resolveHostname = (rootUrl: string) => {
@@ -67,9 +72,9 @@ export namespace ApiUrl {
     'check-previous-password',
   );
   const dashboard = 'dashboard';
-  export const dashboardIndex = (month?: string) => {
+  export const dashboardIndex = (month?: Date) => {
     if (month) {
-      return urljoin(mockRoot, dashboard, month);
+      return urljoin(mockRoot, dashboard, toUrl(month));
     }
     return urljoin(mockRoot, dashboard);
   };
@@ -80,20 +85,20 @@ export namespace ApiUrl {
     'cancel-approve',
   );
 
-  const transaction = 'transaction';
-  export const transactionIndex = (month?: string) => {
+  const transactions = 'transactions';
+  export const transactionsIndex = (month?: Date) => {
     if (month) {
-      // return urljoin(
-      //   mockRoot,
-      //   `${transaction}?${stringify({ month })}`,
-      // );
+      return urljoin(
+        root,
+        `${transactions}?${stringify({ month: toUrl(month) })}`,
+      );
     }
-    return urljoin(mockRoot, transaction);
+    return urljoin(root, transactions);
   };
-  export const transactionEdit = (id: string) => {
-    return urljoin(mockRoot, transaction, id);
+  export const transactionsEdit = (id: string) => {
+    return urljoin(root, transactions, id);
   };
-  export const transactionCreate = urljoin(mockRoot, transaction, 'create');
+  export const transactionsCreate = urljoin(root, transactions);
 
   const plan = 'plan';
   export const planIndex = urljoin(mockRoot, plan);

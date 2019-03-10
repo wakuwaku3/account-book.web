@@ -18,7 +18,7 @@ export class DashboardService implements IDashboardService {
     @inject(symbols.messagesService)
     private messagesService: IMessagesService,
   ) {}
-  public approveAsync = async (selectedMonth: string) => {
+  public approveAsync = async (selectedMonth: Date) => {
     const { model, errors } = await this.fetchService.fetchAsync<{
       model: DashboardModel;
       errors: string[];
@@ -40,7 +40,7 @@ export class DashboardService implements IDashboardService {
     }
     this.dashboardOperators.setModel(model);
   };
-  public cancelApproveAsync = async (selectedMonth: string) => {
+  public cancelApproveAsync = async (selectedMonth: Date) => {
     const { model, errors } = await this.fetchService.fetchAsync<{
       model: DashboardModel;
       errors: string[];

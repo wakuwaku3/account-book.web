@@ -41,7 +41,7 @@ export class Resources {
   public transactionDate = '入出金日';
   public intervalPerMonth = '間隔(月)';
   public amount = '金額';
-  public note = '備考';
+  public notes = '備考';
   public category = 'カテゴリ';
   public save = '保存';
   public reset = 'リセット';
