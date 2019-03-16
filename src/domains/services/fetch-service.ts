@@ -7,25 +7,24 @@ import {
   FetchResponse,
 } from 'src/use-cases/services/interfaces/fetch-service';
 import { symbols } from 'src/use-cases/common/di-symbols';
-import { IAccountsOperators } from 'src/infrastructures/stores/accounts/operators-interface';
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
 import { Message } from '../models/common/message';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { SignInRequest } from '../models/accounts/sign-in-request';
 import { ResetPasswordRequest } from '../models/accounts/reset-password-request';
-import { Claim, ClaimResponse } from '../models/accounts/claim';
-import { IJWTService } from 'src/use-cases/services/interfaces/jwt-service';
+import { ClaimResponse } from '../models/accounts/claim';
 import { now } from 'src/infrastructures/common/date-helper';
+import { IIdentityService } from 'src/use-cases/services/interfaces/identity-service';
 
 @injectable()
 export class FetchService implements IFetchService {
-  private claim: Claim;
+  private get claim() {
+    return this.identityService.getClaim();
+  }
   constructor(
     @inject(symbols.config) private config: Config,
-    @inject(symbols.accountsOperators)
-    private accountsOperators: IAccountsOperators,
     @inject(symbols.messagesService) private messagesService: IMessagesService,
-    @inject(symbols.jwtService) private jwtService: IJWTService,
+    @inject(symbols.identityService) private identityService: IIdentityService,
   ) {}
   public fetchAsync = async <TResult>(
     request: FetchRequest,
@@ -52,6 +51,7 @@ export class FetchService implements IFetchService {
     const json = await response.json();
     return json as TResult;
   };
+
   public fetch = async <TResult>(
     request: FetchRequest,
   ): Promise<FetchResponse<TResult>> => {
@@ -76,7 +76,7 @@ export class FetchService implements IFetchService {
         message: string;
       };
       if (errors && errors.length > 0) {
-        return this.writeErrors(...errors);
+        return this.writeErrors(...this.mapErrorMessageByCode(...errors));
       }
       if (message) {
         return this.writeErrors(message);
@@ -93,6 +93,21 @@ export class FetchService implements IFetchService {
       result,
     };
   };
+
+  private mapErrorMessageByCode = (...codes: string[]) => {
+    const {
+      serverMessages,
+      noHandleServerError,
+    } = this.identityService.getMessages();
+    return codes.map(code => {
+      const message = serverMessages[code];
+      if (message) {
+        return message;
+      }
+      return noHandleServerError(code);
+    });
+  };
+
   public fetchWithCredentialAsync = async <TResult>(
     request: FetchRequest,
   ): Promise<FetchResponse<TResult>> =>
@@ -153,7 +168,7 @@ export class FetchService implements IFetchService {
           );
         }
         // 認証エラー
-        this.accountsOperators.signOut({});
+        this.identityService.signOut();
         return { hasError: true };
       }
       const { errors, message } = (await response.json()) as {
@@ -161,7 +176,7 @@ export class FetchService implements IFetchService {
         message: string;
       };
       if (errors && errors.length > 0) {
-        return this.writeErrors(...errors);
+        return this.writeErrors(...this.mapErrorMessageByCode(...errors));
       }
       if (message) {
         return this.writeErrors(message);
@@ -204,7 +219,7 @@ export class FetchService implements IFetchService {
         message: string;
       };
       if (errors && errors.length > 0) {
-        return this.writeErrors(...errors);
+        return this.writeErrors(...this.mapErrorMessageByCode(...errors));
       }
       if (message) {
         return this.writeErrors(message);
@@ -212,12 +227,16 @@ export class FetchService implements IFetchService {
       return this.writeErrors('error');
     }
     await this.signInInner(response);
-    this.messagesService.appendMessages(({ messages }) => ({
-      level: 'info',
-      text: messages.signIn(this.claim.userName),
-      showDuration: 5000,
-    }));
-    return { hasError: false };
+    const claim = this.claim;
+    if (claim) {
+      this.messagesService.appendMessages(({ messages }) => ({
+        level: 'info',
+        text: messages.signIn(claim.userName),
+        showDuration: 5000,
+      }));
+      return { hasError: false };
+    }
+    return { hasError: true };
   };
 
   public refreshAsync = async (body: { refreshToken: string }) => {
@@ -232,7 +251,7 @@ export class FetchService implements IFetchService {
     });
     if (response.status === 401) {
       // 認証エラーの場合ログアウト
-      this.accountsOperators.signOut({});
+      this.identityService.signOut();
       return { hasError: true };
     }
     await this.signInInner(response);
@@ -241,8 +260,7 @@ export class FetchService implements IFetchService {
 
   private signInInner = async (response: Response) => {
     const { result } = (await response.json()) as { result: ClaimResponse };
-    this.claim = this.jwtService.parseClaim(result);
-    this.accountsOperators.signIn({ claim: this.claim });
+    this.identityService.signIn(result);
   };
 
   public resetPasswordAsync = async (body: ResetPasswordRequest) => {
@@ -260,7 +278,7 @@ export class FetchService implements IFetchService {
         message: string;
       };
       if (errors && errors.length > 0) {
-        return this.writeErrors(...errors);
+        return this.writeErrors(...this.mapErrorMessageByCode(...errors));
       }
       if (message) {
         return this.writeErrors(message);
@@ -268,11 +286,15 @@ export class FetchService implements IFetchService {
       return this.writeErrors('error');
     }
     await this.signInInner(response);
-    this.messagesService.appendMessages(({ messages }) => ({
-      level: 'info',
-      text: messages.signIn(this.claim.userName),
-      showDuration: 5000,
-    }));
-    return { hasError: false };
+    const claim = this.claim;
+    if (claim) {
+      this.messagesService.appendMessages(({ messages }) => ({
+        level: 'info',
+        text: messages.signIn(claim.userName),
+        showDuration: 5000,
+      }));
+      return { hasError: false };
+    }
+    return { hasError: true };
   };
 }

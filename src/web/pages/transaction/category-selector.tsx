@@ -26,6 +26,7 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
       className={root}
       label={resources.category}
       onChange={(event, v) => onChange && onChange(v)}
+      required={true}
       items={categoryIds.map<RadioProps>(categoryId => ({
         checked: categoryId === value,
         label: resources.getCategoryName(categoryId),

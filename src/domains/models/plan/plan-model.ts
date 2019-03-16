@@ -3,7 +3,7 @@ export interface PlanCreationModel {
   isIncome: boolean;
   amount: number;
   interval: number;
-  applyStartDate?: string;
-  applyEndDate?: string;
+  start?: string;
+  end?: string;
 }
 export interface PlanEditModel extends PlanCreationModel {}

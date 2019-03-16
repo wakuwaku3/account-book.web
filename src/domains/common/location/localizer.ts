@@ -30,13 +30,13 @@ export class Localizer {
     const year = Math.floor(month / 12);
     const m = month % 12;
     if (year > 0 && m > 0) {
-      return `${year}年${m}月ごと`;
+      return `${year}年${m}ヶ月ごと`;
     }
     if (year > 0 && m === 0) {
       return `${year}年ごと`;
     }
     if (year === 0 && m > 0) {
-      return `${m}月ごと`;
+      return `${m}ヶ月ごと`;
     }
     return '';
   };

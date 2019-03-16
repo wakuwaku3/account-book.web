@@ -4,6 +4,6 @@ export interface PlanItem {
   isIncome: boolean;
   amount: number;
   interval: number;
-  applyStartDate: string;
-  applyEndDate: string;
+  start: string | null | undefined;
+  end: string | null | undefined;
 }

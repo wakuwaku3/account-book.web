@@ -42,7 +42,9 @@ export const DatePicker = decorate(styles)<DatePickerProps>(props => {
         format={datePicker.datePlaceholder}
         placeholder={datePicker.datePlaceholder}
         mask={value => (value ? datePicker.mask : [])}
-        onChange={date => onChange && onChange(date)}
+        onChange={date =>
+          date && onChange && onChange(new Date(date).toISOString())
+        }
         disableOpenOnEnter={true}
         autoOk={true}
       />

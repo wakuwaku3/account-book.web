@@ -188,6 +188,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
               handleChange('amount', Number(e.currentTarget.value))
             }
             autoFocus={true}
+            required={true}
           />
         </Row>
         <Row>

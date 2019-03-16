@@ -170,10 +170,12 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
                     />
                   </TableCell>
                   <TableCell align="center" className={categoryColumn}>
-                    {localizer.formatDate(new Date(item.applyStartDate))}
+                    {item.start
+                      ? localizer.formatDate(new Date(item.start))
+                      : ''}
                   </TableCell>
                   <TableCell align="center" className={amountColumn}>
-                    {localizer.formatDate(new Date(item.applyEndDate))}
+                    {item.end ? localizer.formatDate(new Date(item.end)) : ''}
                   </TableCell>
                 </TableRow>
               ))}

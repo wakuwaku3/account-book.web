@@ -114,6 +114,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
               type="email"
               onChange={handleChange('email')}
               label={resources.email}
+              required={true}
               placeholder={resources.emailPlaceholder}
             />
           </Row>

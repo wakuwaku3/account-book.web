@@ -290,6 +290,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                   label={resources.previousPassword}
                   onFocus={this.openPopover}
                   onBlur={this.closePopover}
+                  required={true}
                   error={this.validator.hasError(
                     'previousPassword',
                     validationState,
@@ -307,6 +308,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 label={resources.password}
                 onFocus={this.openPopover}
                 onBlur={this.closePopover}
+                required={true}
                 error={this.validator.hasError('password', validationState)}
               />
             </Row>
@@ -320,6 +322,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 label={resources.confirmPassword}
                 onFocus={this.openPopover}
                 onBlur={this.closePopover}
+                required={true}
                 error={this.validator.hasError(
                   'confirmPassword',
                   validationState,

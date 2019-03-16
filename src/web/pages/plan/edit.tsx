@@ -30,6 +30,7 @@ import { symbols } from 'src/use-cases/common/di-symbols';
 import { Clear, Save } from '@material-ui/icons';
 import { Checkbox } from 'src/web/components/forms-controls/checkbox';
 import { DatePicker } from 'src/web/components/forms-controls/date-picker';
+import { now } from 'src/infrastructures/common/date-helper';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },
@@ -86,6 +87,7 @@ const getDefault: () => PlanEditModel = () => {
     isIncome: false,
     amount: 0,
     interval: 1,
+    start: now().toISOString(),
   };
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
@@ -101,14 +103,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   } = createPropagationProps(props);
   const { root, btnRow, btn, progressContainer } = classes;
   const [model, setModel] = React.useState(getDefault());
-  const {
-    name: planName,
-    isIncome,
-    amount,
-    interval,
-    applyStartDate,
-    applyEndDate,
-  } = model;
+  const { name: planName, isIncome, amount, interval, start, end } = model;
   const resetById = async (tid: string) => {
     const newModel = await getPlanAsync(tid);
     if (newModel) {
@@ -118,10 +113,17 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   React.useEffect(() => {
     reset();
   }, [id]);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    setModel({ ...model, [name]: value });
+  const handleChange = <K extends keyof PlanEditModel>(
+    key: K,
+    valueSelector?: (v: string) => PlanEditModel[K],
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    setModel({
+      ...model,
+      [key]: valueSelector ? valueSelector(value) : (value as PlanEditModel[K]),
+    });
   };
+
   const reset = async () => {
     if (id) {
       resetById(id);
@@ -137,6 +139,13 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       history.push(Url.plan);
     }
   };
+
+  const disableSubmit =
+    !(amount || amount === 0) ||
+    !planName ||
+    !(interval || interval > 0) ||
+    Boolean(start && end && new Date(start) > new Date(end));
+
   return id && !planName ? (
     <div className={progressContainer}>
       <CircularProgress />
@@ -158,7 +167,12 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
               <Clear />
               {resources.reset}
             </Button>
-            <Button type="submit" color="primary" className={btn}>
+            <Button
+              type="submit"
+              color="primary"
+              className={btn}
+              disabled={disableSubmit}
+            >
               <Save />
               {resources.save}
             </Button>
@@ -167,10 +181,10 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
         <Row>
           <TextBox
             value={planName}
-            name="planName"
             label={resources.planName}
-            onChange={handleChange}
+            onChange={handleChange('name')}
             autoFocus={true}
+            required={true}
           />
         </Row>
         <Row>
@@ -187,8 +201,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             value={amount}
             name="amount"
             label={resources.amount}
-            onChange={handleChange}
+            onChange={handleChange('amount', v => Number(v))}
             type="number"
+            required={true}
           />
         </Row>
         <Row>
@@ -196,27 +211,28 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             value={interval}
             name="interval"
             label={resources.intervalPerMonth}
-            onChange={handleChange}
+            onChange={handleChange('interval', v => Number(v))}
             type="number"
+            required={true}
           />
         </Row>
         <Row>
           <DatePicker
             localizer={localizer}
-            value={applyStartDate ? new Date(applyStartDate) : null}
+            value={start ? new Date(start) : null}
             label={resources.applyStartDate}
             onChange={date => {
-              setModel({ ...model, applyStartDate: date });
+              setModel({ ...model, start: date });
             }}
           />
         </Row>
         <Row>
           <DatePicker
             localizer={localizer}
-            value={applyEndDate}
+            value={end ? new Date(end) : null}
             label={resources.applyEndDate}
             onChange={date => {
-              setModel({ ...model, applyEndDate: date });
+              setModel({ ...model, end: date });
             }}
           />
         </Row>

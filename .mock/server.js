@@ -6,22 +6,10 @@ const middlewares = jsonServer.defaults();
 // routes.jsonの内容をここに記載
 server.use(
   jsonServer.rewriter({
-    '/accounts/refresh': '/accounts-refresh',
-    '/accounts/sign-in': '/accounts-sign-in',
-    '/accounts/password-reset-requesting':
-      '/accounts-password-reset-requesting',
-    '/accounts/reset-password': '/accounts-reset-password',
-    '/accounts/reset-password': '/accounts-reset-password-get',
-    '/accounts/check-previous-password': '/accounts-check-previous-password',
     '/dashboard/2018-11-01': '/dashboard-2018-11-01',
     '/dashboard/2018-12-01': '/dashboard-2018-12-01',
     '/dashboard/2019-01-01': '/dashboard-2019-01-01',
     '/dashboard/2019-02-01': '/dashboard-2019-02-01',
-    '/transaction/1': '/transaction-1',
-    '/transaction/2': '/transaction-2',
-    '/transaction/3': '/transaction-3',
-    '/transaction/create': '/transaction-create',
-    '/transaction/edit': '/transaction-edit',
     '/plan/1': '/plan-1',
     '/plan/2': '/plan-2',
     '/plan/3': '/plan-3',

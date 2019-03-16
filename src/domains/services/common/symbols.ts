@@ -10,6 +10,7 @@ import { ITransactionService } from 'src/use-cases/services/interfaces/transacti
 import { IPlanService } from 'src/use-cases/services/interfaces/plan-service';
 import { IActualService } from 'src/use-cases/services/interfaces/actual-service';
 import { IJWTService } from 'src/use-cases/services/interfaces/jwt-service';
+import { IIdentityService } from 'src/use-cases/services/interfaces/identity-service';
 
 export const serviceSymbols = {
   config: createRegisterSymbol<Config>(),
@@ -23,4 +24,5 @@ export const serviceSymbols = {
   planService: createRegisterSymbol<IPlanService>(),
   actualService: createRegisterSymbol<IActualService>(),
   jwtService: createRegisterSymbol<IJWTService>(),
+  identityService: createRegisterSymbol<IIdentityService>(),
 };

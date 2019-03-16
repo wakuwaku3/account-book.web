@@ -25,17 +25,23 @@ interface RadioGroupProps {
   label?: string;
   items?: RadioProps[];
   readOnly?: boolean;
+  required?: boolean;
 }
 export const RadioGroup = decorate(styles)<
   RadioGroupProps & MuiRadioGroupProps
 >(props => {
-  const { label, items, readOnly, classes, ...others } = createPropagationProps(
-    props,
-  );
+  const {
+    label,
+    items,
+    readOnly,
+    required,
+    classes,
+    ...others
+  } = createPropagationProps(props);
   const { root, group } = classes;
   return (
     <FormControl className={root}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel required={required}>{label}</FormLabel>
       <MuiRadioGroup {...others} className={group}>
         {items &&
           items.map(({ label: itemLabel, value, ...os }) => {

@@ -100,12 +100,11 @@ export namespace ApiUrl {
   };
   export const transactionsCreate = urljoin(root, transactions);
 
-  const plan = 'plan';
-  export const planIndex = urljoin(mockRoot, plan);
+  const plans = 'plans';
+  export const planIndex = urljoin(root, plans);
   export const planEdit = (id: string) => {
-    return urljoin(mockRoot, plan, id);
+    return urljoin(root, plans, id);
   };
-  export const planCreate = urljoin(mockRoot, plan, 'create');
 
   const actual = 'actual';
   export const actualEdit = (id: string, month?: string) => {
