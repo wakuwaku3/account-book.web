@@ -62,8 +62,6 @@ export class Resources {
         return '雑費';
       case '5':
         return '収入';
-      case '6':
-        return '貯金';
     }
     return 'その他';
   };
