@@ -12,3 +12,8 @@ export const addMonth = (d: Date, month: number) => {
   d2.setMonth(d2.getMonth() + month);
   return d2;
 };
+export const equalMonth = (d1: Date, d2: Date) => {
+  return (
+    d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth()
+  );
+};

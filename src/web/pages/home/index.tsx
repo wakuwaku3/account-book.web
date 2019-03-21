@@ -114,7 +114,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             }
             color="secondary"
           >
-            {resources.approve}
+            {canApprove ? resources.approve : resources.cancelApprove}
           </Button>
         )}
         <DashboardMonthPicker />

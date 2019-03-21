@@ -34,6 +34,7 @@ interface Props {
   localizer: Localizer;
   plans: DashboardPlan[];
   selectedMonth?: Date;
+  readonly: boolean;
 }
 interface Param {}
 interface OwnProps {}
@@ -43,7 +44,7 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts, dashboard }, { history }) => {
-  const { plans, selectedMonth } = new DashboardSelectors(dashboard);
+  const { plans, selectedMonth, model } = new DashboardSelectors(dashboard);
   const { resources, localizer } = new AccountsSelectors(accounts);
   return {
     resources,
@@ -51,6 +52,7 @@ const mapStateToProps: StateMapperWithRouter<
     localizer,
     plans,
     selectedMonth,
+    readonly: model && model.state === 'closed',
   };
 };
 interface Events {}
@@ -65,6 +67,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     localizer,
     history,
     selectedMonth,
+    readonly,
   } = createPropagationProps(props);
   const { root } = classes;
   if (!plans || !selectedMonth) {
@@ -87,6 +90,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             <TableRow key={plan.id}>
               <TableCell align="left">
                 <IconButton
+                  disabled={readonly}
                   color="primary"
                   onClick={() => {
                     if (plan.actualId) {

@@ -66,17 +66,15 @@ export namespace ApiUrl {
       `reset-password?${stringify({ passwordResetToken })}`,
     );
   };
-  export const accountsPreviousPassword = urljoin(
-    mockRoot,
-    accounts,
-    'check-previous-password',
-  );
   const dashboard = 'dashboard';
   export const dashboardIndex = (month?: Date) => {
     if (month) {
-      return urljoin(mockRoot, dashboard, toUrl(month));
+      return urljoin(
+        root,
+        `${dashboard}?${stringify({ month: toUrl(month) })}`,
+      );
     }
-    return urljoin(mockRoot, dashboard);
+    return urljoin(root, dashboard);
   };
   export const dashboardApprove = urljoin(mockRoot, dashboard, 'approve');
   export const dashboardCancelApprove = urljoin(

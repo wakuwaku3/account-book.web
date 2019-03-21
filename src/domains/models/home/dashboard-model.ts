@@ -17,4 +17,5 @@ export interface DashboardModel {
   plans: DashboardPlan[];
   canApprove: boolean;
   canCancelApprove: boolean;
+  state: 'open' | 'closed';
 }

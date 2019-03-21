@@ -13,6 +13,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { Localizer } from 'src/domains/common/location/localizer';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons';
 import { MonthPickerModel } from 'src/domains/models/common/month-picker-model';
+import { equalMonth } from 'src/infrastructures/common/date-helper';
 
 const styles = createStyles({
   root: {
@@ -40,9 +41,7 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
     return null;
   }
   const { selectedMonth, selectableMonths } = monthPicker;
-  const index = selectableMonths.findIndex(
-    x => x.getTime() === selectedMonth.getTime(),
-  );
+  const index = selectableMonths.findIndex(x => equalMonth(x, selectedMonth));
   const beforeDisabled = index <= 0;
   const nextDisabled = index >= selectableMonths.length - 1;
   const { root, btn } = classes;
