@@ -24,8 +24,7 @@ export const Inner: React.SFC<Props> = ({ authenticated }) => {
       <Route path={Url.plan} component={PlanIndex} exact={true} />
       <Route path={Url.planCreate} component={PlanEdit} exact={true} />
       <Route path={Url.planEdit} component={PlanEdit} exact={true} />
-      <Route path={Url.actualEdit} component={PlanEnter} exact={true} />
-      <Route path={Url.actualCreate} component={PlanEnter} exact={true} />
+      <Route path={Url.actualEnter} component={PlanEnter} exact={true} />
       <Route path={Url.transaction} component={TransactionIndex} exact={true} />
       <Route
         path={Url.transactionCreate}

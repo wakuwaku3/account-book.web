@@ -26,9 +26,10 @@ import { resolve } from 'src/use-cases/common/di-container';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import {
   ActualModel,
-  ActualCreationModel,
+  ActualKey,
   ActualEditModel,
 } from 'src/domains/models/actual/actual-model';
+import { parse } from 'querystring';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },
@@ -52,8 +53,7 @@ interface Props {
   resources: Resources;
   localizer: Localizer;
   history: History;
-  id: string;
-  month: string;
+  qs: ActualKey;
 }
 interface Param {
   id: string;
@@ -66,50 +66,47 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts }, { history, match }) => {
-  const { id, month } = match.params;
+  const qs = parse(
+    location.search ? location.search.substring(1) : '',
+  ) as ActualKey;
+  if (qs.month) {
+    qs.month = new Date(qs.month);
+  }
   const { resources, localizer } = new AccountsSelectors(accounts);
-  return { resources, localizer, history, id, month };
+  return { resources, localizer, history, qs };
 };
 interface Events {
-  getActualAsync: (
-    id: string,
-    month?: string,
-  ) => Promise<ActualModel | undefined>;
-  addActualAsync: (model: ActualCreationModel) => Promise<boolean>;
-  editActualAsync: (id: string, model: ActualEditModel) => Promise<boolean>;
+  getActualAsync: (key: ActualKey) => Promise<ActualModel | undefined>;
+  editActualAsync: (key: ActualKey, model: ActualEditModel) => Promise<boolean>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { getActualAsync, addActualAsync, editActualAsync } = resolve(
-    symbols.actualUseCase,
-  );
-  return { getActualAsync, addActualAsync, editActualAsync };
+  const { getActualAsync, editActualAsync } = resolve(symbols.actualUseCase);
+  return { getActualAsync, editActualAsync };
 };
 const getDefault: () => ActualModel = () => {
   return {
-    name: '',
+    planName: '',
     planAmount: 0,
-    actualAmount: 0,
-    month: '',
   };
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const {
     resources,
     classes,
-    id,
+    qs,
     getActualAsync,
-    addActualAsync,
     editActualAsync,
     history,
     localizer,
   } = createPropagationProps(props);
+  const { actualId, planId, dashboardId, month } = qs;
   const [model, setModel] = React.useState(getDefault());
-  const { actualAmount, planAmount, month, name } = model;
+  const { actualAmount, planAmount, planName: name } = model;
   const [loading, setLoading] = React.useState(true);
   const reset = async () => {
     setLoading(true);
     try {
-      const newModel = await getActualAsync(id, month);
+      const newModel = await getActualAsync(qs);
       if (newModel) {
         setModel(newModel);
       }
@@ -119,17 +116,13 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   };
   React.useEffect(() => {
     reset();
-  }, [id, month]);
+  }, [actualId, planId, dashboardId, month ? month.getTime() : undefined]);
   const submit = async () => {
     setLoading(true);
     try {
-      const hasError = month
-        ? await addActualAsync({
-            actualAmount: model.actualAmount,
-            month,
-            planId: id,
-          })
-        : await editActualAsync(id, model);
+      const hasError = await editActualAsync(qs, {
+        actualAmount: model.actualAmount ? model.actualAmount : 0,
+      });
       if (!hasError) {
         history.push(Url.root);
       }
@@ -201,9 +194,11 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
         </Row>
         <Row>
           <TextBox
-            value={actualAmount}
+            type="number"
+            value={
+              actualAmount || actualAmount === 0 ? String(actualAmount) : ''
+            }
             label={resources.actualAmount}
-            autoFocus={true}
             onChange={e =>
               setModel({
                 ...model,

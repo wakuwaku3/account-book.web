@@ -40,5 +40,5 @@
   "editor.formatOnSave": true,
   "files.autoSave": "onFocusChange",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "workbench.colorTheme": "Monokai Dimmed"
+  "workbench.colorTheme": "Default Light+"
 }

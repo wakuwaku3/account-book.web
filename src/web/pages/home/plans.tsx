@@ -35,6 +35,7 @@ interface Props {
   plans: DashboardPlan[];
   selectedMonth?: Date;
   readonly: boolean;
+  id?: string;
 }
 interface Param {}
 interface OwnProps {}
@@ -44,7 +45,9 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts, dashboard }, { history }) => {
-  const { plans, selectedMonth, model } = new DashboardSelectors(dashboard);
+  const { plans, selectedMonth, readonly, id } = new DashboardSelectors(
+    dashboard,
+  );
   const { resources, localizer } = new AccountsSelectors(accounts);
   return {
     resources,
@@ -52,7 +55,8 @@ const mapStateToProps: StateMapperWithRouter<
     localizer,
     plans,
     selectedMonth,
-    readonly: model && model.state === 'closed',
+    readonly,
+    id,
   };
 };
 interface Events {}
@@ -68,6 +72,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     history,
     selectedMonth,
     readonly,
+    id,
   } = createPropagationProps(props);
   const { root } = classes;
   if (!plans || !selectedMonth) {
@@ -93,11 +98,14 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
                   disabled={readonly}
                   color="primary"
                   onClick={() => {
-                    if (plan.actualId) {
-                      history.push(Url.getActualUrl(plan.actualId));
-                      return;
-                    }
-                    history.push(Url.getActualUrl(plan.id, selectedMonth));
+                    history.push(
+                      Url.getActualUrl({
+                        actualId: plan.actualId,
+                        dashboardId: id,
+                        planId: plan.id,
+                        month: selectedMonth,
+                      }),
+                    );
                   }}
                 >
                   <Edit />

@@ -1,14 +1,10 @@
 import {
   ActualModel,
-  ActualCreationModel,
   ActualEditModel,
+  ActualKey,
 } from 'src/domains/models/actual/actual-model';
 
 export interface IActualUseCase {
-  getActualAsync: (
-    id: string,
-    month?: string,
-  ) => Promise<ActualModel | undefined>;
-  addActualAsync: (model: ActualCreationModel) => Promise<boolean>;
-  editActualAsync: (id: string, model: ActualEditModel) => Promise<boolean>;
+  getActualAsync: (key: ActualKey) => Promise<ActualModel | undefined>;
+  editActualAsync: (key: ActualKey, model: ActualEditModel) => Promise<boolean>;
 }

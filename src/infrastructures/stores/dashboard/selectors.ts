@@ -15,6 +15,9 @@ export class DashboardSelectors {
   public get plans() {
     return this.model ? this.model.plans : [];
   }
+  public get id() {
+    return this.model ? this.model.id : undefined;
+  }
   public get selectedMonth() {
     return this.model ? this.model.selectedMonth : getMonthStartDay(now());
   }
@@ -23,5 +26,8 @@ export class DashboardSelectors {
   }
   public get canCancelApprove() {
     return this.model ? this.model.canCancelApprove : false;
+  }
+  public get readonly() {
+    return this.model ? this.model.state === 'closed' : false;
   }
 }

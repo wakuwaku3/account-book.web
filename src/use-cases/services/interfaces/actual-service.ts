@@ -1,9 +1,8 @@
 import {
-  ActualCreationModel,
   ActualEditModel,
+  ActualKey,
 } from 'src/domains/models/actual/actual-model';
 
 export interface IActualService {
-  addActualAsync: (model: ActualCreationModel) => Promise<boolean>;
-  editActualAsync: (id: string, model: ActualEditModel) => Promise<boolean>;
+  editActualAsync: (key: ActualKey, model: ActualEditModel) => Promise<boolean>;
 }

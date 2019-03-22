@@ -12,6 +12,7 @@ export interface DashboardPlan {
   actualId: string;
 }
 export interface DashboardModel {
+  id?: string;
   selectedMonth: Date;
   summary: DashboardSummary;
   plans: DashboardPlan[];

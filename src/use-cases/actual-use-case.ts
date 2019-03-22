@@ -2,46 +2,26 @@ import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from './common/di-symbols';
 import { IFetchService } from './services/interfaces/fetch-service';
-import { IMessagesService } from './services/interfaces/messages-service';
 import { IActualUseCase } from './interfaces/actual-use-case';
 import { IActualService } from './services/interfaces/actual-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { Message } from 'src/domains/models/common/message';
-import { ActualModel } from 'src/domains/models/actual/actual-model';
+import { ActualModel, ActualKey } from 'src/domains/models/actual/actual-model';
 
 @injectable()
 export class ActualUseCase implements IActualUseCase {
   constructor(
     @inject(symbols.fetchService) private fetchService: IFetchService,
-    @inject(symbols.messagesService)
-    private messagesService: IMessagesService,
     @inject(symbols.actualService)
     private actualService: IActualService,
   ) {}
-  public getActualAsync: (
-    id: string,
-    month?: string | undefined,
-  ) => Promise<ActualModel | undefined> = async (id, month) => {
-    const { model, errors } = await this.fetchService.fetchAsync<{
-      model: ActualModel;
-      errors: string[];
-    }>({
-      url: ApiUrl.actualEdit(id, month),
+  public getActualAsync = async (key: ActualKey) => {
+    const { result } = await this.fetchService.fetchWithCredentialAsync<
+      ActualModel
+    >({
+      url: ApiUrl.getActualUrl(key),
       method: 'GET',
     });
-    if (errors && errors.length > 0) {
-      this.messagesService.appendMessages(
-        ...errors.map(error => () =>
-          ({
-            level: 'error',
-            text: error,
-          } as Message),
-        ),
-      );
-      return undefined;
-    }
-    return model;
+    return result;
   };
-  public addActualAsync = this.actualService.addActualAsync;
   public editActualAsync = this.actualService.editActualAsync;
 }

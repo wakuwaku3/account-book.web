@@ -3,12 +3,16 @@ import { format, parse } from 'url';
 import * as urljoin from 'url-join';
 import { config } from 'src/domains/common/config';
 import { stringify } from 'querystring';
+import { ActualKey } from 'src/domains/models/actual/actual-model';
 
 const toUrl = (date: Date) =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
     2,
     '0',
   )}-${String(date.getDate()).padStart(2, '0')}`;
+export type ActualEnterQueryParameters = Partial<
+  Record<keyof ActualKey, string>
+>;
 export namespace Url {
   export const root = '/';
   export const passwordResetRequesting = urljoin(root, 'reset-password');
@@ -27,10 +31,23 @@ export namespace Url {
   export const getTransactionEditUrl = (id: string) => urljoin(transaction, id);
 
   const actual = urljoin(root, 'actual');
-  export const actualEdit = urljoin(actual, ':id');
-  export const actualCreate = urljoin(actual, ':id', ':month');
-  export const getActualUrl = (id: string, month?: Date) =>
-    month ? urljoin(actual, id, toUrl(month)) : urljoin(actual, id);
+  export const actualEnter = actual;
+  export const getActualUrl = (p: ActualKey) => {
+    const param: ActualEnterQueryParameters = {};
+    if (p.actualId) {
+      param.actualId = p.actualId;
+    }
+    if (p.planId) {
+      param.planId = p.planId;
+    }
+    if (p.dashboardId) {
+      param.dashboardId = p.dashboardId;
+    }
+    if (p.month) {
+      param.month = toUrl(p.month);
+    }
+    return `${actual}?${stringify(param)}`;
+  };
 }
 export namespace ApiUrl {
   const resolveHostname = (rootUrl: string) => {
@@ -105,10 +122,21 @@ export namespace ApiUrl {
   };
 
   const actual = 'actual';
-  export const actualEdit = (id: string, month?: string) => {
-    if (month) {
-      return urljoin(mockRoot, actual, id, month);
+  export const actualEdit = urljoin(root, actual);
+  export const getActualUrl = (p: ActualKey) => {
+    const param: ActualEnterQueryParameters = {};
+    if (p.actualId) {
+      param.actualId = p.actualId;
     }
-    return urljoin(mockRoot, actual, id);
+    if (p.planId) {
+      param.planId = p.planId;
+    }
+    if (p.dashboardId) {
+      param.dashboardId = p.dashboardId;
+    }
+    if (p.month) {
+      param.month = toUrl(p.month);
+    }
+    return urljoin(root, `${actual}?${stringify(param)}`);
   };
 }
