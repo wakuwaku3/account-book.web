@@ -1,6 +1,5 @@
 import { injectable } from 'inversify';
 import { FetchRequest } from 'src/domains/models/common/fetch-request';
-import { Config } from 'src/domains/models/common/config';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import {
   IFetchService,
@@ -22,37 +21,10 @@ export class FetchService implements IFetchService {
     return this.identityService.getClaim();
   }
   constructor(
-    @inject(symbols.config) private config: Config,
     @inject(symbols.messagesService) private messagesService: IMessagesService,
     @inject(symbols.identityService) private identityService: IIdentityService,
   ) {}
   public fetchAsync = async <TResult>(
-    request: FetchRequest,
-    token?: string,
-  ) => {
-    const req = {
-      ...request,
-      body:
-        request.body && !this.config.isMockMode
-          ? JSON.stringify(request.body)
-          : null,
-      headers: new Headers(
-        request.method !== 'GET'
-          ? { Accept: 'application/json', 'Content-Type': 'application/json' }
-          : {},
-      ),
-    } as Request;
-    if (token) {
-      req.headers.append('Authorization', `Bearer ${token}`);
-    } else if (this.claim && this.claim.token) {
-      req.headers.append('Authorization', `Bearer ${this.claim.token}`);
-    }
-    const response = await fetch(request.url, req);
-    const json = await response.json();
-    return json as TResult;
-  };
-
-  public fetch = async <TResult>(
     request: FetchRequest,
   ): Promise<FetchResponse<TResult>> => {
     const req = {

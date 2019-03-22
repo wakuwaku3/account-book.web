@@ -32,6 +32,7 @@ interface Props {
   canApprove: boolean;
   canCancelApprove: boolean;
   selectedMonth: Date;
+  id: string;
 }
 interface Param {}
 interface OwnProps {}
@@ -46,6 +47,7 @@ const mapStateToProps: StateMapperWithRouter<
     canApprove,
     canCancelApprove,
     selectedMonth,
+    id,
   } = new DashboardSelectors(dashboard);
   const { resources } = new AccountsSelectors(accounts);
   return {
@@ -55,13 +57,14 @@ const mapStateToProps: StateMapperWithRouter<
     canApprove,
     canCancelApprove,
     selectedMonth,
+    id,
   };
 };
 interface Events {
   setShowState: (showState: DashboardShowState) => void;
   getModelAsync: () => Promise<void>;
-  approve: (selectedMonth: Date) => void;
-  cancelApprove: (selectedMonth: Date) => void;
+  approve: (id: string, selectedMonth: Date) => void;
+  cancelApprove: (id: string, selectedMonth: Date) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   const {
@@ -73,9 +76,9 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   return {
     setShowState,
     getModelAsync,
-    approve: async selectedMonth => await approveAsync(selectedMonth),
-    cancelApprove: async selectedMonth =>
-      await cancelApproveAsync(selectedMonth),
+    approve: async (id, selectedMonth) => await approveAsync(id, selectedMonth),
+    cancelApprove: async (id, selectedMonth) =>
+      await cancelApproveAsync(id, selectedMonth),
   };
 };
 
@@ -91,6 +94,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     selectedMonth,
     setShowState,
     getModelAsync,
+    id,
   } = createPropagationProps(props);
   const { showGraph, showPlans } = showState;
   const { root, subject } = classes;
@@ -110,7 +114,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
           <Button
             variant={canApprove ? 'contained' : 'outlined'}
             onClick={() =>
-              canApprove ? approve(selectedMonth) : cancelApprove(selectedMonth)
+              canApprove
+                ? approve(id, selectedMonth)
+                : cancelApprove(id, selectedMonth)
             }
             color="secondary"
           >

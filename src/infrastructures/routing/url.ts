@@ -93,12 +93,7 @@ export namespace ApiUrl {
     }
     return urljoin(root, dashboard);
   };
-  export const dashboardApprove = urljoin(mockRoot, dashboard, 'approve');
-  export const dashboardCancelApprove = urljoin(
-    mockRoot,
-    dashboard,
-    'cancel-approve',
-  );
+  export const dashboardApprove = (id: string) => urljoin(root, dashboard, id);
 
   const transactions = 'transactions';
   export const transactionsIndex = (month?: Date) => {

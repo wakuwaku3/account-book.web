@@ -4,10 +4,8 @@ import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
 import { IDashboardOperators } from 'src/infrastructures/stores/dashboard/operators-interface';
-import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
 import { DashboardModel } from '../models/home/dashboard-model';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { Message } from '../models/common/message';
 
 @injectable()
 export class DashboardService implements IDashboardService {
@@ -15,51 +13,39 @@ export class DashboardService implements IDashboardService {
     @inject(symbols.fetchService) private fetchService: IFetchService,
     @inject(symbols.dashboardOperators)
     private dashboardOperators: IDashboardOperators,
-    @inject(symbols.messagesService)
-    private messagesService: IMessagesService,
   ) {}
-  public approveAsync = async (selectedMonth: Date) => {
-    const { model, errors } = await this.fetchService.fetchAsync<{
-      model: DashboardModel;
-      errors: string[];
-    }>({
-      url: ApiUrl.dashboardApprove,
-      method: 'POST',
-      body: { month: selectedMonth },
+  public getModelAsync = async (selectedMonth?: Date) => {
+    const {
+      hasError,
+      result,
+    } = await this.fetchService.fetchWithCredentialAsync<DashboardModel>({
+      url: ApiUrl.dashboardIndex(selectedMonth),
+      method: 'GET',
     });
-    if (errors && errors.length > 0) {
-      this.messagesService.appendMessages(
-        ...errors.map(error => () =>
-          ({
-            level: 'error',
-            text: error,
-          } as Message),
-        ),
-      );
-      return;
+    if (!hasError && result) {
+      result.selectedMonth = new Date(result.selectedMonth);
+      this.dashboardOperators.setModel(result);
     }
-    this.dashboardOperators.setModel(model);
   };
-  public cancelApproveAsync = async (selectedMonth: Date) => {
-    const { model, errors } = await this.fetchService.fetchAsync<{
-      model: DashboardModel;
-      errors: string[];
-    }>({
-      url: ApiUrl.dashboardCancelApprove,
+
+  public approveAsync = async (id: string, selectedMonth: Date) => {
+    const { hasError } = await this.fetchService.fetchWithCredentialAsync({
+      url: ApiUrl.dashboardApprove(id),
       method: 'POST',
       body: { month: selectedMonth },
     });
-    if (errors && errors.length > 0) {
-      this.messagesService.appendMessages(
-        ...errors.map(error => () =>
-          ({
-            level: 'error',
-            text: error,
-          } as Message),
-        ),
-      );
-      return;
+    if (!hasError) {
+      await this.getModelAsync(selectedMonth);
     }
-    this.dashboardOperators.setModel(model);
+  };
+  public cancelApproveAsync = async (id: string, selectedMonth: Date) => {
+    const { hasError } = await this.fetchService.fetchWithCredentialAsync({
+      url: ApiUrl.dashboardApprove(id),
+      method: 'DELETE',
+      body: { month: selectedMonth },
+    });
+    if (!hasError) {
+      await this.getModelAsync(selectedMonth);
+    }
   };
 }

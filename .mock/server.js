@@ -4,19 +4,7 @@ const router = jsonServer.router('.mock/db.json');
 const middlewares = jsonServer.defaults();
 
 // routes.jsonの内容をここに記載
-server.use(
-  jsonServer.rewriter({
-    '/dashboard/2018-11-01': '/dashboard-2018-11-01',
-    '/dashboard/2018-12-01': '/dashboard-2018-12-01',
-    '/dashboard/2019-01-01': '/dashboard-2019-01-01',
-    '/dashboard/2019-02-01': '/dashboard-2019-02-01',
-    '/plan/1': '/plan-1',
-    '/plan/2': '/plan-2',
-    '/plan/3': '/plan-3',
-    '/plan/create': '/plan-create',
-    '/plan/edit': '/plan-edit',
-  }),
-);
+server.use(jsonServer.rewriter({}));
 
 // ミドルウェアの設定 (コンソール出力するロガーやキャッシュの設定など)
 server.use(middlewares);

@@ -9,10 +9,6 @@ export interface FetchResponse<TResult> {
 export interface IFetchService {
   fetchAsync: <TResult extends {}>(
     request: FetchRequest,
-    token?: string,
-  ) => Promise<TResult>;
-  fetch: <TResult extends {}>(
-    request: FetchRequest,
   ) => Promise<FetchResponse<TResult>>;
   fetchWithCredentialAsync: <TResult extends {}>(
     request: FetchRequest,

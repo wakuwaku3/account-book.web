@@ -1,4 +1,5 @@
 export interface IDashboardService {
-  approveAsync: (selectedMonth: Date) => Promise<void>;
-  cancelApproveAsync: (selectedMonth: Date) => Promise<void>;
+  getModelAsync: (selectedMonth?: Date) => Promise<void>;
+  approveAsync: (id: string, selectedMonth: Date) => Promise<void>;
+  cancelApproveAsync: (id: string, selectedMonth: Date) => Promise<void>;
 }

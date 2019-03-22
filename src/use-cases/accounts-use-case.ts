@@ -60,7 +60,7 @@ export class AccountsUseCase implements IAccountsUseCase {
     }));
   };
   public getEmailAsync = async (passwordResetToken: string) => {
-    const response = await this.fetchService.fetch<{
+    const response = await this.fetchService.fetchAsync<{
       email: string;
     }>({
       url: ApiUrl.accountsEmail(passwordResetToken),
