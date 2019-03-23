@@ -65,6 +65,7 @@ export class Resources {
     }
     return 'その他';
   };
+  public today = '当日';
 }
 export class ResourcesEn extends Resources {
   public email = 'Mail Address';

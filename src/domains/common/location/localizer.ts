@@ -53,6 +53,17 @@ export class Localizer {
     datePlaceholder: 'yyyy/MM/dd',
     mask: [/\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/],
   };
+  public formatGraphDate = (date: Date) =>
+    `${date.getMonth() + 1}/${date.getDate()}(${this.dayMap[date.getDay()]})`;
+  private dayMap = {
+    0: '日',
+    1: '月',
+    2: '火',
+    3: '水',
+    4: '木',
+    5: '金',
+    6: '土',
+  };
 }
 export class LocalizerEn extends Localizer {
   public formatMonth = (month: Date) =>

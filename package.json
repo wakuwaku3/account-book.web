@@ -30,6 +30,7 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
+    "recharts": "^1.5.0",
     "redux": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "typeface-roboto": "0.0.54",
@@ -55,6 +56,7 @@
     "electron-package": "electron-packager ./dist/temp --platform=all --arch=all --out=dist --asar --overwrite --icon=\"./public/favicon.ico\" "
   },
   "devDependencies": {
+    "@types/recharts": "^1.1.14",
     "cpx": "^1.5.0",
     "electron": "^4.0.4",
     "electron-packager": "^13.0.1",

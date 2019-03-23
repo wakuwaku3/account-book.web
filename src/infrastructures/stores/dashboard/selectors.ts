@@ -13,13 +13,15 @@ export class DashboardSelectors {
     return this.model ? this.model.summary : undefined;
   }
   public get plans() {
-    return this.model ? this.model.plans : [];
+    return this.model && this.model.plans ? this.model.plans : [];
   }
   public get id() {
     return this.model ? this.model.id : undefined;
   }
   public get selectedMonth() {
-    return this.model ? this.model.selectedMonth : getMonthStartDay(now());
+    return this.model && this.model.selectedMonth
+      ? this.model.selectedMonth
+      : getMonthStartDay(now());
   }
   public get canApprove() {
     return this.model ? this.model.canApprove : false;
@@ -29,5 +31,8 @@ export class DashboardSelectors {
   }
   public get readonly() {
     return this.model ? this.model.state === 'closed' : false;
+  }
+  public get daily() {
+    return this.model && this.model.daily ? this.model.daily : [];
   }
 }

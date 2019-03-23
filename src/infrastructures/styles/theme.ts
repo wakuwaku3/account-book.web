@@ -1,6 +1,7 @@
 import { Theme as MuiTheme, colors as MuiColors } from '@material-ui/core';
 import { FontWeightProperty } from 'csstype';
 import { ThemeOptions as MuiThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { green } from '@material-ui/core/colors';
 
 export const colors = {
   amber: MuiColors.amber,
@@ -55,6 +56,14 @@ const customThemeOption = {
       oddBackgroundColor: isLight ? primary['200'] : primary['900'],
       hoverBackgroundColor: isLight ? primary['300'] : primary['800'],
       selectedBackgroundColor: isLight ? blueGrey['100'] : blueGrey['700'],
+    },
+    chart: {
+      balanceColor: isLight ? green['800'] : green['500'],
+      incomeColor: isLight ? indigo['700'] : indigo['300'],
+      expenseColor: isLight ? red['700'] : red['500'],
+      todayColor: isLight ? yellow['800'] : yellow['500'],
+      zeroBorderColor: isLight ? red['700'] : red['500'],
+      gridColor: '#ddd',
     },
     messages: {
       info: {

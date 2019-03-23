@@ -20,6 +20,7 @@ import { DashboardMonthPicker } from './month-picker';
 import { Summary } from './summary';
 import { Plans } from './plans';
 import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
+import { Chart } from './chart';
 
 const styles = createStyles({
   root: { padding: 20 },
@@ -128,17 +129,15 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       <Row>
         <Summary />
       </Row>
-      {false && (
-        <Row>
-          <Accordion
-            defaultShow={showGraph}
-            subject={resources.graph}
-            onChange={s => handleChange({ showGraph: s })}
-          >
-            {resources.change}
-          </Accordion>
-        </Row>
-      )}
+      <Row>
+        <Accordion
+          defaultShow={showGraph}
+          subject={resources.graph}
+          onChange={s => handleChange({ showGraph: s })}
+        >
+          <Chart />
+        </Accordion>
+      </Row>
       <Row>
         <Accordion
           defaultShow={showPlans}
