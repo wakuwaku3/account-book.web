@@ -94,14 +94,14 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
         <TableHead>
           <TableRow>
             <TableCell className={btnColumn} />
+            <TableCell align="right" className={amountColumn}>
+              {resources.amount}
+            </TableCell>
             <TableCell align="right" className={dateColumn}>
               {resources.transactionDate}
             </TableCell>
             <TableCell align="right" className={categoryColumn}>
               {resources.category}
-            </TableCell>
-            <TableCell align="right" className={amountColumn}>
-              {resources.amount}
             </TableCell>
             <TableCell align="left" className={notesColumn}>
               {resources.notes}
@@ -130,14 +130,14 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
                   <Clear />
                 </IconButton>
               </TableCell>
+              <TableCell align="right" className={amountColumn}>
+                {localizer.formatMoney(item.amount)}
+              </TableCell>
               <TableCell align="right" className={dateColumn}>
                 {localizer.formatDateTime(new Date(item.date))}
               </TableCell>
               <TableCell align="right" className={categoryColumn}>
                 {resources.getCategoryName(item.categoryId)}
-              </TableCell>
-              <TableCell align="right" className={amountColumn}>
-                {localizer.formatMoney(item.amount)}
               </TableCell>
               <TableCell align="left" className={notesColumn}>
                 {item.notes}
