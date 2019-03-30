@@ -20,6 +20,9 @@ export class TransactionUseCase implements ITransactionUseCase {
     private transactionService: ITransactionService,
   ) {}
   public loadAsync = async (selectedMonth?: Date) => {
+    if (selectedMonth) {
+      this.transactionOperators.setMonth(selectedMonth);
+    }
     const { result } = await this.fetchService.fetchWithCredentialAsync<
       TransactionModel
     >({

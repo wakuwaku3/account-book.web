@@ -2,5 +2,6 @@ import { TransactionModel } from 'src/domains/models/transaction/transaction-ind
 
 export interface Action {
   setModel: TransactionModel;
+  setMonth: Date;
 }
 export default Action;
