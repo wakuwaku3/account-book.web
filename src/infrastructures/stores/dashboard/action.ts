@@ -4,5 +4,6 @@ import { DashboardModel } from 'src/domains/models/home/dashboard-model';
 export interface Action {
   setShowState: DashboardShowState;
   setModel: DashboardModel;
+  setMonth: Date;
 }
 export default Action;

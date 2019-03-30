@@ -15,7 +15,22 @@ const functions: ReducerFunctions<State, Action> = {
     return { ...state, showState: newShowState };
   },
   setModel: (state, model) => {
+    if (
+      state.model &&
+      state.model.selectedMonth &&
+      (state.model.selectedMonth.getFullYear() !==
+        model.selectedMonth.getFullYear() ||
+        state.model.selectedMonth.getMonth() !== model.selectedMonth.getMonth())
+    ) {
+      return state;
+    }
     return { ...state, model };
+  },
+  setMonth: (state, month) => {
+    return {
+      ...state,
+      model: state.model ? { ...state.model, selectedMonth: month } : undefined,
+    };
   },
 };
 export default functions;
