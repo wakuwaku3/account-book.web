@@ -10,20 +10,18 @@ class JaLocalizedUtils extends DateFnsUtils {
     return format(date, 'yyyy/MM', { locale: this.locale });
   }
 }
+const paddingZero = (val: number) => String(val).padStart(2, '0');
 export class Localizer {
   public formatDate = (date: Date) =>
-    `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(
-      2,
-      '0',
-    )}/${String(date.getDate()).padStart(2, '0')}`;
+    `${date.getFullYear()}/${paddingZero(date.getMonth() + 1)}/${paddingZero(
+      date.getDate(),
+    )}`;
   public formatDateTime = (date: Date) =>
-    `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(
-      2,
-      '0',
-    )}/${String(date.getDate()).padStart(
-      2,
-      '0',
-    )} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    `${date.getFullYear()}/${paddingZero(date.getMonth() + 1)}/${paddingZero(
+      date.getDate(),
+    )} ${paddingZero(date.getHours())}:${paddingZero(
+      date.getMinutes(),
+    )}:${paddingZero(date.getSeconds())}`;
   public formatMonth = (month: Date) =>
     `${month.getFullYear()}年${month.getMonth() + 1}月`;
   public formatInterval = (month: number) => {
