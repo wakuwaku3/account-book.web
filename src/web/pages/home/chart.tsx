@@ -22,9 +22,11 @@ import {
   Legend,
   ReferenceLine,
   Area,
+  Label,
 } from 'recharts';
 import { defaultThemeOption } from 'src/infrastructures/styles/theme';
 import { DashboardDaily } from 'src/domains/models/home/dashboard-model';
+import { now } from 'src/infrastructures/common/date-helper';
 
 const styles = createStyles({
   root: { width: '100%', paddingTop: 20 },
@@ -56,6 +58,18 @@ interface Events {}
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   return {};
 };
+const computeExpenseAverage = (daily: DashboardDaily[]) => {
+  const n = now();
+  const data = daily
+    .filter(({ date }) => new Date(date) <= n)
+    .map(({ expense }) => expense);
+  const len = data.length;
+  if (len === 0) {
+    return undefined;
+  }
+  const sum = data.reduce((p, c) => p + c, 0);
+  return Math.ceil(sum / len);
+};
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { localizer, resources, classes, daily } = createPropagationProps(
     props,
@@ -67,6 +81,8 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     [resources.income]: income,
     [resources.expense]: expense,
   }));
+  const expenseAverage = computeExpenseAverage(daily);
+
   const today = localizer.formatGraphDate(new Date(Date.now()));
   const {
     balanceColor,
@@ -75,6 +91,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     todayColor,
     zeroBorderColor,
     gridColor,
+    averageBorderColor,
   } = defaultThemeOption.shared.chart;
   return (
     <div className={root}>
@@ -91,11 +108,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             <YAxis />
             <Legend />
             <Tooltip />
-            <ReferenceLine
-              x={today}
-              stroke={todayColor}
-              label={resources.today}
-            />
+            <ReferenceLine x={today} stroke={todayColor}>
+              <Label value={resources.today} position="insideTop" />
+            </ReferenceLine>
             <ReferenceLine y={0} stroke={zeroBorderColor} />
           </ComposedChart>
         </ResponsiveContainer>
@@ -110,12 +125,18 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             <YAxis />
             <Legend />
             <Tooltip />
-            <ReferenceLine
-              x={today}
-              stroke={todayColor}
-              label={resources.today}
-            />
+            <ReferenceLine x={today} stroke={todayColor}>
+              <Label value={resources.today} position="insideTop" />
+            </ReferenceLine>
             <ReferenceLine y={0} stroke={zeroBorderColor} />
+            {expenseAverage && (
+              <ReferenceLine y={expenseAverage} stroke={averageBorderColor}>
+                <Label
+                  value={resources.expenseAverage(expenseAverage)}
+                  position="insideRight"
+                />
+              </ReferenceLine>
+            )}
           </ComposedChart>
         </ResponsiveContainer>
       </div>

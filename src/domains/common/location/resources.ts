@@ -66,6 +66,7 @@ export class Resources {
     return 'その他';
   };
   public today = '当日';
+  public expenseAverage = (expense: number) => `平均支出(${expense})`;
 }
 export class ResourcesEn extends Resources {
   public email = 'Mail Address';

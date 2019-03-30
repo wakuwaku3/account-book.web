@@ -63,6 +63,7 @@ const customThemeOption = {
       expenseColor: isLight ? red['700'] : red['500'],
       todayColor: isLight ? yellow['800'] : yellow['500'],
       zeroBorderColor: isLight ? red['700'] : red['500'],
+      averageBorderColor: isLight ? pink['800'] : pink['500'],
       gridColor: '#ddd',
     },
     messages: {
