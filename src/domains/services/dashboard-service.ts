@@ -15,9 +15,7 @@ export class DashboardService implements IDashboardService {
     private dashboardOperators: IDashboardOperators,
   ) {}
   public getModelAsync = async (selectedMonth?: Date) => {
-    if (selectedMonth) {
-      this.dashboardOperators.setMonth(selectedMonth);
-    }
+    this.dashboardOperators.setMonth(selectedMonth);
     const {
       hasError,
       result,
@@ -26,7 +24,9 @@ export class DashboardService implements IDashboardService {
       method: 'GET',
     });
     if (!hasError && result) {
-      result.selectedMonth = new Date(result.selectedMonth);
+      result.selectedMonth = result.selectedMonth
+        ? new Date(result.selectedMonth)
+        : undefined;
       this.dashboardOperators.setModel(result);
     }
   };

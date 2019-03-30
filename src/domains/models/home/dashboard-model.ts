@@ -19,7 +19,7 @@ export interface DashboardPlan {
 }
 export interface DashboardModel {
   id?: string;
-  selectedMonth: Date;
+  selectedMonth: Date | undefined;
   summary: DashboardSummary;
   daily: DashboardDaily[];
   plans: DashboardPlan[];

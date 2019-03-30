@@ -18,6 +18,7 @@ const functions: ReducerFunctions<State, Action> = {
     if (
       state.model &&
       state.model.selectedMonth &&
+      model.selectedMonth &&
       (state.model.selectedMonth.getFullYear() !==
         model.selectedMonth.getFullYear() ||
         state.model.selectedMonth.getMonth() !== model.selectedMonth.getMonth())

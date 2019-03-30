@@ -37,7 +37,7 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
   const { localizer, classes, monthPicker, onChange } = createPropagationProps(
     props,
   );
-  if (!monthPicker) {
+  if (!monthPicker || !monthPicker.selectedMonth) {
     return null;
   }
   const { selectedMonth, selectableMonths } = monthPicker;
