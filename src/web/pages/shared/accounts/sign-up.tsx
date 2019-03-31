@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
-import { createStyles, Typography, Button } from '@material-ui/core';
+import {
+  DialogContent,
+  createStyles,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+} from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/domains/common/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -12,7 +20,6 @@ import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
 import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
@@ -26,6 +33,9 @@ import {
 import { Messages } from 'src/domains/common/location/messages';
 import { ValidationPopup } from 'src/web/components/forms-controls/validation-popup';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
+import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
+import { Culture } from 'src/domains/common/location/culture-infos';
+import { TermsOfService } from './terms-of-service';
 
 const styles = createStyles({
   root: {
@@ -49,16 +59,16 @@ const styles = createStyles({
   },
   btn: { width: '100%' },
   popover: { top: -25, left: -5, position: 'relative' },
+  dialogAction: { margin: 16 },
 });
 interface Props {
   resources: Resources;
   history: History;
-  passwordResetToken: string;
-  email: string;
+  signUpToken: string;
   messages: Messages;
 }
 interface Param {
-  passwordResetToken: string;
+  signUpToken: string;
 }
 interface OwnProps {}
 const mapStateToProps: StateMapperWithRouter<
@@ -67,62 +77,62 @@ const mapStateToProps: StateMapperWithRouter<
   Param,
   OwnProps
 > = ({ accounts }, { history, match }) => {
-  const { claim } = accounts;
-  const { passwordResetToken } = match.params;
-  const email = passwordResetToken
-    ? undefined
-    : claim
-    ? claim.email
-    : undefined;
+  const { signUpToken } = match.params;
   const { resources, messages } = new AccountsSelectors(accounts);
-  return { resources, history, passwordResetToken, email, messages };
+  return { resources, history, signUpToken, messages };
 };
 interface Events {
-  getEmailAsync: (
-    passwordResetToken: string,
-  ) => Promise<{ email: string; hasError: boolean }>;
+  loadSignUpAsync: (
+    signUpToken: string,
+    history: History,
+  ) => Promise<{ email: string } | undefined>;
   showErrorMessage: () => void;
   validatePasswordFormat: (password: string) => boolean;
-  resetPasswordAsync: (
-    request: ResetPasswordRequest,
-    history: History,
-  ) => Promise<void>;
+  signUpAsync: (request: SignUpRequest, history: History) => Promise<void>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
   const {
-    getEmailAsync,
+    loadSignUpAsync,
     validatePasswordFormat,
     showErrorMessage,
-    resetPasswordAsync,
+    signUpAsync,
   } = resolve(symbols.accountsUseCase);
   return {
-    getEmailAsync,
+    loadSignUpAsync: async (signUpToken, history) => {
+      const { hasError, result } = await loadSignUpAsync(signUpToken);
+      if (hasError) {
+        history.push(Url.root);
+      }
+      return result;
+    },
     validatePasswordFormat,
     showErrorMessage,
-    resetPasswordAsync: async (request, history) => {
-      const { hasError } = await resetPasswordAsync(request);
+    signUpAsync: async (request, history) => {
+      const { hasError } = await signUpAsync(request);
       if (!hasError) {
         history.push(Url.root);
       }
     },
   };
 };
-interface ResetPasswordModel {
-  previousPassword: string;
+interface SignUpModel {
   password: string;
   confirmPassword: string;
+  userName: string;
+  culture: Culture;
 }
 interface State {
   email: string;
-  model: ResetPasswordModel;
-  validationState: ValidationState<ResetPasswordModel>;
-  anchor?: null | { key: keyof ResetPasswordModel; el: HTMLInputElement };
+  model: SignUpModel;
+  validationState: ValidationState<SignUpModel>;
+  anchor?: null | { key: keyof SignUpModel; el: HTMLInputElement };
+  open: boolean;
 }
 
-class ModelValidator extends Validator<ResetPasswordModel> {
+class ModelValidator extends Validator<SignUpModel> {
   constructor(
     private props: Events & Props,
-    initializer: ValidatorInitializer<ResetPasswordModel>,
+    initializer: ValidatorInitializer<SignUpModel>,
   ) {
     super(initializer);
   }
@@ -135,15 +145,7 @@ class ModelValidator extends Validator<ResetPasswordModel> {
   private get validatePasswordFormat() {
     return this.props.validatePasswordFormat;
   }
-  protected defaultState: ValidationState<ResetPasswordModel> = {
-    previousPassword: this.props.passwordResetToken
-      ? []
-      : [
-          {
-            text: this.messages.required(this.resources.previousPassword),
-            validate: model => (model.previousPassword ? 'valid' : 'inValid'),
-          },
-        ],
+  protected defaultState: ValidationState<SignUpModel> = {
     password: [
       {
         text: this.messages.passwordDescription,
@@ -171,6 +173,22 @@ class ModelValidator extends Validator<ResetPasswordModel> {
             : 'valid',
       },
     ],
+    userName: [
+      {
+        text: this.messages.passwordDescription,
+        state: 'description',
+      },
+      {
+        text: this.messages.required(this.resources.userName),
+        validate: model => (model.userName ? 'valid' : 'inValid'),
+      },
+    ],
+    culture: [
+      {
+        text: this.messages.required(this.resources.language),
+        validate: model => (model.culture ? 'valid' : 'inValid'),
+      },
+    ],
   };
 }
 
@@ -178,31 +196,30 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
   private validator: ModelValidator;
   constructor(props: any) {
     super(props);
-    const { email } = this.props;
     this.validator = new ModelValidator(this.props, {
       getModel: () => this.state.model,
       setValidationState: validationState => this.setState({ validationState }),
       interval: 500,
     });
     this.state = {
-      email: email ? email : '',
+      email: '',
       validationState: this.validator.getDefaultState(),
       model: {
-        previousPassword: '',
         password: '',
         confirmPassword: '',
+        userName: '',
+        culture: 'ja',
       },
+      open: false,
     };
   }
   public async componentDidMount() {
-    const { passwordResetToken, getEmailAsync, history } = this.props;
-    if (passwordResetToken) {
-      const { email, hasError } = await getEmailAsync(passwordResetToken);
-      if (hasError) {
-        history.push(Url.root);
-        return;
+    const { signUpToken, loadSignUpAsync, history } = this.props;
+    if (signUpToken) {
+      const res = await loadSignUpAsync(signUpToken, history);
+      if (res) {
+        this.setState({ email: res.email });
       }
-      this.setState({ email });
     }
   }
   private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -213,7 +230,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
   private openPopover = (e: React.FocusEvent<HTMLInputElement>) => {
     this.setState({
       anchor: {
-        key: e.currentTarget.name as keyof ResetPasswordModel,
+        key: e.currentTarget.name as keyof SignUpModel,
         el: e.currentTarget,
       },
     });
@@ -233,35 +250,44 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     if (!anchor) {
       return;
     }
-    const key = anchor.key as keyof ResetPasswordModel;
+    const key = anchor.key as keyof SignUpModel;
     if (prevModel[key] !== model[key]) {
       this.validator.validateThrottle(key);
     }
   }
   private submit = async () => {
-    const {
-      showErrorMessage: showResetPasswordErrorMessage,
-      resetPasswordAsync,
-      history,
-      passwordResetToken,
-    } = this.props;
+    const { showErrorMessage, signUpAsync, history, signUpToken } = this.props;
     const { model } = this.state;
     const validationState = await this.validator.validateAll(model);
     if (validationState) {
-      showResetPasswordErrorMessage();
-      this.setState({ validationState });
+      showErrorMessage();
+      this.setState({ validationState, open: false });
       return;
     }
-    const { password } = model;
-    await resetPasswordAsync({ passwordResetToken, password }, history);
+    this.setState({ open: false });
+    const { confirmPassword, ...others } = model;
+    await signUpAsync({ signUpToken, agreement: true, ...others }, history);
+  };
+  private handleClickOpen = async () => {
+    const { showErrorMessage } = this.props;
+    const { model } = this.state;
+    const validationState = await this.validator.validateAll(model);
+    if (validationState) {
+      showErrorMessage();
+      this.setState({ validationState, open: false });
+      return;
+    }
+    this.setState({ open: true });
+  };
+
+  private handleClose = () => {
+    this.setState({ open: false });
   };
   public render() {
-    const { resources, classes, passwordResetToken } = createPropagationProps(
-      this.props,
-    );
-    const { root, form, hidden, btn, popover } = classes;
+    const { resources, classes } = createPropagationProps(this.props);
+    const { root, form, hidden, btn, popover, dialogAction } = classes;
     const { email, model, anchor, validationState } = this.state;
-    const { password, previousPassword, confirmPassword } = model;
+    const { password, confirmPassword, userName } = model;
     const validationMessages =
       anchor && validationState[anchor.key]
         ? validationState[anchor.key]
@@ -272,32 +298,13 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
           <Typography variant="h4">{resources.resetPassword}</Typography>
         </Row>
         <Row>
-          <Form onSubmit={this.submit} className={form}>
+          <Form onSubmit={this.handleClickOpen} className={form}>
             <Row>
               <Typography variant="body1">{`${
                 resources.email
               }:${email}`}</Typography>
               <input type="text" defaultValue={email} className={hidden} />
             </Row>
-            {!passwordResetToken && (
-              <Row>
-                <TextBox
-                  variant="outlined"
-                  value={previousPassword}
-                  type="password"
-                  name="previousPassword"
-                  onChange={this.handleChange}
-                  label={resources.previousPassword}
-                  onFocus={this.openPopover}
-                  onBlur={this.closePopover}
-                  required={true}
-                  error={this.validator.hasError(
-                    'previousPassword',
-                    validationState,
-                  )}
-                />
-              </Row>
-            )}
             <Row>
               <TextBox
                 variant="outlined"
@@ -330,6 +337,19 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
               />
             </Row>
             <Row>
+              <TextBox
+                variant="outlined"
+                value={userName}
+                name="userName"
+                onChange={this.handleChange}
+                label={resources.userName}
+                onFocus={this.openPopover}
+                onBlur={this.closePopover}
+                required={true}
+                error={this.validator.hasError('userName', validationState)}
+              />
+            </Row>
+            <Row>
               <Cell xs={8} />
               <Cell xs={4}>
                 <Button
@@ -338,7 +358,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                   color="primary"
                   className={btn}
                 >
-                  {resources.change}
+                  {resources.next}
                 </Button>
               </Cell>
             </Row>
@@ -354,12 +374,30 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
             validationMessages={validationMessages}
           />
         )}
+        <Dialog open={this.state.open} onClose={this.handleClose}>
+          <DialogTitle>{resources.termsOfService}</DialogTitle>
+          <DialogContent>
+            <TermsOfService />
+          </DialogContent>
+          <DialogActions className={dialogAction}>
+            <Button onClick={this.handleClose} color="primary">
+              {resources.cancel}
+            </Button>
+            <Button
+              onClick={this.submit}
+              color="primary"
+              variant="contained"
+              autoFocus={true}
+            >
+              {resources.submitWithAgreement}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     );
   }
 }
 const StyledInner = decorate(styles)(Inner);
-export const ResetPassword = withConnectedRouter(
-  mapStateToProps,
-  mapEventToProps,
-)(StyledInner);
+export const SignUp = withConnectedRouter(mapStateToProps, mapEventToProps)(
+  StyledInner,
+);

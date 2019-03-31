@@ -3,6 +3,7 @@ import { Claim } from 'src/domains/models/accounts/claim';
 import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
 import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
 import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
+import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
 
 export interface IAccountsUseCase {
   signOut: () => void;
@@ -17,9 +18,13 @@ export interface IAccountsUseCase {
   getEmailAsync: (
     passwordResetToken: string,
   ) => Promise<{ email: string; hasError: boolean }>;
-  showResetPasswordErrorMessage: () => void;
+  showErrorMessage: () => void;
   validatePasswordFormat: (password: string) => boolean;
   resetPasswordAsync: (
     request: ResetPasswordRequest,
   ) => Promise<{ hasError: boolean }>;
+  loadSignUpAsync: (
+    signUpToken: string,
+  ) => Promise<{ result?: { email: string }; hasError: boolean }>;
+  signUpAsync: (request: SignUpRequest) => Promise<{ hasError: boolean }>;
 }

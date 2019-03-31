@@ -13,7 +13,7 @@ const styles = createStyles({
   checkbox: {},
 });
 interface CheckboxProps {
-  label?: string;
+  label?: React.ReactNode;
 }
 export const Checkbox = decorate(styles)<CheckboxProps & MuiCheckboxProps>(
   props => {

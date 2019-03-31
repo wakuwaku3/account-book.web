@@ -14,6 +14,7 @@ import { ResetPasswordRequest } from '../models/accounts/reset-password-request'
 import { ClaimResponse } from '../models/accounts/claim';
 import { now } from 'src/infrastructures/common/date-helper';
 import { IIdentityService } from 'src/use-cases/services/interfaces/identity-service';
+import { SignUpRequest } from '../models/accounts/sign-up-request';
 
 @injectable()
 export class FetchService implements IFetchService {
@@ -237,6 +238,40 @@ export class FetchService implements IFetchService {
 
   public resetPasswordAsync = async (body: ResetPasswordRequest) => {
     const response = await fetch(ApiUrl.accountsResetPassword, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+    });
+    if (response.status >= 400) {
+      const { errors, message } = (await response.json()) as {
+        errors: string[];
+        message: string;
+      };
+      if (errors && errors.length > 0) {
+        return this.writeErrors(...this.mapErrorMessageByCode(...errors));
+      }
+      if (message) {
+        return this.writeErrors(message);
+      }
+      return this.writeErrors('error');
+    }
+    await this.signInInner(response);
+    const claim = this.claim;
+    if (claim) {
+      this.messagesService.appendMessages(({ messages }) => ({
+        level: 'info',
+        text: messages.signIn(claim.userName),
+        showDuration: 5000,
+      }));
+      return { hasError: false };
+    }
+    return { hasError: true };
+  };
+  public signUpAsync = async (body: SignUpRequest) => {
+    const response = await fetch(ApiUrl.accountsSignUp, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: new Headers({

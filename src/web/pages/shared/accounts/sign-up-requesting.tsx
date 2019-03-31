@@ -60,10 +60,10 @@ interface Events {
   submit: (model: SignUpRequestingRequest, history: History) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { requestPasswordResetAsync } = resolve(symbols.accountsUseCase);
+  const { requestSignUpAsync } = resolve(symbols.accountsUseCase);
   return {
     submit: async (model, history) => {
-      const { hasError } = await requestPasswordResetAsync(model);
+      const { hasError } = await requestSignUpAsync(model);
       if (!hasError) {
         history.push(Url.root);
       }

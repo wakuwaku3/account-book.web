@@ -11,7 +11,6 @@ import { IAccountsService } from './services/interfaces/accounts-service';
 import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
 import { IValidateService } from './services/interfaces/validate-service';
 import { IMessagesService } from './services/interfaces/messages-service';
-import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
 import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
 
 @injectable()
@@ -53,7 +52,7 @@ export class AccountsUseCase implements IAccountsUseCase {
   };
   public validatePasswordFormat = (password: string) =>
     this.validateService.validatePasswordFormat(password);
-  public showResetPasswordErrorMessage = () => {
+  public showErrorMessage = () => {
     this.messagesService.appendMessages(({ messages }) => ({
       level: 'warning',
       text: messages.validationError,
@@ -72,13 +71,20 @@ export class AccountsUseCase implements IAccountsUseCase {
       hasError: response.hasError,
     };
   };
-  public resetPasswordAsync = async (request: ResetPasswordRequest) => {
-    return await this.fetchService.resetPasswordAsync(request);
-  };
+  public resetPasswordAsync = this.fetchService.resetPasswordAsync;
   public requestSignUpAsync = async (model: SignUpRequestingRequest) => {
     if (!(await this.accountsService.validateSignUpRequestingModel(model))) {
       return { hasError: true };
     }
     return await this.accountsService.requestSignUpAsync(model);
   };
+  public loadSignUpAsync = async (signUpToken: string) => {
+    return await this.fetchService.fetchAsync<{
+      email: string;
+    }>({
+      url: ApiUrl.accountsGetSignUp(signUpToken),
+      method: 'GET',
+    });
+  };
+  public signUpAsync = this.fetchService.signUpAsync;
 }

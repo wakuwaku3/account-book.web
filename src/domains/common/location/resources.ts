@@ -8,7 +8,9 @@ export class Resources {
   public signIn = 'サインイン';
   public profile = 'プロフィール';
   public signOut = 'サインアウト';
+  public cancel = 'キャンセル';
   public submit = '送信';
+  public submitWithAgreement = '同意して送信';
   public change = '変更';
   public resetPassword = 'パスワード再設定';
   public resetPasswordRequesting =
@@ -70,6 +72,10 @@ export class Resources {
   };
   public today = '当日';
   public expenseAverage = (expense: number) => `平均支出(${expense})`;
+  public userName = 'ユーザー名';
+  public language = '言語';
+  public termsOfService = 'サービス利用規約';
+  public next = '次へ';
 }
 export class ResourcesEn extends Resources {
   public email = 'Mail Address';

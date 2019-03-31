@@ -15,7 +15,9 @@ export type ActualEnterQueryParameters = Partial<
 >;
 export namespace Url {
   export const root = '/';
+  export const serviceAgreement = urljoin(root, 'service-agreement');
   export const signUpRequesting = urljoin(root, 'sign-up');
+  export const signUp = urljoin(signUpRequesting, ':signUpToken');
   export const passwordResetRequesting = urljoin(root, 'reset-password');
   export const resetPassword = urljoin(
     passwordResetRequesting,
@@ -89,6 +91,10 @@ export namespace ApiUrl {
       `reset-password?${stringify({ passwordResetToken })}`,
     );
   };
+  export const accountsGetSignUp = (signUpToken: string) => {
+    return urljoin(root, accounts, `sign-up?${stringify({ signUpToken })}`);
+  };
+  export const accountsSignUp = urljoin(root, accounts, 'sign-up');
   const dashboard = 'dashboard';
   export const dashboardIndex = (month?: Date) => {
     if (month) {

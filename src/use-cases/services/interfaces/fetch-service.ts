@@ -1,6 +1,7 @@
 import { FetchRequest } from 'src/domains/models/common/fetch-request';
 import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
+import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
 
 export interface FetchResponse<TResult> {
   hasError: boolean;
@@ -20,4 +21,5 @@ export interface IFetchService {
   resetPasswordAsync: (
     body: ResetPasswordRequest,
   ) => Promise<{ hasError: boolean }>;
+  signUpAsync: (request: SignUpRequest) => Promise<{ hasError: boolean }>;
 }
