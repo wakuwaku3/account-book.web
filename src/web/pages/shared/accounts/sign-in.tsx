@@ -98,6 +98,13 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
             </Button>
           </Row>
           <Row>
+            <Link to={Url.signUpRequesting} className={fullWidth}>
+              <Typography variant="caption" color="inherit" align="right">
+                {resources.entryUser}
+              </Typography>
+            </Link>
+          </Row>
+          <Row>
             <Link to={Url.passwordResetRequesting} className={fullWidth}>
               <Typography variant="caption" color="inherit" align="right">
                 {resources.forgotPassword}

@@ -12,6 +12,7 @@ import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/pass
 import { IValidateService } from './services/interfaces/validate-service';
 import { IMessagesService } from './services/interfaces/messages-service';
 import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
+import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
 
 @injectable()
 export class AccountsUseCase implements IAccountsUseCase {
@@ -73,5 +74,11 @@ export class AccountsUseCase implements IAccountsUseCase {
   };
   public resetPasswordAsync = async (request: ResetPasswordRequest) => {
     return await this.fetchService.resetPasswordAsync(request);
+  };
+  public requestSignUpAsync = async (model: SignUpRequestingRequest) => {
+    if (!(await this.accountsService.validateSignUpRequestingModel(model))) {
+      return { hasError: true };
+    }
+    return await this.accountsService.requestSignUpAsync(model);
   };
 }

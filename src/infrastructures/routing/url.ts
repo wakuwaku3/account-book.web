@@ -15,6 +15,7 @@ export type ActualEnterQueryParameters = Partial<
 >;
 export namespace Url {
   export const root = '/';
+  export const signUpRequesting = urljoin(root, 'sign-up');
   export const passwordResetRequesting = urljoin(root, 'reset-password');
   export const resetPassword = urljoin(
     passwordResetRequesting,
@@ -75,6 +76,11 @@ export namespace ApiUrl {
     root,
     accounts,
     'password-reset-requesting',
+  );
+  export const accountsSignUpRequesting = urljoin(
+    root,
+    accounts,
+    'sign-up-requesting',
   );
   export const accountsEmail = (passwordResetToken: string) => {
     return urljoin(

@@ -14,6 +14,7 @@ import { PlanEdit } from '../plan/edit';
 import { PlanEnter } from '../actual/enter';
 import { TransactionIndex } from '../transaction';
 import { TransactionEdit } from '../transaction/edit';
+import { SignUpRequesting } from './accounts/sign-up-requesting';
 
 interface Props {
   authenticated: boolean;
@@ -44,6 +45,11 @@ export const Inner: React.SFC<Props> = ({ authenticated }) => {
       <Route
         path={Url.passwordResetRequesting}
         component={PasswordResetRequesting}
+        exact={true}
+      />
+      <Route
+        path={Url.signUpRequesting}
+        component={SignUpRequesting}
         exact={true}
       />
       <Route path={Url.root} component={SignIn} />

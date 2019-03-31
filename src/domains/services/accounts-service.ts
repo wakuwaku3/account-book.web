@@ -8,6 +8,7 @@ import { IAccountsService } from 'src/use-cases/services/interfaces/accounts-ser
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
 import { PasswordResetRequestingRequest } from '../models/accounts/password-reset-requesting-request';
 import { IValidateService } from 'src/use-cases/services/interfaces/validate-service';
+import { SignUpRequestingRequest } from '../models/accounts/sign-up-requesting-request';
 
 @injectable()
 export class AccountsService implements IAccountsService {
@@ -58,6 +59,25 @@ export class AccountsService implements IAccountsService {
     }
     return !hasError;
   };
+  public validateSignUpRequestingModel = (model: SignUpRequestingRequest) => {
+    const { email } = model;
+    let hasError = false;
+    this.messagesService.clear();
+    if (!email) {
+      this.messagesService.appendMessages(({ messages, resources }) => ({
+        level: 'warning',
+        text: messages.requiredError(resources.email),
+      }));
+      hasError = true;
+    } else if (!this.validateService.validateEmailFormat(email)) {
+      this.messagesService.appendMessages(({ messages, resources }) => ({
+        level: 'warning',
+        text: messages.emailFormatError,
+      }));
+      hasError = true;
+    }
+    return !hasError;
+  };
 
   public requestPasswordResetAsync = async (
     model: PasswordResetRequestingRequest,
@@ -71,6 +91,22 @@ export class AccountsService implements IAccountsService {
       this.messagesService.appendMessages(({ messages }) => ({
         level: 'info',
         text: messages.sendPasswordResetRequestingMail,
+        showDuration: 5000,
+      }));
+    }
+    return { hasError };
+  };
+
+  public requestSignUpAsync = async (model: SignUpRequestingRequest) => {
+    const { hasError } = await this.fetchService.fetchAsync({
+      url: ApiUrl.accountsSignUpRequesting,
+      method: 'PUT',
+      body: model,
+    });
+    if (!hasError) {
+      this.messagesService.appendMessages(({ messages }) => ({
+        level: 'info',
+        text: messages.sendSignUpRequestingMail,
         showDuration: 5000,
       }));
     }

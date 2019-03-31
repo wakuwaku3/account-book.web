@@ -11,6 +11,8 @@ export class Messages {
     'エラーが存在します。入力項目を再度確認してください。';
   public sendPasswordResetRequestingMail =
     '指定のメールアドレスにパスワード再設定用のURLを記載したメールを送信しました。';
+  public sendSignUpRequestingMail =
+    '指定のメールアドレスに新しいユーザーを作成するためのメールを送信しました。';
   public notSamePreviousPassword = '前回設定したパスワードが正しくありません。';
   public passwordDescription = 'ログインに使用するパスワードです。';
   public passwordLength = 'パスワードは8文字以上入力してください。';

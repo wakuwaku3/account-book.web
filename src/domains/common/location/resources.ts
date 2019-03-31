@@ -13,6 +13,9 @@ export class Resources {
   public resetPassword = 'パスワード再設定';
   public resetPasswordRequesting =
     'パスワード再設定したいアカウントのメールアドレスを入力してください。';
+  public entryUser = '新しいユーザーの登録';
+  public signUpRequesting =
+    'サインインに使うメールアドレスを入力してください。';
   public forgotPassword = 'パスワードを忘れた方はコチラ';
   public dashboard = 'ダッシュボード';
   public list = '一覧';
