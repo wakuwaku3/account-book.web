@@ -104,7 +104,7 @@ export const TermsOfService = decorate(styles)(({ classes }) => (
       </li>
     </ol>
 
-    <Typography variant="h5">第4条（利用料金および支払方法）</Typography>
+    {/* <Typography variant="h5">第4条（利用料金および支払方法）</Typography>
     <ol>
       <li>
         <Typography variant="caption">
@@ -116,9 +116,9 @@ export const TermsOfService = decorate(styles)(({ classes }) => (
           ユーザーが利用料金の支払を遅滞した場合には，ユーザーは年14．6％の割合による遅延損害金を支払うものとします。
         </Typography>
       </li>
-    </ol>
+    </ol> */}
 
-    <Typography variant="h5">第5条（禁止事項）</Typography>
+    <Typography variant="h5">第4条（禁止事項）</Typography>
     <p>
       <Typography variant="caption">
         ユーザーは，本サービスの利用にあたり，以下の行為をしてはなりません。
@@ -199,7 +199,7 @@ export const TermsOfService = decorate(styles)(({ classes }) => (
       </li>
     </ol>
 
-    <Typography variant="h5">第6条（本サービスの提供の停止等）</Typography>
+    <Typography variant="h5">第5条（本サービスの提供の停止等）</Typography>
     <ol>
       <li>
         <Typography variant="caption">
@@ -235,7 +235,7 @@ export const TermsOfService = decorate(styles)(({ classes }) => (
       </li>
     </ol>
 
-    <Typography variant="h5">第7条（利用制限および登録抹消）</Typography>
+    <Typography variant="h5">第6条（利用制限および登録抹消）</Typography>
     <ol>
       <li>
         <Typography variant="caption">
@@ -251,11 +251,11 @@ export const TermsOfService = decorate(styles)(({ classes }) => (
                 登録事項に虚偽の事実があることが判明した場合
               </Typography>
             </li>
-            <li>
+            {/* <li>
               <Typography variant="caption">
                 料金等の支払債務の不履行があった場合
               </Typography>
-            </li>
+            </li> */}
             <li>
               <Typography variant="caption">
                 サービス提供者からの連絡に対し，一定期間返答がない場合
@@ -281,14 +281,14 @@ export const TermsOfService = decorate(styles)(({ classes }) => (
       </li>
     </ol>
 
-    <Typography variant="h5">第8条（退会）</Typography>
+    <Typography variant="h5">第7条（退会）</Typography>
     <p>
       <Typography variant="caption">
         ユーザーは，サービス提供者の定める退会手続により，本サービスから退会できるものとします。
       </Typography>
     </p>
 
-    <Typography variant="h5">第9条（保証の否認および免責事項）</Typography>
+    <Typography variant="h5">第8条（保証の否認および免責事項）</Typography>
     <ol>
       <li>
         <Typography variant="caption">
@@ -312,42 +312,42 @@ export const TermsOfService = decorate(styles)(({ classes }) => (
       </li>
     </ol>
 
-    <Typography variant="h5">第10条（サービス内容の変更等）</Typography>
+    <Typography variant="h5">第9条（サービス内容の変更等）</Typography>
     <p>
       <Typography variant="caption">
         サービス提供者は，ユーザーに通知することなく，本サービスの内容を変更しまたは本サービスの提供を中止することができるものとし，これによってユーザーに生じた損害について一切の責任を負いません。
       </Typography>
     </p>
 
-    <Typography variant="h5">第11条（利用規約の変更）</Typography>
+    <Typography variant="h5">第10条（利用規約の変更）</Typography>
     <p>
       <Typography variant="caption">
         サービス提供者は，必要と判断した場合には，ユーザーに通知することなくいつでも本規約を変更することができるものとします。なお，本規約の変更後，本サービスの利用を開始した場合には，当該ユーザーは変更後の規約に同意したものとみなします。
       </Typography>
     </p>
 
-    <Typography variant="h5">第12条（個人情報の取扱い）</Typography>
+    <Typography variant="h5">第11条（個人情報の取扱い）</Typography>
     <p>
       <Typography variant="caption">
         サービス提供者は，本サービスの利用によって取得する個人情報については，サービス提供者「プライバシーポリシー」に従い適切に取り扱うものとします。
       </Typography>
     </p>
 
-    <Typography variant="h5">第13条（通知または連絡）</Typography>
+    <Typography variant="h5">第12条（通知または連絡）</Typography>
     <p>
       <Typography variant="caption">
         ユーザーとサービス提供者との間の通知または連絡は，サービス提供者の定める方法によって行うものとします。サービス提供者は,ユーザーから,サービス提供者が別途定める方式に従った変更届け出がない限り,現在登録されている連絡先が有効なものとみなして当該連絡先へ通知または連絡を行い,これらは,発信時にユーザーへ到達したものとみなします。
       </Typography>
     </p>
 
-    <Typography variant="h5">第14条（権利義務の譲渡の禁止）</Typography>
+    <Typography variant="h5">第13条（権利義務の譲渡の禁止）</Typography>
     <p>
       <Typography variant="caption">
         ユーザーは，サービス提供者の書面による事前の承諾なく，利用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し，または担保に供することはできません。
       </Typography>
     </p>
 
-    <Typography variant="h5">第15条（準拠法・裁判管轄）</Typography>
+    <Typography variant="h5">第14条（準拠法・裁判管轄）</Typography>
     <ol>
       <li>
         <Typography variant="caption">
