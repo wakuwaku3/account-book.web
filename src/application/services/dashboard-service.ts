@@ -1,8 +1,8 @@
-import { IDashboardService } from 'src/use-cases/services/interfaces/dashboard-service';
+import { IDashboardService } from 'src/application/interfaces/services/dashboard-service';
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from 'src/use-cases/common/di-symbols';
-import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { IDashboardOperators } from 'src/infrastructures/stores/dashboard/operators-interface';
 import { DashboardModel } from 'src/domains/models/home/dashboard-model';
 import { ApiUrl } from 'src/infrastructures/routing/url';

@@ -1,13 +1,13 @@
 import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { injectable } from 'inversify';
-import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
+import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from 'src/use-cases/common/di-symbols';
-import { IAccountsService } from 'src/use-cases/services/interfaces/accounts-service';
-import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { IAccountsService } from 'src/application/interfaces/services/accounts-service';
+import { IMessagesService } from 'src/application/interfaces/services/messages-service';
 import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
-import { IValidateService } from 'src/use-cases/services/interfaces/validate-service';
+import { IValidateService } from 'src/application/interfaces/services/validate-service';
 import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
 
 @injectable()

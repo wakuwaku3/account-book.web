@@ -1,12 +1,12 @@
-import { ITransactionService } from 'src/use-cases/services/interfaces/transaction-service';
+import { ITransactionService } from 'src/application/interfaces/services/transaction-service';
 import {
   TransactionEditModel,
   TransactionCreationModel,
 } from 'src/domains/models/transaction/transaction-model';
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from 'src/use-cases/common/di-symbols';
-import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 
 @injectable()

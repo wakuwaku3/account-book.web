@@ -6,8 +6,8 @@ import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { Localizer } from 'src/domains/common/location/localizer';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
 import { MonthPicker } from 'src/web/components/forms-controls/month-picker';
 import { MonthPickerModel } from 'src/domains/models/common/month-picker-model';

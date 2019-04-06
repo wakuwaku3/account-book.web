@@ -1,9 +1,9 @@
-import { IPlanService } from 'src/use-cases/services/interfaces/plan-service';
+import { IPlanService } from 'src/application/interfaces/services/plan-service';
 import { PlanEditModel } from 'src/domains/models/plan/plan-model';
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from 'src/use-cases/common/di-symbols';
-import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { PlanItem } from 'src/domains/models/plan/plan-item';
 import { IPlanOperators } from 'src/infrastructures/stores/plan/operators-interface';

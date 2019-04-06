@@ -1,17 +1,17 @@
 import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { injectable } from 'inversify';
 import { Claim } from 'src/domains/models/accounts/claim';
-import { IAccountsUseCase } from 'src/use-cases/interfaces/accounts-use-case';
-import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
+import { IAccountsUseCase } from 'src/application/interfaces/usecases/accounts-use-case';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IAccountsOperators } from 'src/infrastructures/stores/accounts/operators-interface';
-import { IAccountsService } from './services/interfaces/accounts-service';
+import { IAccountsService } from 'src/application/interfaces/services/accounts-service';
 import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
-import { IValidateService } from './services/interfaces/validate-service';
-import { IMessagesService } from './services/interfaces/messages-service';
+import { IValidateService } from 'src/application/interfaces/services/validate-service';
+import { IMessagesService } from 'src/application/interfaces/services/messages-service';
 import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
+import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 
 @injectable()
 export class AccountsUseCase implements IAccountsUseCase {

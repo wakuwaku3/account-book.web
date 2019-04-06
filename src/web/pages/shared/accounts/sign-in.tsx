@@ -4,7 +4,7 @@ import * as React from 'react';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
-import { resolve } from 'src/use-cases/common/di-container';
+import { resolve } from 'src/application/use-cases/di/di-container';
 import { Resources } from 'src/domains/common/location/resources';
 import { Form } from 'src/web/components/forms-controls/form';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -14,7 +14,7 @@ import { Row } from 'src/web/components/layout/row';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Link } from 'react-router-dom';
 import { Url } from 'src/infrastructures/routing/url';
 

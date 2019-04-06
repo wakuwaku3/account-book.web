@@ -1,13 +1,13 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from './common/di-symbols';
+import { symbols } from './di/di-symbols';
 import { ITransactionOperators } from 'src/infrastructures/stores/transaction/operators-interface';
-import { IFetchService } from './services/interfaces/fetch-service';
+import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { ITransactionUseCase } from './interfaces/transaction-use-case';
+import { ITransactionUseCase } from 'src/application/interfaces/usecases/transaction-use-case';
 import { TransactionModel } from 'src/domains/models/transaction/transaction-index-model';
 import { TransactionEditModel } from 'src/domains/models/transaction/transaction-model';
-import { ITransactionService } from './services/interfaces/transaction-service';
+import { ITransactionService } from 'src/application/interfaces/services/transaction-service';
 import { now, getMonthStartDay } from 'src/infrastructures/common/date-helper';
 
 @injectable()

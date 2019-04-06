@@ -23,8 +23,8 @@ import { TransactionSelectors } from 'src/infrastructures/stores/transaction/sel
 import { Create, Clear } from '@material-ui/icons';
 import { Url } from 'src/infrastructures/routing/url';
 import { TableCell } from 'src/web/components/table/table-cell';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 
 const styles = createStyles({
   root: { width: '100%', overflow: 'auto' },

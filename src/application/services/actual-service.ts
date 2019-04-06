@@ -1,8 +1,8 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from 'src/use-cases/common/di-symbols';
-import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
-import { IActualService } from 'src/use-cases/services/interfaces/actual-service';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { IFetchService } from 'src/application/interfaces/services/fetch-service';
+import { IActualService } from 'src/application/interfaces/services/actual-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import {
   ActualEditModel,

@@ -22,8 +22,8 @@ import { Form } from 'src/web/components/forms-controls/form';
 import { Localizer } from 'src/domains/common/location/localizer';
 import { Clear, Save, Sync } from '@material-ui/icons';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import {
   ActualModel,
   ActualKey,

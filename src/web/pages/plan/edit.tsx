@@ -25,8 +25,8 @@ import {
 import { Form } from 'src/web/components/forms-controls/form';
 import { Url } from 'src/infrastructures/routing/url';
 import { Localizer } from 'src/domains/common/location/localizer';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Clear, Save } from '@material-ui/icons';
 import { Checkbox } from 'src/web/components/forms-controls/checkbox';
 import { DatePicker } from 'src/web/components/forms-controls/date-picker';

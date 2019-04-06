@@ -20,8 +20,8 @@ import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Url } from 'src/infrastructures/routing/url';
 import { RefElement } from 'src/web/components/types';
 

@@ -4,16 +4,16 @@ import { inject } from 'src/infrastructures/services/inversify-helper';
 import {
   IFetchService,
   FetchResponse,
-} from 'src/use-cases/services/interfaces/fetch-service';
-import { symbols } from 'src/use-cases/common/di-symbols';
-import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
+} from 'src/application/interfaces/services/fetch-service';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { IMessagesService } from 'src/application/interfaces/services/messages-service';
 import { Message } from 'src/domains/models/common/message';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
 import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
 import { ClaimResponse } from 'src/domains/models/accounts/claim';
 import { now } from 'src/infrastructures/common/date-helper';
-import { IIdentityService } from 'src/use-cases/services/interfaces/identity-service';
+import { IIdentityService } from 'src/application/interfaces/services/identity-service';
 import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
 
 @injectable()

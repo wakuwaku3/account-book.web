@@ -23,8 +23,8 @@ import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import {
   Validator,
   ValidatorInitializer,

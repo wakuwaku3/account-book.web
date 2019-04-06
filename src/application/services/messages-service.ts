@@ -1,9 +1,9 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import { IGuidProvider } from 'src/infrastructures/common/services/interfaces/guid-provider';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IMessagesOperators } from 'src/infrastructures/stores/messages/operators-interface';
-import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
+import { IMessagesService } from 'src/application/interfaces/services/messages-service';
 import {
   MessageGenerator,
   MessageGeneratorArgs,

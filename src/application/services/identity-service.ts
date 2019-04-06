@@ -1,9 +1,9 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IAccountsOperators } from 'src/infrastructures/stores/accounts/operators-interface';
-import { IJWTService } from 'src/use-cases/services/interfaces/jwt-service';
-import { IIdentityService } from 'src/use-cases/services/interfaces/identity-service';
+import { IJWTService } from 'src/application/interfaces/services/jwt-service';
+import { IIdentityService } from 'src/application/interfaces/services/identity-service';
 import { Claim, ClaimResponse } from 'src/domains/models/accounts/claim';
 import { cultureInfos } from 'src/domains/common/location/culture-infos';
 
