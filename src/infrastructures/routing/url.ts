@@ -1,9 +1,9 @@
 // import { stringify } from 'query-string';
 import { format, parse } from 'url';
 import * as urljoin from 'url-join';
-import { config } from 'src/domains/common/config';
+import { config } from 'src/infrastructures/env/config';
 import { stringify } from 'querystring';
-import { ActualKey } from 'src/domains/models/actual/actual-model';
+import { ActualKey } from 'src/enterprise/actual/actual-model';
 
 const toUrl = (date: Date) =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(

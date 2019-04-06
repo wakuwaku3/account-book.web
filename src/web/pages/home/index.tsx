@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -13,7 +13,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { Accordion } from 'src/web/components/layout/accordion';
-import { DashboardShowState } from 'src/domains/models/home/dashboard-show-state';
+import { DashboardShowState } from 'src/enterprise/home/dashboard-show-state';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { DashboardMonthPicker } from './month-picker';

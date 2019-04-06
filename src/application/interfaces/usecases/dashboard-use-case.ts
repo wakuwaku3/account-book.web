@@ -1,4 +1,4 @@
-import { DashboardShowState } from 'src/domains/models/home/dashboard-show-state';
+import { DashboardShowState } from 'src/enterprise/home/dashboard-show-state';
 
 export interface IDashboardUseCase {
   setShowState: (showState: DashboardShowState) => void;

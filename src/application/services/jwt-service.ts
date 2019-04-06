@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { ClaimResponse, Claim } from 'src/domains/models/accounts/claim';
+import { ClaimResponse, Claim } from 'src/enterprise/accounts/claim';
 import { decode } from 'jsonwebtoken';
 import { IJWTService } from 'src/application/interfaces/services/jwt-service';
 import { fromUtc } from 'src/infrastructures/common/date-helper';

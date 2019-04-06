@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Claim } from 'src/domains/models/accounts/claim';
+import { Claim } from 'src/enterprise/accounts/claim';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { EventMapper } from 'src/infrastructures/stores/types';

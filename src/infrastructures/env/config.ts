@@ -1,4 +1,4 @@
-import { ExternalConfig, Config } from 'src/domains/models/common/config';
+import { ExternalConfig, Config } from 'src/enterprise/env/config';
 
 const createExternalConfig = (): ExternalConfig => {
   switch (process.env.NODE_ENV) {

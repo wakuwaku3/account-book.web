@@ -1,4 +1,4 @@
-import { MessageGenerator } from 'src/domains/models/common/message';
+import { MessageGenerator } from 'src/enterprise/messages/message';
 
 export interface IMessagesUseCase {
   clear: () => void;

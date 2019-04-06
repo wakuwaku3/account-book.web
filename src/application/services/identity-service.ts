@@ -4,8 +4,8 @@ import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IAccountsOperators } from 'src/infrastructures/stores/accounts/operators-interface';
 import { IJWTService } from 'src/application/interfaces/services/jwt-service';
 import { IIdentityService } from 'src/application/interfaces/services/identity-service';
-import { Claim, ClaimResponse } from 'src/domains/models/accounts/claim';
-import { cultureInfos } from 'src/domains/common/location/culture-infos';
+import { Claim, ClaimResponse } from 'src/enterprise/accounts/claim';
+import { cultureInfos } from 'src/enterprise/location/culture-infos';
 
 @injectable()
 export class IdentityService implements IIdentityService {

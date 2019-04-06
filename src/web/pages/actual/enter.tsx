@@ -7,7 +7,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -19,7 +19,7 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
-import { Localizer } from 'src/domains/common/location/localizer';
+import { Localizer } from 'src/enterprise/location/localizer';
 import { Clear, Save, Sync } from '@material-ui/icons';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { resolve } from 'src/application/use-cases/di/di-container';
@@ -28,7 +28,7 @@ import {
   ActualModel,
   ActualKey,
   ActualEditModel,
-} from 'src/domains/models/actual/actual-model';
+} from 'src/enterprise/actual/actual-model';
 import { parse } from 'querystring';
 
 const styles = createStyles({

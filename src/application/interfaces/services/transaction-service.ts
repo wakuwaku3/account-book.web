@@ -1,7 +1,7 @@
 import {
   TransactionEditModel,
   TransactionCreationModel,
-} from 'src/domains/models/transaction/transaction-model';
+} from 'src/enterprise/transaction/transaction-model';
 
 export interface ITransactionService {
   createTransactionAsync: (model: TransactionCreationModel) => Promise<boolean>;

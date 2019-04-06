@@ -10,7 +10,7 @@ import {
   DialogActions,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -29,12 +29,12 @@ import {
   Validator,
   ValidatorInitializer,
   ValidationState,
-} from 'src/domains/models/validation/validator';
-import { Messages } from 'src/domains/common/location/messages';
+} from 'src/enterprise/validation/validator';
+import { Messages } from 'src/enterprise/location/messages';
 import { ValidationPopup } from 'src/web/components/forms-controls/validation-popup';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
-import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
-import { Culture } from 'src/domains/common/location/culture-infos';
+import { SignUpRequest } from 'src/enterprise/accounts/sign-up-request';
+import { Culture } from 'src/enterprise/location/culture-infos';
 import { TermsOfService } from './terms-of-service';
 
 const styles = createStyles({

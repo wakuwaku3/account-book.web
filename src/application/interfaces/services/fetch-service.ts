@@ -1,7 +1,7 @@
-import { FetchRequest } from 'src/domains/models/common/fetch-request';
-import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
-import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
-import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
+import { FetchRequest } from 'src/enterprise/fetch/fetch-request';
+import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';
+import { ResetPasswordRequest } from 'src/enterprise/accounts/reset-password-request';
+import { SignUpRequest } from 'src/enterprise/accounts/sign-up-request';
 
 export interface FetchResponse<TResult> {
   hasError: boolean;

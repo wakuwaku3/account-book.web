@@ -1,5 +1,5 @@
-import { MessageLevel } from './types';
-import { CultureInfo } from 'src/domains/common/location/culture-infos';
+import { MessageLevel } from '../fetch/types';
+import { CultureInfo } from '../location/culture-infos';
 
 interface MessageInner {
   text: string;

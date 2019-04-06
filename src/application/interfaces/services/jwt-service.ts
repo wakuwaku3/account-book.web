@@ -1,4 +1,4 @@
-import { ClaimResponse, Claim } from 'src/domains/models/accounts/claim';
+import { ClaimResponse, Claim } from 'src/enterprise/accounts/claim';
 
 export interface IJWTService {
   parseClaim: (res: ClaimResponse) => Claim;

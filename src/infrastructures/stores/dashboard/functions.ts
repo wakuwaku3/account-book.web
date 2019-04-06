@@ -1,7 +1,7 @@
 import { ReducerFunctions } from '../types';
 import State from './state';
 import Action from './action';
-import { DashboardShowState } from 'src/domains/models/home/dashboard-show-state';
+import { DashboardShowState } from 'src/enterprise/home/dashboard-show-state';
 
 const setLocalStorage = (state: DashboardShowState) => {
   if (localStorage) {

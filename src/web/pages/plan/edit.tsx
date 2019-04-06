@@ -7,7 +7,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -21,10 +21,10 @@ import { TextBox } from 'src/web/components/forms-controls/text-box';
 import {
   PlanEditModel,
   PlanCreationModel,
-} from 'src/domains/models/plan/plan-model';
+} from 'src/enterprise/plan/plan-model';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Url } from 'src/infrastructures/routing/url';
-import { Localizer } from 'src/domains/common/location/localizer';
+import { Localizer } from 'src/enterprise/location/localizer';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Clear, Save } from '@material-ui/icons';

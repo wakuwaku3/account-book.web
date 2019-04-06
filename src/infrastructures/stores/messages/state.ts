@@ -1,4 +1,4 @@
-import { MessageGeneratorArgs } from 'src/domains/models/common/message';
+import { MessageGeneratorArgs } from 'src/enterprise/messages/message';
 
 export interface MessagesState {
   messageGeneratorArgs: MessageGeneratorArgs[];

@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { FetchRequest } from 'src/domains/models/common/fetch-request';
+import { FetchRequest } from 'src/enterprise/fetch/fetch-request';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import {
   IFetchService,
@@ -7,14 +7,14 @@ import {
 } from 'src/application/interfaces/services/fetch-service';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IMessagesService } from 'src/application/interfaces/services/messages-service';
-import { Message } from 'src/domains/models/common/message';
+import { Message } from 'src/enterprise/messages/message';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
-import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
-import { ClaimResponse } from 'src/domains/models/accounts/claim';
+import { ResetPasswordRequest } from 'src/enterprise/accounts/reset-password-request';
+import { ClaimResponse } from 'src/enterprise/accounts/claim';
 import { now } from 'src/infrastructures/common/date-helper';
 import { IIdentityService } from 'src/application/interfaces/services/identity-service';
-import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
+import { SignUpRequest } from 'src/enterprise/accounts/sign-up-request';
+import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';
 
 @injectable()
 export class FetchService implements IFetchService {

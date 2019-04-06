@@ -7,7 +7,7 @@ import {
   createMuiTheme,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';

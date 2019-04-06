@@ -4,7 +4,7 @@ import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { IDashboardOperators } from 'src/infrastructures/stores/dashboard/operators-interface';
-import { DashboardModel } from 'src/domains/models/home/dashboard-model';
+import { DashboardModel } from 'src/enterprise/home/dashboard-model';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 
 @injectable()

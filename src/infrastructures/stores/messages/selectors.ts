@@ -1,6 +1,6 @@
 import { MessagesState } from './state';
-import { MessageGeneratorArgs } from 'src/domains/models/common/message';
-import { CultureInfo } from 'src/domains/common/location/culture-infos';
+import { MessageGeneratorArgs } from 'src/enterprise/messages/message';
+import { CultureInfo } from 'src/enterprise/location/culture-infos';
 
 export class MessagesSelectors implements MessagesState {
   public messageGeneratorArgs: MessageGeneratorArgs[];

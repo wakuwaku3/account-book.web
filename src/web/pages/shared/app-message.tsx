@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MessageContainer } from '../../components/messages/message-container';
-import { Message } from 'src/domains/models/common/message';
+import { Message } from 'src/enterprise/messages/message';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { MessagesSelectors } from 'src/infrastructures/stores/messages/selectors';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';

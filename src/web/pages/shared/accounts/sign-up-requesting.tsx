@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -18,7 +18,7 @@ import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Url } from 'src/infrastructures/routing/url';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
-import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
+import { SignUpRequestingRequest } from 'src/enterprise/accounts/sign-up-requesting-request';
 
 const styles = createStyles({
   root: {

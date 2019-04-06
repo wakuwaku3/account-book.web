@@ -12,7 +12,7 @@ import {
   Fab,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
@@ -25,8 +25,8 @@ import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Url } from 'src/infrastructures/routing/url';
 import { Create, Clear, Add } from '@material-ui/icons';
-import { Localizer } from 'src/domains/common/location/localizer';
-import { PlanItem } from 'src/domains/models/plan/plan-item';
+import { Localizer } from 'src/enterprise/location/localizer';
+import { PlanItem } from 'src/enterprise/plan/plan-item';
 import { History } from 'history';
 import { PlanSelectors } from 'src/infrastructures/stores/plan/selectors';
 import { TableCell } from 'src/web/components/table/table-cell';

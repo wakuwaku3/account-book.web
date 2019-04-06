@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyledComponentBase } from 'src/infrastructures/styles/types';
 import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -12,7 +12,7 @@ import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
+import { ResetPasswordRequest } from 'src/enterprise/accounts/reset-password-request';
 import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
@@ -22,8 +22,8 @@ import {
   Validator,
   ValidatorInitializer,
   ValidationState,
-} from 'src/domains/models/validation/validator';
-import { Messages } from 'src/domains/common/location/messages';
+} from 'src/enterprise/validation/validator';
+import { Messages } from 'src/enterprise/location/messages';
 import { ValidationPopup } from 'src/web/components/forms-controls/validation-popup';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 

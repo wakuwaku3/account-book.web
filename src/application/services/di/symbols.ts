@@ -1,5 +1,5 @@
 import { createRegisterSymbol } from 'src/infrastructures/services/inversify-helper';
-import { Config } from 'src/domains/models/common/config';
+import { Config } from 'src/enterprise/env/config';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { IGuidProvider } from 'src/infrastructures/common/services/interfaces/guid-provider';
 import { IValidateService } from 'src/application/interfaces/services/validate-service';

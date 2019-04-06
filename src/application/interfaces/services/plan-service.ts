@@ -1,7 +1,7 @@
 import {
   PlanEditModel,
   PlanCreationModel,
-} from 'src/domains/models/plan/plan-model';
+} from 'src/enterprise/plan/plan-model';
 
 export interface IPlanService {
   createPlanAsync: (model: PlanCreationModel) => Promise<boolean>;

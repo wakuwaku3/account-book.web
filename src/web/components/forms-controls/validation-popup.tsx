@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
-import { ValidationMessageContent } from 'src/domains/models/validation/validation-message';
+import { ValidationMessageContent } from 'src/enterprise/validation/validation-message';
 import { Popup, PopupProps } from '../layout/popup';
 
 const styles = createStyles({

@@ -7,7 +7,7 @@ import { ApiUrl } from 'src/infrastructures/routing/url';
 import {
   ActualEditModel,
   ActualKey,
-} from 'src/domains/models/actual/actual-model';
+} from 'src/enterprise/actual/actual-model';
 
 @injectable()
 export class ActualService implements IActualService {

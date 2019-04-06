@@ -3,7 +3,7 @@ import { serviceSymbols } from './symbols';
 import { FetchService } from '../fetch-service';
 import { GuidProvider } from '../../../infrastructures/common/services/guid-provider';
 import { ValidateService } from '../validate-service';
-import { config } from 'src/domains/common/config';
+import { config } from 'src/infrastructures/env/config';
 import { AccountsService } from '../accounts-service';
 import { MessagesService } from '../messages-service';
 import { DashboardService } from '../dashboard-service';

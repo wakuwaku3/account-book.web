@@ -1,4 +1,4 @@
-import { PlanItem } from 'src/domains/models/plan/plan-item';
+import { PlanItem } from 'src/enterprise/plan/plan-item';
 
 export interface Action {
   setPlans: PlanItem[];

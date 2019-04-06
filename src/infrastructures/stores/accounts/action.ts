@@ -1,4 +1,4 @@
-import { Claim } from 'src/domains/models/accounts/claim';
+import { Claim } from 'src/enterprise/accounts/claim';
 
 export interface Action {
   signOut: {};

@@ -1,9 +1,9 @@
-import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
-import { Claim } from 'src/domains/models/accounts/claim';
-import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
-import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
-import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
-import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
+import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';
+import { Claim } from 'src/enterprise/accounts/claim';
+import { PasswordResetRequestingRequest } from 'src/enterprise/accounts/password-reset-requesting-request';
+import { ResetPasswordRequest } from 'src/enterprise/accounts/reset-password-request';
+import { SignUpRequestingRequest } from 'src/enterprise/accounts/sign-up-requesting-request';
+import { SignUpRequest } from 'src/enterprise/accounts/sign-up-request';
 
 export interface IAccountsUseCase {
   signOut: () => void;

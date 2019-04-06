@@ -1,4 +1,4 @@
-import { TransactionModel } from 'src/domains/models/transaction/transaction-index-model';
+import { TransactionModel } from 'src/enterprise/transaction/transaction-index-model';
 
 export interface TransactionState {
   model?: TransactionModel;

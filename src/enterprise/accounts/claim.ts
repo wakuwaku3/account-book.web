@@ -1,4 +1,5 @@
-import { Culture } from 'src/domains/common/location/culture-infos';
+import { Culture } from '../location/culture-infos';
+
 export interface ClaimResponse {
   token: string;
   refreshToken: string;

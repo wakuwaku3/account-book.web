@@ -1,5 +1,5 @@
 import State from './state';
-import { cultureInfos } from 'src/domains/common/location/culture-infos';
+import { cultureInfos } from 'src/enterprise/location/culture-infos';
 import {
   now,
   getMonthStartDay,

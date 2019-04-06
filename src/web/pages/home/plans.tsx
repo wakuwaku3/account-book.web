@@ -10,7 +10,7 @@ import {
   IconButton,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -18,8 +18,8 @@ import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { DashboardPlan } from 'src/domains/models/home/dashboard-model';
-import { Localizer } from 'src/domains/common/location/localizer';
+import { DashboardPlan } from 'src/enterprise/home/dashboard-model';
+import { Localizer } from 'src/enterprise/location/localizer';
 import { Edit } from '@material-ui/icons';
 import { Url } from 'src/infrastructures/routing/url';
 import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';

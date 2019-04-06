@@ -7,7 +7,7 @@ import { IMessagesService } from 'src/application/interfaces/services/messages-s
 import {
   MessageGenerator,
   MessageGeneratorArgs,
-} from 'src/domains/models/common/message';
+} from 'src/enterprise/messages/message';
 
 @injectable()
 export class MessagesService implements IMessagesService {

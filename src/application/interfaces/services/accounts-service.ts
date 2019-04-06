@@ -1,6 +1,6 @@
-import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
-import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
-import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
+import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';
+import { PasswordResetRequestingRequest } from 'src/enterprise/accounts/password-reset-requesting-request';
+import { SignUpRequestingRequest } from 'src/enterprise/accounts/sign-up-requesting-request';
 
 export interface IAccountsService {
   validateSignInModel: (model: SignInRequest) => boolean;

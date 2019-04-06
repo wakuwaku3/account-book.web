@@ -1,5 +1,5 @@
-import { DashboardShowState } from 'src/domains/models/home/dashboard-show-state';
-import { DashboardModel } from 'src/domains/models/home/dashboard-model';
+import { DashboardShowState } from 'src/enterprise/home/dashboard-show-state';
+import { DashboardModel } from 'src/enterprise/home/dashboard-model';
 
 export interface DashboardState {
   showState: DashboardShowState;

@@ -13,7 +13,7 @@ import { StyledSFC } from 'src/infrastructures/styles/types';
 import { AccountCircle, Apps } from '@material-ui/icons';
 import * as React from 'react';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { History } from 'history';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';

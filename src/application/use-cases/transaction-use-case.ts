@@ -5,8 +5,8 @@ import { ITransactionOperators } from 'src/infrastructures/stores/transaction/op
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { ITransactionUseCase } from 'src/application/interfaces/usecases/transaction-use-case';
-import { TransactionModel } from 'src/domains/models/transaction/transaction-index-model';
-import { TransactionEditModel } from 'src/domains/models/transaction/transaction-model';
+import { TransactionModel } from 'src/enterprise/transaction/transaction-index-model';
+import { TransactionEditModel } from 'src/enterprise/transaction/transaction-model';
 import { ITransactionService } from 'src/application/interfaces/services/transaction-service';
 import { now, getMonthStartDay } from 'src/infrastructures/common/date-helper';
 

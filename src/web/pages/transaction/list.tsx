@@ -9,7 +9,7 @@ import {
   TableBody,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
@@ -17,8 +17,8 @@ import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { Localizer } from 'src/domains/common/location/localizer';
-import { TransactionItem } from 'src/domains/models/transaction/transaction-item';
+import { Localizer } from 'src/enterprise/location/localizer';
+import { TransactionItem } from 'src/enterprise/transaction/transaction-item';
 import { TransactionSelectors } from 'src/infrastructures/stores/transaction/selectors';
 import { Create, Clear } from '@material-ui/icons';
 import { Url } from 'src/infrastructures/routing/url';
