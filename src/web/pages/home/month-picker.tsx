@@ -1,16 +1,16 @@
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { Localizer } from 'src/domains/common/location/localizer';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
-import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
+import { StoredState } from 'src/adapter/stores/stored-state';
+import { Localizer } from 'src/enterprise/location/localizer';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { DashboardSelectors } from 'src/adapter/stores/dashboard/selectors';
 import { MonthPicker } from 'src/web/components/forms-controls/month-picker';
-import { MonthPickerModel } from 'src/domains/models/common/month-picker-model';
+import { MonthPickerModel } from 'src/enterprise/components/month-picker-model';
 
 interface Props {
   monthPicker?: MonthPickerModel;

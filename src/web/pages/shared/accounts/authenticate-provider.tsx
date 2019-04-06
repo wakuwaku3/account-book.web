@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Claim } from 'src/domains/models/accounts/claim';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
+import { Claim } from 'src/enterprise/accounts/claim';
+import { StoredState } from 'src/adapter/stores/stored-state';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 
 interface Events {
   refreshTokenAsync: (claim?: Claim) => Promise<void>;

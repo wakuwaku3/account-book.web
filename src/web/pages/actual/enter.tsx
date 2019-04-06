@@ -7,28 +7,28 @@ import {
   Button,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { Url } from 'src/infrastructures/routing/url';
+import { StoredState } from 'src/adapter/stores/stored-state';
+import { Url } from 'src/enterprise/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
-import { Localizer } from 'src/domains/common/location/localizer';
+import { Localizer } from 'src/enterprise/location/localizer';
 import { Clear, Save, Sync } from '@material-ui/icons';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
-import { resolve } from 'src/use-cases/common/di-container';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import {
   ActualModel,
   ActualKey,
   ActualEditModel,
-} from 'src/domains/models/actual/actual-model';
+} from 'src/enterprise/actual/actual-model';
 import { parse } from 'querystring';
 
 const styles = createStyles({

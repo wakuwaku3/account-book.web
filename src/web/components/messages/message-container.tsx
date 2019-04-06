@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SnackbarOrigin } from '@material-ui/core/Snackbar';
 import { MessageBar } from './message-bar';
 import { Theme } from 'src/infrastructures/styles/theme';
-import { Message } from 'src/domains/models/common/message';
+import { Message } from 'src/enterprise/messages/message';
 import {
   decorate,
   appendClassName,

@@ -3,20 +3,20 @@ import { createStyles, Typography, Button } from '@material-ui/core';
 import * as React from 'react';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
-import { resolve } from 'src/use-cases/common/di-container';
-import { Resources } from 'src/domains/common/location/resources';
+import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';
+import { resolve } from 'src/application/use-cases/di/di-container';
+import { Resources } from 'src/enterprise/location/resources';
 import { Form } from 'src/web/components/forms-controls/form';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
-import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { symbols } from 'src/use-cases/common/di-symbols';
+import { StoredState } from 'src/adapter/stores/stored-state';
+import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Link } from 'react-router-dom';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 
 const styles = createStyles({
   root: {

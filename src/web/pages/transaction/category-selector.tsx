@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles } from '@material-ui/core';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import {
   RadioGroup,
   RadioProps,
 } from 'src/web/components/forms-controls/radio-group';
-import { categoryIds } from 'src/domains/models/transaction/category';
+import { categoryIds } from 'src/enterprise/transaction/category';
 
 const styles = createStyles({
   root: { paddingTop: 20 },

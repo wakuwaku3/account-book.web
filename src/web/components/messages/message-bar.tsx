@@ -3,11 +3,11 @@ import { MessageField } from './message-field';
 import { createStyles, Snackbar, IconButton } from '@material-ui/core';
 import { SnackbarOrigin } from '@material-ui/core/Snackbar';
 import { Theme } from 'src/infrastructures/styles/theme';
-import { Message } from 'src/domains/models/common/message';
+import { Message } from 'src/enterprise/messages/message';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { Close } from '@material-ui/icons';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
-import { delay } from 'src/infrastructures/common/async-helper';
+import { delay } from 'src/enterprise/interfaces/helpers/async-helper';
 
 const styles = (theme: Theme) =>
   createStyles({

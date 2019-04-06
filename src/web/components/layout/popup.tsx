@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createStyles, Popper } from '@material-ui/core';
 import { PopperProps } from '@material-ui/core/Popper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
+import { StoredState } from 'src/adapter/stores/stored-state';
 import { StyledSFC } from 'src/infrastructures/styles/types';
 import {
   decorate,

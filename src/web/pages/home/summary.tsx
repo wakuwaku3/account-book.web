@@ -2,18 +2,18 @@ import * as React from 'react';
 import { StyledSFC } from 'src/infrastructures/styles/types';
 import { createStyles } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/domains/common/location/resources';
+import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { DashboardSummary } from 'src/domains/models/home/dashboard-model';
-import { Localizer } from 'src/domains/common/location/localizer';
+import { StoredState } from 'src/adapter/stores/stored-state';
+import { DashboardSummary } from 'src/enterprise/home/dashboard-model';
+import { Localizer } from 'src/enterprise/location/localizer';
 import { Amount } from './amount';
-import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
+import { DashboardSelectors } from 'src/adapter/stores/dashboard/selectors';
 
 const styles = createStyles({
   root: {
