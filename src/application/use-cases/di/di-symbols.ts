@@ -1,9 +1,9 @@
 import { serviceSymbols } from 'src/application/services/di/symbols';
 import { useCaseSymbols } from './use-case-symbols';
-import { serviceSymbols as storeSymbols } from 'src/infrastructures/stores/services/symbols';
+import { operatorsSymbols } from 'src/adapter/stores/di/symbols';
 
 export const symbols = {
   ...serviceSymbols,
-  ...storeSymbols,
+  ...operatorsSymbols,
   ...useCaseSymbols,
 };

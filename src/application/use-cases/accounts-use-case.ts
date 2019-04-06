@@ -5,7 +5,7 @@ import { IAccountsUseCase } from 'src/application/interfaces/usecases/accounts-u
 import { ApiUrl } from 'src/enterprise/routing/url';
 import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
-import { IAccountsOperators } from 'src/infrastructures/stores/accounts/operators-interface';
+import { IAccountsOperators } from 'src/adapter/stores/accounts/operators-interface';
 import { IAccountsService } from 'src/application/interfaces/services/accounts-service';
 import { PasswordResetRequestingRequest } from 'src/enterprise/accounts/password-reset-requesting-request';
 import { IValidateService } from 'src/application/interfaces/services/validate-service';

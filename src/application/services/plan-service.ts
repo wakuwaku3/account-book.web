@@ -6,7 +6,7 @@ import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { ApiUrl } from 'src/enterprise/routing/url';
 import { PlanItem } from 'src/enterprise/plan/plan-item';
-import { IPlanOperators } from 'src/infrastructures/stores/plan/operators-interface';
+import { IPlanOperators } from 'src/adapter/stores/plan/operators-interface';
 
 @injectable()
 export class PlanService implements IPlanService {

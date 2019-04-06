@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from './di/di-symbols';
-import { IDashboardOperators } from 'src/infrastructures/stores/dashboard/operators-interface';
+import { IDashboardOperators } from 'src/adapter/stores/dashboard/operators-interface';
 import { IDashboardService } from 'src/application/interfaces/services/dashboard-service';
 import { IDashboardUseCase } from 'src/application/interfaces/usecases/dashboard-use-case';
 

@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from './di/di-symbols';
-import { ITransactionOperators } from 'src/infrastructures/stores/transaction/operators-interface';
+import { ITransactionOperators } from 'src/adapter/stores/transaction/operators-interface';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { ApiUrl } from 'src/enterprise/routing/url';
 import { ITransactionUseCase } from 'src/application/interfaces/usecases/transaction-use-case';

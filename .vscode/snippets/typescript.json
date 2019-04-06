@@ -39,7 +39,7 @@
   "Functions": {
     "prefix": "fncs",
     "body": [
-      "import { ReducerFunctions } from '../types';",
+      "import { ReducerFunctions } from 'src/infrastructures/stores/types';",
       "import State from './state';",
       "import Action from './action';",
       "",
@@ -52,7 +52,7 @@
   "Reducers": {
     "prefix": "reducers",
     "body": [
-      "import { createReducers } from '../redux-helper';",
+      "import { createReducers } from 'src/infrastructures/stores/redux-helper';",
       "import actionCreators from './action-creators';",
       "import functions from './functions';",
       "",

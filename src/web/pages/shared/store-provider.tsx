@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { createAppStore } from 'src/infrastructures/stores/reducer-factory';
+import { StoredState } from 'src/adapter/stores/stored-state';
+import { createAppStore } from 'src/adapter/stores/reducer-factory';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 

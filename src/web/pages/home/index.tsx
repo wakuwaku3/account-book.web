@@ -6,12 +6,12 @@ import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/infrastructures/stores/stored-state';
+import { StoredState } from 'src/adapter/stores/stored-state';
 import { Accordion } from 'src/web/components/layout/accordion';
 import { DashboardShowState } from 'src/enterprise/home/dashboard-show-state';
 import { resolve } from 'src/application/use-cases/di/di-container';
@@ -19,7 +19,7 @@ import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { DashboardMonthPicker } from './month-picker';
 import { Summary } from './summary';
 import { Plans } from './plans';
-import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
+import { DashboardSelectors } from 'src/adapter/stores/dashboard/selectors';
 import { Chart } from './chart';
 
 const styles = createStyles({
