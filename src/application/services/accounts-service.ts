@@ -6,9 +6,9 @@ import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { IAccountsService } from 'src/use-cases/services/interfaces/accounts-service';
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
-import { PasswordResetRequestingRequest } from '../models/accounts/password-reset-requesting-request';
+import { PasswordResetRequestingRequest } from 'src/domains/models/accounts/password-reset-requesting-request';
 import { IValidateService } from 'src/use-cases/services/interfaces/validate-service';
-import { SignUpRequestingRequest } from '../models/accounts/sign-up-requesting-request';
+import { SignUpRequestingRequest } from 'src/domains/models/accounts/sign-up-requesting-request';
 
 @injectable()
 export class AccountsService implements IAccountsService {

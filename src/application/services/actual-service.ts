@@ -4,7 +4,10 @@ import { symbols } from 'src/use-cases/common/di-symbols';
 import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
 import { IActualService } from 'src/use-cases/services/interfaces/actual-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { ActualEditModel, ActualKey } from '../models/actual/actual-model';
+import {
+  ActualEditModel,
+  ActualKey,
+} from 'src/domains/models/actual/actual-model';
 
 @injectable()
 export class ActualService implements IActualService {

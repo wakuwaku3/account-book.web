@@ -2,7 +2,7 @@ import { ITransactionService } from 'src/use-cases/services/interfaces/transacti
 import {
   TransactionEditModel,
   TransactionCreationModel,
-} from '../models/transaction/transaction-model';
+} from 'src/domains/models/transaction/transaction-model';
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from 'src/use-cases/common/di-symbols';

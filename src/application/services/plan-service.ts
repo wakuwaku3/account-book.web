@@ -1,11 +1,11 @@
 import { IPlanService } from 'src/use-cases/services/interfaces/plan-service';
-import { PlanEditModel } from '../models/plan/plan-model';
+import { PlanEditModel } from 'src/domains/models/plan/plan-model';
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/services/inversify-helper';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { IFetchService } from 'src/use-cases/services/interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { PlanItem } from '../models/plan/plan-item';
+import { PlanItem } from 'src/domains/models/plan/plan-item';
 import { IPlanOperators } from 'src/infrastructures/stores/plan/operators-interface';
 
 @injectable()

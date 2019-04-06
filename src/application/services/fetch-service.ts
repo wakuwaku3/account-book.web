@@ -7,14 +7,14 @@ import {
 } from 'src/use-cases/services/interfaces/fetch-service';
 import { symbols } from 'src/use-cases/common/di-symbols';
 import { IMessagesService } from 'src/use-cases/services/interfaces/messages-service';
-import { Message } from '../models/common/message';
+import { Message } from 'src/domains/models/common/message';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { SignInRequest } from '../models/accounts/sign-in-request';
-import { ResetPasswordRequest } from '../models/accounts/reset-password-request';
-import { ClaimResponse } from '../models/accounts/claim';
+import { SignInRequest } from 'src/domains/models/accounts/sign-in-request';
+import { ResetPasswordRequest } from 'src/domains/models/accounts/reset-password-request';
+import { ClaimResponse } from 'src/domains/models/accounts/claim';
 import { now } from 'src/infrastructures/common/date-helper';
 import { IIdentityService } from 'src/use-cases/services/interfaces/identity-service';
-import { SignUpRequest } from '../models/accounts/sign-up-request';
+import { SignUpRequest } from 'src/domains/models/accounts/sign-up-request';
 
 @injectable()
 export class FetchService implements IFetchService {

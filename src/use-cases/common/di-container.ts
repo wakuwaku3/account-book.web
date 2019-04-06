@@ -1,5 +1,5 @@
 import { createContainer } from 'src/infrastructures/services/inversify-helper';
-import { registerServices } from 'src/domains/services/common/register-module';
+import { registerServices } from 'src/application/services/di/register-module';
 import { registerUseCases } from './register-module';
 import { registerServices as registerStoreServices } from 'src/infrastructures/stores/services/register-module';
 
