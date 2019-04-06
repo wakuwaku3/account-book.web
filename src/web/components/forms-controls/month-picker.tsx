@@ -13,7 +13,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { Localizer } from 'src/enterprise/location/localizer';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons';
 import { MonthPickerModel } from 'src/enterprise/components/month-picker-model';
-import { equalMonth } from 'src/infrastructures/common/date-helper';
+import { equalMonth } from 'src/enterprise/interfaces/helpers/date-helper';
 
 const styles = createStyles({
   root: {

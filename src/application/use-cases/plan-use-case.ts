@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/services/inversify-helper';
+import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from './di/di-symbols';
 import { IPlanUseCase } from 'src/application/interfaces/usecases/plan-use-case';
 import { IPlanService } from 'src/application/interfaces/services/plan-service';

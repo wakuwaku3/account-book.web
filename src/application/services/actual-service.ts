@@ -1,13 +1,10 @@
 import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/services/inversify-helper';
+import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { IActualService } from 'src/application/interfaces/services/actual-service';
-import { ApiUrl } from 'src/infrastructures/routing/url';
-import {
-  ActualEditModel,
-  ActualKey,
-} from 'src/enterprise/actual/actual-model';
+import { ApiUrl } from 'src/enterprise/routing/url';
+import { ActualEditModel, ActualKey } from 'src/enterprise/actual/actual-model';
 
 @injectable()
 export class ActualService implements IActualService {

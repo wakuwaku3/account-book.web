@@ -24,7 +24,7 @@ import {
   TransactionCreationModel,
 } from 'src/enterprise/transaction/transaction-model';
 import { Form } from 'src/web/components/forms-controls/form';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { CategorySelector } from './category-selector';
 import { Localizer } from 'src/enterprise/location/localizer';
 import { resolve } from 'src/application/use-cases/di/di-container';

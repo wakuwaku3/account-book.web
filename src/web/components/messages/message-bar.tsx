@@ -7,7 +7,7 @@ import { Message } from 'src/enterprise/messages/message';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { Close } from '@material-ui/icons';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
-import { delay } from 'src/infrastructures/common/async-helper';
+import { delay } from 'src/enterprise/interfaces/helpers/async-helper';
 
 const styles = (theme: Theme) =>
   createStyles({

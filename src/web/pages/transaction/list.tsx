@@ -21,7 +21,7 @@ import { Localizer } from 'src/enterprise/location/localizer';
 import { TransactionItem } from 'src/enterprise/transaction/transaction-item';
 import { TransactionSelectors } from 'src/infrastructures/stores/transaction/selectors';
 import { Create, Clear } from '@material-ui/icons';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { TableCell } from 'src/web/components/table/table-cell';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';

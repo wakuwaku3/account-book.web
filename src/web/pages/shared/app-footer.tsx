@@ -16,7 +16,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { List, Atm, CalendarToday } from '@material-ui/icons';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { ThemeProvider } from 'src/web/components/styles/theme-provider';
 import { ThemeOption } from 'src/infrastructures/styles/theme';
 

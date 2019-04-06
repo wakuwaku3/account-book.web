@@ -1,7 +1,7 @@
-import { createRegisterSymbol } from 'src/infrastructures/services/inversify-helper';
+import { createRegisterSymbol } from 'src/infrastructures/di/inversify-helper';
 import { Config } from 'src/enterprise/env/config';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
-import { IGuidProvider } from 'src/infrastructures/common/services/interfaces/guid-provider';
+import { IGuidProvider } from 'src/enterprise/interfaces/helpers/guid-provider';
 import { IValidateService } from 'src/application/interfaces/services/validate-service';
 import { IAccountsService } from 'src/application/interfaces/services/accounts-service';
 import { IMessagesService } from 'src/application/interfaces/services/messages-service';

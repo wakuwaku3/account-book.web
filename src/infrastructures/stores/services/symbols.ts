@@ -1,4 +1,4 @@
-import { createRegisterSymbol } from 'src/infrastructures/services/inversify-helper';
+import { createRegisterSymbol } from 'src/infrastructures/di/inversify-helper';
 import { IDispatchProvider } from 'src/infrastructures/stores/services/interfaces/dispatch-provider';
 import { IAccountsOperators } from '../accounts/operators-interface';
 import { IMessagesOperators } from '../messages/operators-interface';

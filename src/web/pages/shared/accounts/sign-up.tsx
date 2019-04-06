@@ -20,7 +20,7 @@ import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
 import { resolve } from 'src/application/use-cases/di/di-container';

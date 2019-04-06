@@ -2,7 +2,7 @@ import { injectable } from 'inversify';
 import { ClaimResponse, Claim } from 'src/enterprise/accounts/claim';
 import { decode } from 'jsonwebtoken';
 import { IJWTService } from 'src/application/interfaces/services/jwt-service';
-import { fromUtc } from 'src/infrastructures/common/date-helper';
+import { fromUtc } from 'src/enterprise/interfaces/helpers/date-helper';
 
 @injectable()
 export class JWTService implements IJWTService {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { StateMapper } from 'src/infrastructures/stores/types';
 import { SignIn } from './accounts/sign-in';
 import { AccountsSelectors } from 'src/infrastructures/stores/accounts/selectors';

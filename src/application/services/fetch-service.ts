@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { FetchRequest } from 'src/enterprise/fetch/fetch-request';
-import { inject } from 'src/infrastructures/services/inversify-helper';
+import { inject } from 'src/infrastructures/di/inversify-helper';
 import {
   IFetchService,
   FetchResponse,
@@ -8,10 +8,10 @@ import {
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IMessagesService } from 'src/application/interfaces/services/messages-service';
 import { Message } from 'src/enterprise/messages/message';
-import { ApiUrl } from 'src/infrastructures/routing/url';
+import { ApiUrl } from 'src/enterprise/routing/url';
 import { ResetPasswordRequest } from 'src/enterprise/accounts/reset-password-request';
 import { ClaimResponse } from 'src/enterprise/accounts/claim';
-import { now } from 'src/infrastructures/common/date-helper';
+import { now } from 'src/enterprise/interfaces/helpers/date-helper';
 import { IIdentityService } from 'src/application/interfaces/services/identity-service';
 import { SignUpRequest } from 'src/enterprise/accounts/sign-up-request';
 import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';

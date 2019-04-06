@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/services/inversify-helper';
+import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IAccountsOperators } from 'src/infrastructures/stores/accounts/operators-interface';
 import { IJWTService } from 'src/application/interfaces/services/jwt-service';

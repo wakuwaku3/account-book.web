@@ -26,7 +26,7 @@ import {
 } from 'recharts';
 import { defaultThemeOption } from 'src/infrastructures/styles/theme';
 import { DashboardDaily } from 'src/enterprise/home/dashboard-model';
-import { now } from 'src/infrastructures/common/date-helper';
+import { now } from 'src/enterprise/interfaces/helpers/date-helper';
 
 const styles = createStyles({
   root: { width: '100%', paddingTop: 20 },

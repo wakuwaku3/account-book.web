@@ -1,4 +1,4 @@
-import { Container } from 'src/infrastructures/services/inversify-helper';
+import { Container } from 'src/infrastructures/di/inversify-helper';
 import { useCaseSymbols } from './use-case-symbols';
 import { MessagesUseCase } from '../messages-use-case';
 import { AccountsUseCase } from '../accounts-use-case';

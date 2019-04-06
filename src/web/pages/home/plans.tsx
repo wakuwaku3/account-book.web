@@ -21,7 +21,7 @@ import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { DashboardPlan } from 'src/enterprise/home/dashboard-model';
 import { Localizer } from 'src/enterprise/location/localizer';
 import { Edit } from '@material-ui/icons';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { DashboardSelectors } from 'src/infrastructures/stores/dashboard/selectors';
 import { TableCell } from 'src/web/components/table/table-cell';
 

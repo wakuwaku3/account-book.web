@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/services/inversify-helper';
+import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from './di/di-symbols';
 import { IDashboardOperators } from 'src/infrastructures/stores/dashboard/operators-interface';
 import { IDashboardService } from 'src/application/interfaces/services/dashboard-service';

@@ -1,7 +1,7 @@
-import { Container } from 'src/infrastructures/services/inversify-helper';
+import { Container } from 'src/infrastructures/di/inversify-helper';
 import { serviceSymbols } from './symbols';
 import { FetchService } from '../fetch-service';
-import { GuidProvider } from '../../../infrastructures/common/services/guid-provider';
+import { GuidProvider } from '../../../enterprise/helpers/guid-provider';
 import { ValidateService } from '../validate-service';
 import { config } from 'src/infrastructures/env/config';
 import { AccountsService } from '../accounts-service';

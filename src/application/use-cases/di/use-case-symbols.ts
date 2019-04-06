@@ -1,4 +1,4 @@
-import { createRegisterSymbol } from 'src/infrastructures/services/inversify-helper';
+import { createRegisterSymbol } from 'src/infrastructures/di/inversify-helper';
 import { IMessagesUseCase } from 'src/application/interfaces/usecases/messages-use-case';
 import { IDashboardUseCase } from 'src/application/interfaces/usecases/dashboard-use-case';
 import { IPlanUseCase } from 'src/application/interfaces/usecases/plan-use-case';

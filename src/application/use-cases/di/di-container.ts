@@ -1,4 +1,4 @@
-import { createContainer } from 'src/infrastructures/services/inversify-helper';
+import { createContainer } from 'src/infrastructures/di/inversify-helper';
 import { registerServices } from 'src/application/services/di/register-module';
 import { registerUseCases } from './register-module';
 import { registerServices as registerStoreServices } from 'src/infrastructures/stores/services/register-module';

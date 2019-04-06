@@ -23,7 +23,7 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { Create, Clear, Add } from '@material-ui/icons';
 import { Localizer } from 'src/enterprise/location/localizer';
 import { PlanItem } from 'src/enterprise/plan/plan-item';

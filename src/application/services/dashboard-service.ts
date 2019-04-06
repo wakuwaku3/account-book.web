@@ -1,11 +1,11 @@
 import { IDashboardService } from 'src/application/interfaces/services/dashboard-service';
 import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/services/inversify-helper';
+import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
 import { IDashboardOperators } from 'src/infrastructures/stores/dashboard/operators-interface';
 import { DashboardModel } from 'src/enterprise/home/dashboard-model';
-import { ApiUrl } from 'src/infrastructures/routing/url';
+import { ApiUrl } from 'src/enterprise/routing/url';
 
 @injectable()
 export class DashboardService implements IDashboardService {

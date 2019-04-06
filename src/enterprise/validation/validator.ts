@@ -1,5 +1,5 @@
 import { ValidationMessage } from './validation-message';
-import { ThrottleAsync } from 'src/infrastructures/common/throttle';
+import { ThrottleAsync } from 'src/enterprise/interfaces/helpers/throttle';
 
 export type ValidationState<TModel extends {}> = Record<
   keyof TModel,

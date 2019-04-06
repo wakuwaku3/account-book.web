@@ -17,7 +17,7 @@ import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 
 const styles = createStyles({

@@ -4,7 +4,7 @@ import { accountsReducer } from './accounts';
 import { messagesReducer } from './messages';
 import { themeReducer } from './theme';
 import { ReducerBuilders } from './types';
-import { createMappedObject } from 'src/infrastructures/common/object-helper';
+import { createMappedObject } from 'src/enterprise/interfaces/helpers/object-helper';
 import { dashboardReducer } from './dashboard';
 import { transactionReducer } from './transaction';
 import { planReducer } from './plan';

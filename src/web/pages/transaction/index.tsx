@@ -15,7 +15,7 @@ import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { TransactionMonthPicker } from './month-picker';
 import { TransactionList } from './list';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 import { Add } from '@material-ui/icons';
 import { History } from 'history';
 

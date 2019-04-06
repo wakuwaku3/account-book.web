@@ -1,5 +1,8 @@
 import State from './state';
-import { now, getMonthStartDay } from 'src/infrastructures/common/date-helper';
+import {
+  now,
+  getMonthStartDay,
+} from 'src/enterprise/interfaces/helpers/date-helper';
 
 export class DashboardSelectors {
   constructor(private state: State) {}

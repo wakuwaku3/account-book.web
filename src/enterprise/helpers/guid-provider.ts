@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
-import { IGuidProvider } from 'src/infrastructures/common/services/interfaces/guid-provider';
-import { Guid } from 'src/infrastructures/common/guid';
+import { IGuidProvider } from 'src/enterprise/interfaces/helpers/guid-provider';
+import { Guid } from 'src/enterprise/interfaces/helpers/guid';
 
 @injectable()
 export class GuidProvider implements IGuidProvider {

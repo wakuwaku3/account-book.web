@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/services/inversify-helper';
-import { IGuidProvider } from 'src/infrastructures/common/services/interfaces/guid-provider';
+import { inject } from 'src/infrastructures/di/inversify-helper';
+import { IGuidProvider } from 'src/enterprise/interfaces/helpers/guid-provider';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IMessagesOperators } from 'src/infrastructures/stores/messages/operators-interface';
 import { IMessagesService } from 'src/application/interfaces/services/messages-service';

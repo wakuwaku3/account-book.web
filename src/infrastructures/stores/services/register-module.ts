@@ -1,7 +1,7 @@
 import {
   Container,
   RegisterSymbol,
-} from 'src/infrastructures/services/inversify-helper';
+} from 'src/infrastructures/di/inversify-helper';
 import { serviceSymbols } from './symbols';
 import { DispatchProvider } from '../../../infrastructures/stores/services/dispatch-provider';
 import { IDispatchProvider } from './interfaces/dispatch-provider';

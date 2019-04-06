@@ -16,7 +16,7 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/infrastructures/stores/stored-state';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Link } from 'react-router-dom';
-import { Url } from 'src/infrastructures/routing/url';
+import { Url } from 'src/enterprise/routing/url';
 
 const styles = createStyles({
   root: {

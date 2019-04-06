@@ -1,8 +1,8 @@
 import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';
 import { injectable } from 'inversify';
 import { IFetchService } from 'src/application/interfaces/services/fetch-service';
-import { ApiUrl } from 'src/infrastructures/routing/url';
-import { inject } from 'src/infrastructures/services/inversify-helper';
+import { ApiUrl } from 'src/enterprise/routing/url';
+import { inject } from 'src/infrastructures/di/inversify-helper';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { IAccountsService } from 'src/application/interfaces/services/accounts-service';
 import { IMessagesService } from 'src/application/interfaces/services/messages-service';
