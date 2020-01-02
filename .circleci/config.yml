@@ -12,9 +12,6 @@ jobs:
           name: install packages
           command: npm i
       - run:
-          name: post install
-          command: npm run postinstall
-      - run:
           name: build
           command: npm run build
       - run:
@@ -27,9 +24,6 @@ jobs:
       - run:
           name: install packages
           command: npm i
-      - run:
-          name: post install
-          command: npm run postinstall
       - run:
           name: build
           command: npm run build
