@@ -11,8 +11,6 @@
   },
   "editor.tabSize": 2,
   "prettier.trailingComma": "all",
-  "tslint.alwaysShowRuleFailuresAsWarnings": true,
-  "prettier.tslintIntegration": true,
   "cSpell.words": [
     "Guid",
     "IJWT",
