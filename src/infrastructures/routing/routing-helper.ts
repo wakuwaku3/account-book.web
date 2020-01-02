@@ -1,10 +1,11 @@
-import {
-  withRouter as withRouterBase,
-  RouteComponentProps,
-} from 'react-router';
-import { RoutingComponent, StateMapperWithRouter } from './types';
-import { connect, Matching, GetProps } from 'react-redux';
+import { withRouter as withRouterBase } from 'react-router';
+import { RoutingComponent, StateMapperWithRouter, RoutingProps } from './types';
+import { connect, InferableComponentEnhancerWithProps } from 'react-redux';
 import { EventMapper } from '../stores/types';
+
+type FirstArgs<T> = T extends (a1: infer A1, ...rest: any[]) => any
+  ? A1
+  : never;
 
 export const withRouter = <TProps = {}, TParam = {}>(
   component: RoutingComponent<TProps, TParam>,
@@ -25,31 +26,14 @@ export const withConnectedRouter = <
     TOwnProps
   >,
   mapEventToProps: EventMapper<TEvents, TOwnProps> = () => ({}),
-) => <
-  C extends React.ComponentType<
-    Matching<Partial<TProps> & Partial<TEvents>, GetProps<C>> &
-      Partial<RouteComponentProps<TParam>>
-  >
->(
-  component: C,
-) => {
-  const c = connect(
-    mapStateToProps,
-    mapEventToProps,
-  )(component);
-  return withRouterBase<RouteComponentProps<TParam>>(c as React.ComponentType<
-    RouteComponentProps<TParam>
-  > &
-    typeof c) as React.ComponentType<
-    Pick<
-      GetProps<C>,
-      Exclude<
-        keyof GetProps<C>,
-        | Extract<keyof TEvents, keyof GetProps<C>>
-        | Extract<keyof TProps, keyof GetProps<C>>
-        | keyof RouteComponentProps<TParam>
-      >
-    > &
+) => (
+  component: FirstArgs<
+    InferableComponentEnhancerWithProps<
+      RoutingProps<Partial<TProps> & Partial<TEvents>, TParam>,
       TOwnProps
-  >;
+    >
+  >,
+) => {
+  const c = connect(mapStateToProps, mapEventToProps)(component);
+  return withRouter(c);
 };
