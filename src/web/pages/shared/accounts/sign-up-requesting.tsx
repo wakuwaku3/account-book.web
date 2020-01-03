@@ -4,7 +4,7 @@ import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
@@ -19,6 +19,7 @@ import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Url } from 'src/enterprise/routing/url';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { SignUpRequestingRequest } from 'src/enterprise/accounts/sign-up-requesting-request';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: {
@@ -133,7 +134,6 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const SignUpRequesting = withConnectedRouter(
-  mapStateToProps,
-  mapEventToProps,
-)(StyledInner);
+export const SignUpRequesting = withRouter(
+  connect(mapStateToProps, mapEventToProps)(StyledInner),
+);

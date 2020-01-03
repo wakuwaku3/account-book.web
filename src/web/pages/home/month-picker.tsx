@@ -1,6 +1,6 @@
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
@@ -11,6 +11,7 @@ import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { DashboardSelectors } from 'src/adapter/stores/dashboard/selectors';
 import { MonthPicker } from 'src/web/components/forms-controls/month-picker';
 import { MonthPickerModel } from 'src/enterprise/components/month-picker-model';
+import { connect } from 'react-redux';
 
 interface Props {
   monthPicker?: MonthPickerModel;
@@ -32,7 +33,7 @@ const mapStateToProps: StateMapperWithRouter<
     localizer,
     history,
     monthPicker: { selectedMonth, selectableMonths },
-  };
+  } as Props;
 };
 interface Events {
   onChange: (month?: Date) => void;
@@ -43,7 +44,6 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     onChange: async month => await getModelAsync(month),
   };
 };
-export const DashboardMonthPicker = withConnectedRouter(
-  mapStateToProps,
-  mapEventToProps,
-)(MonthPicker);
+export const DashboardMonthPicker = withRouter(
+  connect(mapStateToProps, mapEventToProps)(MonthPicker),
+);

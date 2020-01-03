@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Claim } from 'src/enterprise/accounts/claim';
 import { StoredState } from 'src/adapter/stores/stored-state';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { connect } from 'react-redux';
 
 interface Events {
   refreshTokenAsync: (claim?: Claim) => Promise<void>;
@@ -35,7 +36,5 @@ const mapStateToProps: StateMapperWithRouter<StoredState, Props> = ({
     claim,
   };
 };
-export const AuthenticateProvider = withConnectedRouter(
-  mapStateToProps,
-  mapEventToProps,
-)(Inner);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(Inner);
+export const AuthenticateProvider = withRouter(ConnectedInner);

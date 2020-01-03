@@ -15,7 +15,6 @@ import * as React from 'react';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { History } from 'history';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
@@ -24,6 +23,8 @@ import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Url } from 'src/enterprise/routing/url';
 import { RefElement } from 'src/web/components/types';
+import { connect } from 'react-redux';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 
 const styles = createStyles({
   root: {
@@ -42,7 +43,6 @@ interface Props {
 }
 interface Events {
   signOut: () => void;
-  handleOpenMenu: () => void;
 }
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const {
@@ -126,6 +126,5 @@ const mapEventToProps: EventMapper<Events> = () => {
   };
 };
 const StyledInner = decorate(styles)(Inner);
-export const AppTop = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
-);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(StyledInner);
+export const AppTop = withRouter(ConnectedInner);

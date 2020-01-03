@@ -9,7 +9,7 @@ import {
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
@@ -30,6 +30,7 @@ import { Localizer } from 'src/enterprise/location/localizer';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Clear, Save } from '@material-ui/icons';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },
@@ -212,7 +213,6 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const TransactionEdit = withConnectedRouter(
-  mapStateToProps,
-  mapEventToProps,
-)(StyledInner);
+export const TransactionEdit = withRouter(
+  connect(mapStateToProps, mapEventToProps)(StyledInner),
+);

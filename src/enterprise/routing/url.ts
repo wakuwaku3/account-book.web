@@ -1,4 +1,3 @@
-// import { stringify } from 'query-string';
 import { format, parse } from 'url';
 import * as urljoin from 'url-join';
 import { config } from 'src/infrastructures/env/config';
@@ -13,29 +12,30 @@ const toUrl = (date: Date) =>
 export type ActualEnterQueryParameters = Partial<
   Record<keyof ActualKey, string>
 >;
-export namespace Url {
-  export const root = '/';
-  export const serviceAgreement = urljoin(root, 'service-agreement');
-  export const signUpRequesting = urljoin(root, 'sign-up');
-  export const signUp = urljoin(signUpRequesting, ':signUpToken');
-  export const passwordResetRequesting = urljoin(root, 'reset-password');
-  export const resetPassword = urljoin(
-    passwordResetRequesting,
+export class Url {
+  public static root = '/';
+  public static serviceAgreement = urljoin(Url.root, 'service-agreement');
+  public static signUpRequesting = urljoin(Url.root, 'sign-up');
+  public static signUp = urljoin(Url.signUpRequesting, ':signUpToken');
+  public static passwordResetRequesting = urljoin(Url.root, 'reset-password');
+  public static resetPassword = urljoin(
+    Url.passwordResetRequesting,
     ':passwordResetToken',
   );
-  export const plan = urljoin(root, 'plan');
-  export const planCreate = urljoin(plan, 'create');
-  export const planEdit = urljoin(plan, ':id');
-  export const getPlanEditUrl = (id: string) => urljoin(plan, id);
+  public static plan = urljoin(Url.root, 'plan');
+  public static planCreate = urljoin(Url.plan, 'create');
+  public static planEdit = urljoin(Url.plan, ':id');
+  public static getPlanEditUrl = (id: string) => urljoin(Url.plan, id);
 
-  export const transaction = urljoin(root, 'transaction');
-  export const transactionCreate = urljoin(transaction, 'create');
-  export const transactionEdit = urljoin(transaction, ':id');
-  export const getTransactionEditUrl = (id: string) => urljoin(transaction, id);
+  public static transaction = urljoin(Url.root, 'transaction');
+  public static transactionCreate = urljoin(Url.transaction, 'create');
+  public static transactionEdit = urljoin(Url.transaction, ':id');
+  public static getTransactionEditUrl = (id: string) =>
+    urljoin(Url.transaction, id);
 
-  const actual = urljoin(root, 'actual');
-  export const actualEnter = actual;
-  export const getActualUrl = (p: ActualKey) => {
+  private static actual = urljoin(Url.root, 'actual');
+  public static actualEnter = Url.actual;
+  public static getActualUrl = (p: ActualKey) => {
     const param: ActualEnterQueryParameters = {};
     if (p.actualId) {
       param.actualId = p.actualId;
@@ -49,11 +49,11 @@ export namespace Url {
     if (p.month) {
       param.month = toUrl(p.month);
     }
-    return `${actual}?${stringify(param)}`;
+    return `${Url.actual}?${stringify(param)}`;
   };
 }
-export namespace ApiUrl {
-  const resolveHostname = (rootUrl: string) => {
+export class ApiUrl {
+  private static resolveHostname = (rootUrl: string) => {
     const { hostname, port } = parse(rootUrl);
     if (hostname === 'localhost' && window && window.location) {
       return format({
@@ -64,73 +64,90 @@ export namespace ApiUrl {
     }
     return rootUrl;
   };
-  export const mockRoot = resolveHostname('http://localhost:3001');
-  export const root = resolveHostname(config.apiUrl);
-  const accounts = 'accounts';
-  export const accountsRefresh = urljoin(root, accounts, 'refresh');
-  export const accountsSignIn = urljoin(root, accounts, 'sign-in');
-  export const accountsResetPassword = urljoin(
-    root,
-    accounts,
+  public static mockRoot = ApiUrl.resolveHostname('http://localhost:3001');
+  public static root = ApiUrl.resolveHostname(config.apiUrl);
+  private static accounts = 'accounts';
+  public static accountsRefresh = urljoin(
+    ApiUrl.root,
+    ApiUrl.accounts,
+    'refresh',
+  );
+  public static accountsSignIn = urljoin(
+    ApiUrl.root,
+    ApiUrl.accounts,
+    'sign-in',
+  );
+  public static accountsResetPassword = urljoin(
+    ApiUrl.root,
+    ApiUrl.accounts,
     'reset-password',
   );
-  export const accountsPasswordResetRequesting = urljoin(
-    root,
-    accounts,
+  public static accountsPasswordResetRequesting = urljoin(
+    ApiUrl.root,
+    ApiUrl.accounts,
     'password-reset-requesting',
   );
-  export const accountsSignUpRequesting = urljoin(
-    root,
-    accounts,
+  public static accountsSignUpRequesting = urljoin(
+    ApiUrl.root,
+    ApiUrl.accounts,
     'sign-up-requesting',
   );
-  export const accountsEmail = (passwordResetToken: string) => {
+  public static accountsEmail = (passwordResetToken: string) => {
     return urljoin(
-      root,
-      accounts,
+      ApiUrl.root,
+      ApiUrl.accounts,
       `reset-password?${stringify({ passwordResetToken })}`,
     );
   };
-  export const accountsGetSignUp = (signUpToken: string) => {
-    return urljoin(root, accounts, `sign-up?${stringify({ signUpToken })}`);
+  public static accountsGetSignUp = (signUpToken: string) => {
+    return urljoin(
+      ApiUrl.root,
+      ApiUrl.accounts,
+      `sign-up?${stringify({ signUpToken })}`,
+    );
   };
-  export const accountsSignUp = urljoin(root, accounts, 'sign-up');
-  const dashboard = 'dashboard';
-  export const dashboardIndex = (month?: Date) => {
+  public static accountsSignUp = urljoin(
+    ApiUrl.root,
+    ApiUrl.accounts,
+    'sign-up',
+  );
+  private static dashboard = 'dashboard';
+  public static dashboardIndex = (month?: Date) => {
     if (month) {
       return urljoin(
-        root,
-        `${dashboard}?${stringify({ month: toUrl(month) })}`,
+        ApiUrl.root,
+        `${ApiUrl.dashboard}?${stringify({ month: toUrl(month) })}`,
       );
     }
-    return urljoin(root, dashboard);
+    return urljoin(ApiUrl.root, ApiUrl.dashboard);
   };
-  export const dashboardApprove = (id: string) => urljoin(root, dashboard, id);
+  public static dashboardApprove = (id: string) =>
+    urljoin(ApiUrl.root, ApiUrl.dashboard, id);
 
-  const transactions = 'transactions';
-  export const transactionsIndex = (month?: Date) => {
+  private static transactions = 'transactions';
+  public static transactionsIndex = (month?: Date) => {
     if (month) {
       return urljoin(
-        root,
-        `${transactions}?${stringify({ month: toUrl(month) })}`,
+        ApiUrl.root,
+        `${ApiUrl.transactions}?${stringify({ month: toUrl(month) })}`,
       );
     }
-    return urljoin(root, transactions);
+    return urljoin(ApiUrl.root, ApiUrl.transactions);
   };
-  export const transactionsEdit = (id: string) => {
-    return urljoin(root, transactions, id);
+  public static transactionsEdit = (id: string) => {
+    return urljoin(ApiUrl.root, ApiUrl.transactions, id);
   };
-  export const transactionsCreate = urljoin(root, transactions);
+  public static transactionsCreate = urljoin(ApiUrl.root, ApiUrl.transactions);
 
-  const plans = 'plans';
-  export const planIndex = urljoin(root, plans);
-  export const planEdit = (id: string) => {
-    return urljoin(root, plans, id);
+  private static plans = 'plans';
+  public static planIndex = urljoin(ApiUrl.root, ApiUrl.plans);
+  public static planEdit = (id: string) => {
+    return urljoin(ApiUrl.root, ApiUrl.plans, id);
   };
 
-  const actual = 'actual';
-  export const actualEdit = urljoin(root, actual);
-  export const getActualUrl = (p: ActualKey) => {
+  private static actual = 'actual';
+  public static actualEdit = urljoin(ApiUrl.root, ApiUrl.actual);
+  public static getActualUrl = (p: ActualKey) => {
     const param: ActualEnterQueryParameters = {};
     if (p.actualId) {
       param.actualId = p.actualId;
@@ -144,6 +161,6 @@ export namespace ApiUrl {
     if (p.month) {
       param.month = toUrl(p.month);
     }
-    return urljoin(root, `${actual}?${stringify(param)}`);
+    return urljoin(ApiUrl.root, `${ApiUrl.actual}?${stringify(param)}`);
   };
 }

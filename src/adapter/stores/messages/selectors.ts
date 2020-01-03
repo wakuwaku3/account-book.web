@@ -3,7 +3,7 @@ import { MessageGeneratorArgs } from 'src/enterprise/messages/message';
 import { CultureInfo } from 'src/enterprise/location/culture-infos';
 
 export class MessagesSelectors implements MessagesState {
-  public messageGeneratorArgs: MessageGeneratorArgs[];
+  public messageGeneratorArgs: MessageGeneratorArgs[] = [];
   constructor(state: MessagesState) {
     Object.assign(this, state);
   }

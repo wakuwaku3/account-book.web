@@ -4,7 +4,7 @@ import { createStyles, Typography, Fab } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
@@ -18,6 +18,7 @@ import { TransactionList } from './list';
 import { Url } from 'src/enterprise/routing/url';
 import { Add } from '@material-ui/icons';
 import { History } from 'history';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: { padding: 20 },
@@ -76,7 +77,6 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const TransactionIndex = withConnectedRouter(
-  mapStateToProps,
-  mapEventToProps,
-)(StyledInner);
+export const TransactionIndex = withRouter(
+  connect(mapStateToProps, mapEventToProps)(StyledInner),
+);

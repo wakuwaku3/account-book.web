@@ -4,11 +4,12 @@ import { Message } from 'src/enterprise/messages/message';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { MessagesSelectors } from 'src/adapter/stores/messages/selectors';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/adapter/stores/stored-state';
 import { resolve } from 'src/application/use-cases/di/di-container';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { connect } from 'react-redux';
 
 interface Events {
   onClear: () => void;
@@ -51,7 +52,6 @@ const mapStateToProps: StateMapperWithRouter<StoredState, Props> = ({
     messages: getMessages(cultureInfo),
   };
 };
-export const AppMessages = withConnectedRouter(
-  mapStateToProps,
-  mapEventToProps,
-)(Inner);
+
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(Inner);
+export const AppMessages = withRouter(ConnectedInner);

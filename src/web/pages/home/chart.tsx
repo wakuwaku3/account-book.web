@@ -4,7 +4,7 @@ import { createStyles } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
@@ -27,6 +27,7 @@ import {
 import { defaultThemeOption } from 'src/infrastructures/styles/theme';
 import { DashboardDaily } from 'src/enterprise/home/dashboard-model';
 import { now } from 'src/enterprise/interfaces/helpers/date-helper';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: { width: '100%', paddingTop: 20 },
@@ -144,6 +145,6 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const Chart = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
+export const Chart = withRouter(
+  connect(mapStateToProps, mapEventToProps)(StyledInner),
 );
