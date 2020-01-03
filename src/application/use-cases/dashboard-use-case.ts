@@ -1,9 +1,9 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/di/inversify-helper';
-import { symbols } from './di/di-symbols';
-import { IDashboardOperators } from 'src/adapter/stores/dashboard/operators-interface';
-import { IDashboardService } from 'src/application/interfaces/services/dashboard-service';
-import { IDashboardUseCase } from 'src/application/interfaces/usecases/dashboard-use-case';
+import { symbols } from './di/symbols';
+import { IDashboardOperators } from 'src/enterprise/services/dashboard/interfaces/dashboard-operators';
+import { IDashboardService } from 'src/enterprise/services/dashboard/interfaces/dashboard-service';
+import { IDashboardUseCase } from './interfaces/dashboard-use-case';
 
 @injectable()
 export class DashboardUseCase implements IDashboardUseCase {

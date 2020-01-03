@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
-import { Url } from 'src/enterprise/routing/url';
+import { Url } from 'src/infrastructures/routing/url';
 import { StateMapper } from 'src/infrastructures/stores/types';
 import { SignIn } from './accounts/sign-in';
-import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
-import { StoredState } from 'src/adapter/stores/stored-state';
+import { StoredState } from 'src/enterprise/stores/stored-state';
 import { Dashboard } from 'src/web/pages/home';
 import { PasswordResetRequesting } from './accounts/password-reset-requesting';
 import { ResetPassword } from './accounts/reset-password';

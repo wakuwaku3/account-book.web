@@ -2,13 +2,13 @@ import * as React from 'react';
 import { SnackbarOrigin } from '@material-ui/core/Snackbar';
 import { MessageBar } from './message-bar';
 import { Theme } from 'src/infrastructures/styles/theme';
-import { Message } from 'src/enterprise/messages/message';
 import {
   decorate,
   appendClassName,
 } from 'src/infrastructures/styles/styles-helper';
 import { createStyles } from '@material-ui/core';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
+import { Message } from 'src/enterprise/models/messages/message';
 
 const styles = (theme: Theme) =>
   createStyles({

@@ -1,8 +1,8 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/di/inversify-helper';
-import { symbols } from './di/di-symbols';
-import { IPlanUseCase } from 'src/application/interfaces/usecases/plan-use-case';
-import { IPlanService } from 'src/application/interfaces/services/plan-service';
+import { symbols } from './di/symbols';
+import { IPlanUseCase } from './interfaces/plan-use-case';
+import { IPlanService } from 'src/enterprise/services/plan/interfaces/plan-service';
 
 @injectable()
 export class PlanUseCase implements IPlanUseCase {

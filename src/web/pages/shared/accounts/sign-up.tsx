@@ -10,33 +10,33 @@ import {
   DialogActions,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/enterprise/location/resources';
+import { Resources } from 'src/enterprise/models/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/adapter/stores/stored-state';
-import { Url } from 'src/enterprise/routing/url';
+import { StoredState } from 'src/enterprise/stores/stored-state';
+import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
-import { resolve } from 'src/application/use-cases/di/di-container';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { resolve } from 'src/application/use-cases/di/container';
+import { symbols } from 'src/application/use-cases/di/symbols';
 import {
   Validator,
   ValidatorInitializer,
   ValidationState,
-} from 'src/enterprise/validation/validator';
-import { Messages } from 'src/enterprise/location/messages';
+} from 'src/infrastructures/validation/validator';
+import { Messages } from 'src/enterprise/models/location/messages';
 import { ValidationPopup } from 'src/web/components/forms-controls/validation-popup';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
-import { SignUpRequest } from 'src/enterprise/accounts/sign-up-request';
-import { Culture } from 'src/enterprise/location/culture-infos';
+import { Culture } from 'src/enterprise/models/location/culture-infos';
 import { TermsOfService } from './terms-of-service';
 import { connect } from 'react-redux';
+import { SignUpRequest } from 'src/enterprise/models/accounts/account';
 
 const styles = createStyles({
   root: {

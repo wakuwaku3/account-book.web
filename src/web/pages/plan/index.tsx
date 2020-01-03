@@ -12,23 +12,23 @@ import {
   Fab,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/enterprise/location/resources';
+import { Resources } from 'src/enterprise/models/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
-import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/adapter/stores/stored-state';
-import { resolve } from 'src/application/use-cases/di/di-container';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
-import { Url } from 'src/enterprise/routing/url';
+import { StoredState } from 'src/enterprise/stores/stored-state';
+import { resolve } from 'src/application/use-cases/di/container';
+import { symbols } from 'src/application/use-cases/di/symbols';
+import { Url } from 'src/infrastructures/routing/url';
 import { Create, Clear, Add } from '@material-ui/icons';
-import { Localizer } from 'src/enterprise/location/localizer';
-import { PlanItem } from 'src/enterprise/plan/plan-item';
+import { Localizer } from 'src/enterprise/models/location/localizer';
+import { PlanItem } from 'src/enterprise/models/plan/plan-item';
 import { History } from 'history';
-import { PlanSelectors } from 'src/adapter/stores/plan/selectors';
+import { PlanSelectors } from 'src/enterprise/stores/plan/selectors';
 import { TableCell } from 'src/web/components/table/table-cell';
 import { connect } from 'react-redux';
 

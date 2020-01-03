@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Theme } from 'src/infrastructures/styles/theme';
-import { Message } from 'src/enterprise/messages/message';
+import { Message } from 'src/enterprise/models/messages/message';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createStyles, Typography } from '@material-ui/core';
 import { Info, Warning, Error } from '@material-ui/icons';

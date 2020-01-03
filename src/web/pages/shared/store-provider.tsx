@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { StoredState } from 'src/adapter/stores/stored-state';
-import { createAppStore } from 'src/adapter/stores/reducer-factory';
-import { resolve } from 'src/application/use-cases/di/di-container';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { StoredState } from 'src/enterprise/stores/stored-state';
+import { createAppStore } from 'src/enterprise/stores/reducer-factory';
+import { resolve } from 'src/application/use-cases/di/container';
+import { symbols } from 'src/application/use-cases/di/symbols';
 
 export interface StoreProviderProps {
   initialState: StoredState;

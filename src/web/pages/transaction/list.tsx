@@ -9,22 +9,22 @@ import {
   TableBody,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/enterprise/location/resources';
+import { Resources } from 'src/enterprise/models/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/adapter/stores/stored-state';
-import { Localizer } from 'src/enterprise/location/localizer';
-import { TransactionItem } from 'src/enterprise/transaction/transaction-item';
-import { TransactionSelectors } from 'src/adapter/stores/transaction/selectors';
+import { StoredState } from 'src/enterprise/stores/stored-state';
+import { Localizer } from 'src/enterprise/models/location/localizer';
+import { TransactionItem } from 'src/enterprise/models/transaction/transaction-item';
+import { TransactionSelectors } from 'src/enterprise/stores/transaction/selectors';
 import { Create, Clear } from '@material-ui/icons';
-import { Url } from 'src/enterprise/routing/url';
+import { Url } from 'src/infrastructures/routing/url';
 import { TableCell } from 'src/web/components/table/table-cell';
-import { resolve } from 'src/application/use-cases/di/di-container';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { resolve } from 'src/application/use-cases/di/container';
+import { symbols } from 'src/application/use-cases/di/symbols';
 import { connect } from 'react-redux';
 
 const styles = createStyles({

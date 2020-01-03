@@ -1,16 +1,15 @@
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/enterprise/location/resources';
+import { Resources } from 'src/enterprise/models/location/resources';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/adapter/stores/stored-state';
-import { Localizer } from 'src/enterprise/location/localizer';
-import { resolve } from 'src/application/use-cases/di/di-container';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
-import { DashboardSelectors } from 'src/adapter/stores/dashboard/selectors';
-import { MonthPicker } from 'src/web/components/forms-controls/month-picker';
-import { MonthPickerModel } from 'src/enterprise/components/month-picker-model';
+import { StoredState } from 'src/enterprise/stores/stored-state';
+import { Localizer } from 'src/enterprise/models/location/localizer';
+import { resolve } from 'src/application/use-cases/di/container';
+import { symbols } from 'src/application/use-cases/di/symbols';
+import { DashboardSelectors } from 'src/enterprise/stores/dashboard/selectors';
+import { MonthPicker, MonthPickerModel } from 'src/web/components/forms-controls/month-picker';
 import { connect } from 'react-redux';
 
 interface Props {

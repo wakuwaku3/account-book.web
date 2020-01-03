@@ -7,30 +7,30 @@ import {
   Button,
 } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { Resources } from 'src/enterprise/location/resources';
+import { Resources } from 'src/enterprise/models/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
-import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
+import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { StoredState } from 'src/adapter/stores/stored-state';
+import { StoredState } from 'src/enterprise/stores/stored-state';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import {
   PlanEditModel,
   PlanCreationModel,
-} from 'src/enterprise/plan/plan-model';
+} from 'src/enterprise/models/plan/plan-model';
 import { Form } from 'src/web/components/forms-controls/form';
-import { Url } from 'src/enterprise/routing/url';
-import { Localizer } from 'src/enterprise/location/localizer';
-import { resolve } from 'src/application/use-cases/di/di-container';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { Url } from 'src/infrastructures/routing/url';
+import { Localizer } from 'src/enterprise/models/location/localizer';
+import { resolve } from 'src/application/use-cases/di/container';
+import { symbols } from 'src/application/use-cases/di/symbols';
 import { Clear, Save } from '@material-ui/icons';
 import { Checkbox } from 'src/web/components/forms-controls/checkbox';
 import { DatePicker } from 'src/web/components/forms-controls/date-picker';
-import { now } from 'src/enterprise/interfaces/helpers/date-helper';
+import { now } from 'src/infrastructures/helpers/date-helper';
 import { connect } from 'react-redux';
 
 const styles = createStyles({
