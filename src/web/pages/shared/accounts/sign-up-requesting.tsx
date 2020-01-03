@@ -14,12 +14,11 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { Url } from 'src/infrastructures/routing/url';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { SignUpRequestingRequest } from 'src/enterprise/models/accounts/account';
 import { connect } from 'react-redux';
+import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: {
@@ -61,7 +60,7 @@ interface Events {
   submit: (model: SignUpRequestingRequest, history: History) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { requestSignUpAsync } = resolve(symbols.accountsUseCase);
+  const { requestSignUpAsync } = accountsUseCase.value;
   return {
     submit: async (model, history) => {
       const { hasError } = await requestSignUpAsync(model);

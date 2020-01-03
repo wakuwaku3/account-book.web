@@ -1,17 +1,14 @@
-import { injectable } from 'inversify';
-import { inject } from '../di/inversify-helper';
 import { IMessagesOperators } from 'src/enterprise/infrastructures-interfaces/messages-operators';
 import { IMessagesService } from 'src/enterprise/infrastructures-interfaces/messages-service';
-import { infrastructuresSymbols } from 'src/enterprise/infrastructures-interfaces/symbols';
 import { IGuidProvider } from 'src/enterprise/infrastructures-interfaces/guid-provider';
-import { MessageGenerator, MessageGeneratorArgs } from 'src/enterprise/models/messages/message';
+import {
+  MessageGenerator,
+  MessageGeneratorArgs,
+} from 'src/enterprise/models/messages/message';
 
-@injectable()
 export class MessagesService implements IMessagesService {
   constructor(
-    @inject(infrastructuresSymbols.messagesOperators)
     private messagesOperators: IMessagesOperators,
-    @inject(infrastructuresSymbols.guidProvider)
     private guidProvider: IGuidProvider,
   ) {}
   public clear = () => this.messagesOperators.clear({});

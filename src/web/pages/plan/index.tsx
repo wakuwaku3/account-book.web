@@ -21,8 +21,6 @@ import { Row } from 'src/web/components/layout/row';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { Url } from 'src/infrastructures/routing/url';
 import { Create, Clear, Add } from '@material-ui/icons';
 import { Localizer } from 'src/enterprise/models/location/localizer';
@@ -31,6 +29,7 @@ import { History } from 'history';
 import { PlanSelectors } from 'src/enterprise/stores/plan/selectors';
 import { TableCell } from 'src/web/components/table/table-cell';
 import { connect } from 'react-redux';
+import { planUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: { padding: 20 },
@@ -67,7 +66,7 @@ interface Events {
   deletePlanAsync: (id: string) => Promise<void>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { loadAsync, deletePlanAsync } = resolve(symbols.planUseCase);
+  const { loadAsync, deletePlanAsync } = planUseCase.value;
   return {
     loadAsync,
     deletePlanAsync,

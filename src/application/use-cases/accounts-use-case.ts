@@ -1,8 +1,5 @@
-import { injectable } from 'inversify';
 import { Claim } from 'src/enterprise/models/accounts/claim';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import {
   SignUpRequestingRequest,
   SignInRequest,
@@ -15,16 +12,12 @@ import { IValidateService } from 'src/enterprise/services/accounts/interfaces/va
 import { IAccountsOperators } from 'src/enterprise/services/accounts/interfaces/account-operators';
 import { IAccountsService } from 'src/enterprise/services/accounts/interfaces/accounts-service';
 
-@injectable()
 export class AccountsUseCase implements IAccountsUseCase {
   constructor(
-    @inject(symbols.fetchService) private fetchService: IFetchService,
-    @inject(symbols.validateService) private validateService: IValidateService,
-    @inject(symbols.accountsOperators)
+    private fetchService: IFetchService,
+    private validateService: IValidateService,
     private accountsOperators: IAccountsOperators,
-    @inject(symbols.accountsService)
     private accountsService: IAccountsService,
-    @inject(symbols.messagesService)
     private messagesService: IMessagesService,
   ) {}
   public signOut = () => this.accountsOperators.signOut({});

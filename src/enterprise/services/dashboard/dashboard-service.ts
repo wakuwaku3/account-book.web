@@ -1,19 +1,12 @@
 import { IDashboardService } from './interfaces/dashboard-service';
-import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import symbols from './interfaces/symbols';
 import { IFetchService } from 'src/enterprise/infrastructures-interfaces/fetch-service';
 import { IDashboardOperators } from './interfaces/dashboard-operators';
 import { DashboardModel } from 'src/enterprise/models/dashboard/dashboard-model';
 import { ApiUrl } from 'src/infrastructures/routing/url';
-import { infrastructuresSymbols } from 'src/enterprise/infrastructures-interfaces/symbols';
 
-@injectable()
 export class DashboardService implements IDashboardService {
   constructor(
-    @inject(infrastructuresSymbols.fetchService)
     private fetchService: IFetchService,
-    @inject(symbols.dashboardOperators)
     private dashboardOperators: IDashboardOperators,
   ) {}
   public getModelAsync = async (selectedMonth?: Date) => {

@@ -22,8 +22,6 @@ import { Form } from 'src/web/components/forms-controls/form';
 import { Localizer } from 'src/enterprise/models/location/localizer';
 import { Clear, Save, Sync } from '@material-ui/icons';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import {
   ActualModel,
   ActualKey,
@@ -31,6 +29,7 @@ import {
 } from 'src/enterprise/models/actual/actual-model';
 import { parse } from 'querystring';
 import { connect } from 'react-redux';
+import { actualUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },
@@ -81,7 +80,7 @@ interface Events {
   editActualAsync: (key: ActualKey, model: ActualEditModel) => Promise<boolean>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { getActualAsync, editActualAsync } = resolve(symbols.actualUseCase);
+  const { getActualAsync, editActualAsync } = actualUseCase.value;
   return { getActualAsync, editActualAsync };
 };
 const getDefault: () => ActualModel = () => {

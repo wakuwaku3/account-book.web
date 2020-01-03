@@ -4,7 +4,6 @@ import * as React from 'react';
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { SignInRequest } from 'src/enterprise/models/accounts/account';
-import { resolve } from 'src/application/use-cases/di/container';
 import { Resources } from 'src/enterprise/models/location/resources';
 import { Form } from 'src/web/components/forms-controls/form';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
@@ -14,10 +13,10 @@ import { Row } from 'src/web/components/layout/row';
 import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { Link } from 'react-router-dom';
 import { Url } from 'src/infrastructures/routing/url';
 import { connect } from 'react-redux';
+import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: {
@@ -118,7 +117,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const mapEventToProps: EventMapper<Events> = () => {
-  const { signInAsync } = resolve(symbols.accountsUseCase);
+  const { signInAsync } = accountsUseCase.value;
   return {
     signIn: async model => {
       await signInAsync(model);

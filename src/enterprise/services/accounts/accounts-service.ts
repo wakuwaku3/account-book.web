@@ -2,10 +2,6 @@ import {
   SignInRequest,
   PasswordResetRequestingRequest,
 } from 'src/enterprise/models/accounts/account';
-import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import symbols from './interfaces/symbols';
-import { infrastructuresSymbols } from 'src/enterprise/infrastructures-interfaces/symbols';
 import { IAccountsService } from 'src/enterprise/services/accounts/interfaces/accounts-service';
 import { IValidateService } from 'src/enterprise/services/accounts/interfaces/validate-service';
 import { SignUpRequestingRequest } from 'src/enterprise/models/accounts/account';
@@ -13,14 +9,10 @@ import { IFetchService } from 'src/enterprise/infrastructures-interfaces/fetch-s
 import { IMessagesService } from 'src/enterprise/infrastructures-interfaces/messages-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 
-@injectable()
 export class AccountsService implements IAccountsService {
   constructor(
-    @inject(infrastructuresSymbols.fetchService)
     private fetchService: IFetchService,
-    @inject(infrastructuresSymbols.messagesService)
     private messagesService: IMessagesService,
-    @inject(symbols.validateService)
     private validateService: IValidateService,
   ) {}
   public validateSignInModel = (model: SignInRequest) => {

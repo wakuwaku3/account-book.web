@@ -4,9 +4,8 @@ import { StoredState } from 'src/enterprise/stores/stored-state';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { connect } from 'react-redux';
+import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 interface Events {
   refreshTokenAsync: (claim?: Claim) => Promise<void>;
@@ -23,7 +22,7 @@ const Inner: React.SFC<Props & Events> = props => {
   return <React.Fragment>{!notInitialized && children}</React.Fragment>;
 };
 const mapEventToProps: EventMapper<Events> = dispatch => {
-  const { refreshTokenAsync } = resolve(symbols.accountsUseCase);
+  const { refreshTokenAsync } = accountsUseCase.value;
   return {
     refreshTokenAsync: async state => await refreshTokenAsync(state),
   };

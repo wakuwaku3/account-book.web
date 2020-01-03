@@ -6,11 +6,13 @@ import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
 import { Localizer } from 'src/enterprise/models/location/localizer';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { DashboardSelectors } from 'src/enterprise/stores/dashboard/selectors';
-import { MonthPicker, MonthPickerModel } from 'src/web/components/forms-controls/month-picker';
+import {
+  MonthPicker,
+  MonthPickerModel,
+} from 'src/web/components/forms-controls/month-picker';
 import { connect } from 'react-redux';
+import { dashboardUseCase } from 'src/application/use-cases/di/container';
 
 interface Props {
   monthPicker?: MonthPickerModel;
@@ -38,7 +40,7 @@ interface Events {
   onChange: (month?: Date) => void;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { getModelAsync } = resolve(symbols.dashboardUseCase);
+  const { getModelAsync } = dashboardUseCase.value;
   return {
     onChange: async month => await getModelAsync(month),
   };

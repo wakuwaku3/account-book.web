@@ -23,9 +23,8 @@ import { TransactionSelectors } from 'src/enterprise/stores/transaction/selector
 import { Create, Clear } from '@material-ui/icons';
 import { Url } from 'src/infrastructures/routing/url';
 import { TableCell } from 'src/web/components/table/table-cell';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { connect } from 'react-redux';
+import { transactionUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: { width: '100%', overflow: 'auto' },
@@ -65,7 +64,7 @@ interface Events {
   deleteTransactionAsync: (id: string) => Promise<void>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { deleteTransactionAsync } = resolve(symbols.transactionUseCase);
+  const { deleteTransactionAsync } = transactionUseCase.value;
   return { deleteTransactionAsync };
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {

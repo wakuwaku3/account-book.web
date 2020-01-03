@@ -1,20 +1,13 @@
 import { IPlanService } from 'src/enterprise/services/plan/interfaces/plan-service';
 import { PlanEditModel } from 'src/enterprise/models/plan/plan-model';
-import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import symbols from './interfaces/symbols';
 import { IFetchService } from 'src/enterprise/infrastructures-interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { PlanItem } from 'src/enterprise/models/plan/plan-item';
 import { IPlanOperators } from 'src/enterprise/services/plan/interfaces/plan-operators';
-import { infrastructuresSymbols } from 'src/enterprise/infrastructures-interfaces/symbols';
 
-@injectable()
 export class PlanService implements IPlanService {
   constructor(
-    @inject(infrastructuresSymbols.fetchService)
     private fetchService: IFetchService,
-    @inject(symbols.planOperators)
     private planOperators: IPlanOperators,
   ) {}
   public createPlanAsync = async (model: PlanEditModel) => {

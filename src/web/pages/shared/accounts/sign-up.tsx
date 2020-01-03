@@ -23,8 +23,6 @@ import { StoredState } from 'src/enterprise/stores/stored-state';
 import { Url } from 'src/infrastructures/routing/url';
 import { Form } from 'src/web/components/forms-controls/form';
 import { Cell } from 'src/web/components/layout/cell';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import {
   Validator,
   ValidatorInitializer,
@@ -37,6 +35,7 @@ import { Culture } from 'src/enterprise/models/location/culture-infos';
 import { TermsOfService } from './terms-of-service';
 import { connect } from 'react-redux';
 import { SignUpRequest } from 'src/enterprise/models/accounts/account';
+import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: {
@@ -97,7 +96,7 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     validatePasswordFormat,
     showErrorMessage,
     signUpAsync,
-  } = resolve(symbols.accountsUseCase);
+  } = accountsUseCase.value;
   return {
     loadSignUpAsync: async (signUpToken, history) => {
       const { hasError, result } = await loadSignUpAsync(signUpToken);

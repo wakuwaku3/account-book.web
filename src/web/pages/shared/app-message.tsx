@@ -6,10 +6,9 @@ import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { connect } from 'react-redux';
 import { Message } from 'src/enterprise/models/messages/message';
+import { messagesUseCase } from 'src/application/use-cases/di/container';
 
 interface Events {
   onClear: () => void;
@@ -36,7 +35,7 @@ const Inner: React.SFC<Events & Props> = ({
   );
 };
 const mapEventToProps: EventMapper<Events> = () => {
-  const useCase = resolve(symbols.messagesUseCase);
+  const useCase = messagesUseCase.value;
   return {
     onRemoveMessage: useCase.removeMessage,
     onClear: useCase.clear,
