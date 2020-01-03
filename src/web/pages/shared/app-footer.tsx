@@ -9,7 +9,7 @@ import {
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
@@ -19,6 +19,7 @@ import { List, Atm, CalendarToday } from '@material-ui/icons';
 import { Url } from 'src/enterprise/routing/url';
 import { ThemeProvider } from 'src/web/components/styles/theme-provider';
 import { ThemeOption } from 'src/infrastructures/styles/theme';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: {},
@@ -83,6 +84,5 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const AppFooter = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
-);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(StyledInner);
+export const AppFooter = withRouter(ConnectedInner);

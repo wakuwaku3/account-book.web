@@ -12,7 +12,7 @@ import {
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
@@ -24,6 +24,7 @@ import { Edit } from '@material-ui/icons';
 import { Url } from 'src/enterprise/routing/url';
 import { DashboardSelectors } from 'src/adapter/stores/dashboard/selectors';
 import { TableCell } from 'src/web/components/table/table-cell';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: { width: '100%', overflow: 'auto' },
@@ -136,6 +137,6 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const Plans = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
+export const Plans = withRouter(
+  connect(mapStateToProps, mapEventToProps)(StyledInner),
 );

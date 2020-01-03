@@ -14,7 +14,7 @@ import {
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
@@ -30,6 +30,7 @@ import { PlanItem } from 'src/enterprise/plan/plan-item';
 import { History } from 'history';
 import { PlanSelectors } from 'src/adapter/stores/plan/selectors';
 import { TableCell } from 'src/web/components/table/table-cell';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: { padding: 20 },
@@ -187,6 +188,5 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const PlanIndex = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
-);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(StyledInner);
+export const PlanIndex = withRouter(ConnectedInner);

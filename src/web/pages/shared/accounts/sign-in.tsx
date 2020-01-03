@@ -8,7 +8,7 @@ import { resolve } from 'src/application/use-cases/di/di-container';
 import { Resources } from 'src/enterprise/location/resources';
 import { Form } from 'src/web/components/forms-controls/form';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { Container } from 'src/web/components/layout/container';
 import { Row } from 'src/web/components/layout/row';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
@@ -17,6 +17,7 @@ import { StoredState } from 'src/adapter/stores/stored-state';
 import { symbols } from 'src/application/use-cases/di/di-symbols';
 import { Link } from 'react-router-dom';
 import { Url } from 'src/enterprise/routing/url';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: {
@@ -142,6 +143,5 @@ const mapStateToProps: StateMapperWithRouter<StoredState, Props, Params> = (
   return { resources, getDefaultEmail };
 };
 const StyledInner = decorate(styles)(Inner);
-export const SignIn = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
-);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(StyledInner);
+export const SignIn = withRouter(ConnectedInner);

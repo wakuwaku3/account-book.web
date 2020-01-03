@@ -39,7 +39,7 @@ export abstract class Validator<TModel extends {}> {
   public validateThrottle = (key: keyof TModel) => {
     this.validateThrottles[key].execute();
   };
-  protected defaultState: ValidationState<TModel>;
+  protected defaultState = {} as ValidationState<TModel>;
   protected hasErrorAsync = async (key: keyof TModel, model: TModel) => {
     const array = this.defaultState[key];
     for (const x of array) {

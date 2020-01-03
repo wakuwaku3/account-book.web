@@ -4,7 +4,7 @@ import { Url } from 'src/enterprise/routing/url';
 import { StateMapper } from 'src/infrastructures/stores/types';
 import { SignIn } from './accounts/sign-in';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { StoredState } from 'src/adapter/stores/stored-state';
 import { Dashboard } from 'src/web/pages/home';
 import { PasswordResetRequesting } from './accounts/password-reset-requesting';
@@ -16,6 +16,7 @@ import { TransactionIndex } from '../transaction';
 import { TransactionEdit } from '../transaction/edit';
 import { SignUpRequesting } from './accounts/sign-up-requesting';
 import { SignUp } from './accounts/sign-up';
+import { connect } from 'react-redux';
 
 interface Props {
   authenticated: boolean;
@@ -62,4 +63,5 @@ const mapStateToProps: StateMapper<StoredState, Props> = ({ accounts }) => {
   const { authenticated } = new AccountsSelectors(accounts);
   return { authenticated };
 };
-export const AppRouter = withConnectedRouter(mapStateToProps)(Inner);
+const ConnectedInner = connect(mapStateToProps)(Inner);
+export const AppRouter = withRouter(ConnectedInner);

@@ -9,9 +9,10 @@ import {
   createPropagationProps,
   appendClassName,
 } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { RefElement } from '../types';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   popper: {},
@@ -65,6 +66,5 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   );
 };
 const StyledInner = decorate(styles)(Inner);
-export const Popup = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
-);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(StyledInner);
+export const Popup = withRouter(ConnectedInner);

@@ -4,7 +4,7 @@ import { createStyles, Typography, Button } from '@material-ui/core';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
@@ -21,6 +21,7 @@ import { Summary } from './summary';
 import { Plans } from './plans';
 import { DashboardSelectors } from 'src/adapter/stores/dashboard/selectors';
 import { Chart } from './chart';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: { padding: 20 },
@@ -59,7 +60,7 @@ const mapStateToProps: StateMapperWithRouter<
     canCancelApprove,
     selectedMonth,
     id,
-  };
+  }as Props;
 };
 interface Events {
   setShowState: (showState: DashboardShowState) => void;
@@ -152,6 +153,5 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
 };
 
 const StyledInner = decorate(styles)(Inner);
-export const Dashboard = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
-);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(StyledInner);
+export const Dashboard = withRouter(ConnectedInner);

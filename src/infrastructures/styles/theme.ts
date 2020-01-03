@@ -26,8 +26,10 @@ export const colors = {
 };
 export type Colors = typeof colors;
 
-export namespace CommonColors {
-  export const { white, black } = MuiColors.common;
+export class CommonColors {
+  private static common = MuiColors.common;
+  public static white = CommonColors.common.white;
+  public static black = CommonColors.common.black;
 }
 
 const { grey, indigo, yellow, red, blueGrey, pink } = colors;

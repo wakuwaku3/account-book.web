@@ -12,7 +12,7 @@ import {
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { Resources } from 'src/enterprise/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
-import { withConnectedRouter } from 'src/infrastructures/routing/routing-helper';
+import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { History } from 'history';
 import { AccountsSelectors } from 'src/adapter/stores/accounts/selectors';
 import { Container } from 'src/web/components/layout/container';
@@ -36,6 +36,7 @@ import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { SignUpRequest } from 'src/enterprise/accounts/sign-up-request';
 import { Culture } from 'src/enterprise/location/culture-infos';
 import { TermsOfService } from './terms-of-service';
+import { connect } from 'react-redux';
 
 const styles = createStyles({
   root: {
@@ -300,9 +301,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
         <Row>
           <Form onSubmit={this.handleClickOpen} className={form}>
             <Row>
-              <Typography variant="body1">{`${
-                resources.email
-              }:${email}`}</Typography>
+              <Typography variant="body1">{`${resources.email}:${email}`}</Typography>
               <input type="text" defaultValue={email} className={hidden} />
             </Row>
             <Row>
@@ -398,6 +397,6 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
   }
 }
 const StyledInner = decorate(styles)(Inner);
-export const SignUp = withConnectedRouter(mapStateToProps, mapEventToProps)(
-  StyledInner,
+export const SignUp = withRouter(
+  connect(mapStateToProps, mapEventToProps)(StyledInner),
 );
