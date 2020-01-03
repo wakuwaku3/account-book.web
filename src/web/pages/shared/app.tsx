@@ -9,9 +9,9 @@ import { AuthenticateProvider } from './accounts/authenticate-provider';
 import {
   getInitialStoredState,
   StoredState,
-} from 'src/adapter/stores/stored-state';
+} from 'src/enterprise/stores/stored-state';
 import { AppBody } from './app-body';
-import { ThemeSelectors } from 'src/adapter/stores/theme/selectors';
+import { ThemeSelectors } from 'src/enterprise/stores/theme/selectors';
 import { createBrowserHistory } from 'history';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { AppFooter } from './app-footer';

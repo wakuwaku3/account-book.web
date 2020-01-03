@@ -6,14 +6,18 @@ import {
   IconButton,
   Button,
 } from '@material-ui/core';
-import { Resources } from 'src/enterprise/location/resources';
+import { Resources } from 'src/enterprise/models/location/resources';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { History } from 'history';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
-import { Localizer } from 'src/enterprise/location/localizer';
+import { Localizer } from 'src/enterprise/models/location/localizer';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons';
-import { MonthPickerModel } from 'src/enterprise/components/month-picker-model';
-import { equalMonth } from 'src/enterprise/interfaces/helpers/date-helper';
+import { equalMonth } from 'src/infrastructures/helpers/date-helper';
+
+export interface MonthPickerModel {
+  selectedMonth: Date | undefined;
+  selectableMonths: Date[];
+}
 
 const styles = createStyles({
   root: {

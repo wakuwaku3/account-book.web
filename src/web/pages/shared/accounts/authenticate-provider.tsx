@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Claim } from 'src/enterprise/accounts/claim';
-import { StoredState } from 'src/adapter/stores/stored-state';
+import { Claim } from 'src/enterprise/models/accounts/claim';
+import { StoredState } from 'src/enterprise/stores/stored-state';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { EventMapper } from 'src/infrastructures/stores/types';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
-import { resolve } from 'src/application/use-cases/di/di-container';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
+import { resolve } from 'src/application/use-cases/di/container';
+import { symbols } from 'src/application/use-cases/di/symbols';
 import { connect } from 'react-redux';
 
 interface Events {

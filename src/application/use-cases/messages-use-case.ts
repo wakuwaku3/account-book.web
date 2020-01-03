@@ -1,8 +1,8 @@
 import { injectable } from 'inversify';
 import { inject } from 'src/infrastructures/di/inversify-helper';
-import { IMessagesUseCase } from 'src/application/interfaces/usecases/messages-use-case';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
-import { MessageGenerator } from 'src/enterprise/messages/message';
+import { symbols } from 'src/application/use-cases/di/symbols';
+import { IMessagesUseCase } from './interfaces/messages-use-case';
+import { MessageGenerator } from 'src/enterprise/models/messages/message';
 
 @injectable()
 export class MessagesUseCase implements IMessagesUseCase {

@@ -1,17 +1,19 @@
-import { SignInRequest } from 'src/enterprise/accounts/sign-in-request';
 import { injectable } from 'inversify';
-import { Claim } from 'src/enterprise/accounts/claim';
-import { IAccountsUseCase } from 'src/application/interfaces/usecases/accounts-use-case';
-import { ApiUrl } from 'src/enterprise/routing/url';
+import { Claim } from 'src/enterprise/models/accounts/claim';
+import { ApiUrl } from 'src/infrastructures/routing/url';
 import { inject } from 'src/infrastructures/di/inversify-helper';
-import { symbols } from 'src/application/use-cases/di/di-symbols';
-import { IAccountsOperators } from 'src/adapter/stores/accounts/operators-interface';
-import { IAccountsService } from 'src/application/interfaces/services/accounts-service';
-import { PasswordResetRequestingRequest } from 'src/enterprise/accounts/password-reset-requesting-request';
-import { IValidateService } from 'src/application/interfaces/services/validate-service';
-import { IMessagesService } from 'src/application/interfaces/services/messages-service';
-import { SignUpRequestingRequest } from 'src/enterprise/accounts/sign-up-requesting-request';
-import { IFetchService } from 'src/application/interfaces/services/fetch-service';
+import { symbols } from 'src/application/use-cases/di/symbols';
+import {
+  SignUpRequestingRequest,
+  SignInRequest,
+  PasswordResetRequestingRequest,
+} from 'src/enterprise/models/accounts/account';
+import { IFetchService } from 'src/enterprise/infrastructures-interfaces/fetch-service';
+import { IAccountsUseCase } from './interfaces/accounts-use-case';
+import { IMessagesService } from 'src/enterprise/infrastructures-interfaces/messages-service';
+import { IValidateService } from 'src/enterprise/services/accounts/interfaces/validate-service';
+import { IAccountsOperators } from 'src/enterprise/services/accounts/interfaces/account-operators';
+import { IAccountsService } from 'src/enterprise/services/accounts/interfaces/accounts-service';
 
 @injectable()
 export class AccountsUseCase implements IAccountsUseCase {

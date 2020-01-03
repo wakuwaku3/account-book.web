@@ -7,7 +7,7 @@ import {
   MuiPickersUtilsProvider,
   DatePickerProps as MuiDatePickerProps,
 } from 'material-ui-pickers';
-import { Localizer } from 'src/enterprise/location/localizer';
+import { Localizer } from 'src/enterprise/models/location/localizer';
 
 const styles = createStyles({
   root: {},
