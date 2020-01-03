@@ -52,8 +52,8 @@ export type WithStyles<
       ? T
       : T extends StyleRulesCallback<infer K>
       ? K
-      : T extends StyleRules<infer K>
-      ? K
+      : T extends StyleRules<infer K2>
+      ? K2
       : never
   >;
 };

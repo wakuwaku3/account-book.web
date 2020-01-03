@@ -1,4 +1,3 @@
-// import { stringify } from 'query-string';
 import { format, parse } from 'url';
 import urljoin from 'url-join';
 import { config } from 'src/infrastructures/env/config';
