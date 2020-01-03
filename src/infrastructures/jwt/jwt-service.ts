@@ -1,10 +1,8 @@
-import { injectable } from 'inversify';
 import { ClaimResponse, Claim } from 'src/enterprise/models/accounts/claim';
 import { decode } from 'jsonwebtoken';
 import { IJWTService } from 'src/enterprise/infrastructures-interfaces/jwt-service';
 import { fromUtc } from '../helpers/date-helper';
 
-@injectable()
 export class JWTService implements IJWTService {
   public parseClaim = (res: ClaimResponse): Claim => {
     const { payload } = decode(res.token, { complete: true }) as {

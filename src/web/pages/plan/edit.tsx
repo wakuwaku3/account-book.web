@@ -25,13 +25,12 @@ import {
 import { Form } from 'src/web/components/forms-controls/form';
 import { Url } from 'src/infrastructures/routing/url';
 import { Localizer } from 'src/enterprise/models/location/localizer';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { Clear, Save } from '@material-ui/icons';
 import { Checkbox } from 'src/web/components/forms-controls/checkbox';
 import { DatePicker } from 'src/web/components/forms-controls/date-picker';
 import { now } from 'src/infrastructures/helpers/date-helper';
 import { connect } from 'react-redux';
+import { planUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },
@@ -77,9 +76,7 @@ interface Events {
   getPlanAsync: (id: string) => Promise<PlanEditModel | undefined>;
 }
 const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
-  const { createPlanAsync, editPlanAsync, getPlanAsync } = resolve(
-    symbols.planUseCase,
-  );
+  const { createPlanAsync, editPlanAsync, getPlanAsync } = planUseCase.value;
   return { createPlanAsync, editPlanAsync, getPlanAsync };
 };
 const getDefault: () => PlanEditModel = () => {

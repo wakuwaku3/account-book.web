@@ -1,6 +1,3 @@
-import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import { symbols } from './di/symbols';
 import { IFetchService } from 'src/enterprise/infrastructures-interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { TransactionModel } from 'src/enterprise/models/transaction/transaction-index-model';
@@ -10,13 +7,10 @@ import { ITransactionOperators } from 'src/enterprise/services/transaction/inter
 import { ITransactionService } from 'src/enterprise/services/transaction/interfaces/transaction-service';
 import { getMonthStartDay, now } from 'src/infrastructures/helpers/date-helper';
 
-@injectable()
 export class TransactionUseCase implements ITransactionUseCase {
   constructor(
-    @inject(symbols.fetchService) private fetchService: IFetchService,
-    @inject(symbols.transactionOperators)
+    private fetchService: IFetchService,
     private transactionOperators: ITransactionOperators,
-    @inject(symbols.transactionService)
     private transactionService: ITransactionService,
   ) {}
   public loadAsync = async (selectedMonth?: Date) => {

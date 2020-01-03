@@ -14,14 +14,13 @@ import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
 import { Accordion } from 'src/web/components/layout/accordion';
 import { DashboardShowState } from 'src/enterprise/models/dashboard/dashboard-show-state';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { DashboardMonthPicker } from './month-picker';
 import { Summary } from './summary';
 import { Plans } from './plans';
 import { DashboardSelectors } from 'src/enterprise/stores/dashboard/selectors';
 import { Chart } from './chart';
 import { connect } from 'react-redux';
+import { dashboardUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: { padding: 20 },
@@ -74,7 +73,7 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     getModelAsync,
     approveAsync,
     cancelApproveAsync,
-  } = resolve(symbols.dashboardUseCase);
+  } = dashboardUseCase.value;
   return {
     setShowState,
     getModelAsync,

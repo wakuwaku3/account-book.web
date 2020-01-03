@@ -1,20 +1,14 @@
-import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import symbols from './interfaces/symbols';
-import { infrastructuresSymbols } from 'src/enterprise/infrastructures-interfaces/symbols';
 import { IAccountsOperators } from './interfaces/account-operators';
 import { Claim, ClaimResponse } from 'src/enterprise/models/accounts/claim';
 import { IIdentityService } from './interfaces/identity-service';
 import { IJWTService } from 'src/enterprise/infrastructures-interfaces/jwt-service';
 import { cultureInfos } from 'src/enterprise/models/location/culture-infos';
 
-@injectable()
 export class IdentityService implements IIdentityService {
   private claim?: Claim;
   constructor(
-    @inject(symbols.accountsOperators)
     private accountsOperators: IAccountsOperators,
-    @inject(infrastructuresSymbols.jwtService) private jwtService: IJWTService,
+    private jwtService: IJWTService,
   ) {}
 
   public signIn = async (result: ClaimResponse) => {

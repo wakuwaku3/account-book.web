@@ -1,11 +1,7 @@
-import { injectable } from 'inversify';
 import { IFetchService } from 'src/enterprise/infrastructures-interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 import { ClaimResponse } from 'src/enterprise/models/accounts/claim';
-import { infrastructuresSymbols } from 'src/enterprise/infrastructures-interfaces/symbols';
 import { IMessagesService } from 'src/enterprise/infrastructures-interfaces/messages-service';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import symbols from './interfaces/symbols';
 import { now } from 'src/infrastructures/helpers/date-helper';
 import { IIdentityService } from './interfaces/identity-service';
 import {
@@ -19,15 +15,12 @@ import {
   SignUpRequest,
 } from 'src/enterprise/models/accounts/account';
 
-@injectable()
 export class FetchService implements IFetchService {
   private get claim() {
     return this.identityService.getClaim();
   }
   constructor(
-    @inject(infrastructuresSymbols.messagesService)
     private messagesService: IMessagesService,
-    @inject(symbols.identityService)
     private identityService: IIdentityService,
   ) {}
   public fetchAsync = async <TResult>(

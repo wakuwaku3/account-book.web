@@ -27,10 +27,9 @@ import { Form } from 'src/web/components/forms-controls/form';
 import { Url } from 'src/infrastructures/routing/url';
 import { CategorySelector } from './category-selector';
 import { Localizer } from 'src/enterprise/models/location/localizer';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { Clear, Save } from '@material-ui/icons';
 import { connect } from 'react-redux';
+import { transactionUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: { padding: 20, maxWidth: 1024, margin: 'auto' },
@@ -85,7 +84,7 @@ const mapEventToProps: EventMapper<Events, OwnProps> = dispatch => {
     createTransactionAsync,
     editTransactionAsync,
     getTransactionAsync,
-  } = resolve(symbols.transactionUseCase);
+  } = transactionUseCase.value;
   return { createTransactionAsync, editTransactionAsync, getTransactionAsync };
 };
 const getDefaultState: () => TransactionEditModel = () => {

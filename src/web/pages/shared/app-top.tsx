@@ -19,12 +19,11 @@ import { AccountsSelectors } from 'src/enterprise/stores/accounts/selectors';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
-import { resolve } from 'src/application/use-cases/di/container';
-import { symbols } from 'src/application/use-cases/di/symbols';
 import { Url } from 'src/infrastructures/routing/url';
 import { RefElement } from 'src/web/components/types';
 import { connect } from 'react-redux';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
+import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
   root: {
@@ -120,7 +119,7 @@ const mapStateToProps: StateMapperWithRouter<StoredState, Props> = (
   return { resources, authenticated, history };
 };
 const mapEventToProps: EventMapper<Events> = () => {
-  const { signOut } = resolve(symbols.accountsUseCase);
+  const { signOut } = accountsUseCase.value;
   return {
     signOut,
   };

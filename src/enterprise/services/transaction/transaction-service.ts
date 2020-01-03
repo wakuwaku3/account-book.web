@@ -3,18 +3,11 @@ import {
   TransactionEditModel,
   TransactionCreationModel,
 } from 'src/enterprise/models/transaction/transaction-model';
-import { injectable } from 'inversify';
-import { inject } from 'src/infrastructures/di/inversify-helper';
-import { infrastructuresSymbols } from 'src/enterprise/infrastructures-interfaces/symbols';
 import { IFetchService } from 'src/enterprise/infrastructures-interfaces/fetch-service';
 import { ApiUrl } from 'src/infrastructures/routing/url';
 
-@injectable()
 export class TransactionService implements ITransactionService {
-  constructor(
-    @inject(infrastructuresSymbols.fetchService)
-    private fetchService: IFetchService,
-  ) {}
+  constructor(private fetchService: IFetchService) {}
   public createTransactionAsync = async (model: TransactionCreationModel) => {
     const { hasError } = await this.fetchService.fetchWithCredentialAsync<{}>({
       url: ApiUrl.transactionsCreate,
