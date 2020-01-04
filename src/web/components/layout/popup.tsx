@@ -31,7 +31,7 @@ const mapStateToProps: StateMapperWithRouter<
   Props,
   Param,
   PopupProps
-> = ({}, { anchorEl, popperProps }) => {
+> = (_, { anchorEl, popperProps }) => {
   return { anchorEl, popperProps: popperProps ? popperProps : {} };
 };
 interface Events {}
@@ -39,19 +39,20 @@ const mapEventToProps: EventMapper<Events, PopupProps> = () => {
   return {};
 };
 const Inner: StyledSFC<typeof styles, Props & Events> = props => {
-  const { popperProps, children, classes } = createPropagationProps(props);
+  const { popperProps, children, classes, anchorEl } = createPropagationProps(
+    props,
+  );
   const [anchorEl1, setAnchorEl1] = React.useState<RefElement>(undefined);
   const { popper } = classes;
   const open1 = Boolean(anchorEl1);
   const appendedPopper = appendClassName(popper, popperProps.className);
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     setAnchorEl1(undefined);
-  };
+  }, []);
   React.useEffect(() => {
-    const { anchorEl } = props;
     setAnchorEl1(anchorEl);
     return handleClose;
-  }, []);
+  }, [anchorEl, handleClose]);
 
   return (
     <Popper

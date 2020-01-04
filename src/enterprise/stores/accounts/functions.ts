@@ -13,7 +13,7 @@ const functions: ReducerFunctions<State, Action> = {
     setLocalStorage(state);
     return state;
   },
-  signOut: (s, {}) => {
+  signOut: () => {
     const state = {};
     setLocalStorage(state);
     return state;

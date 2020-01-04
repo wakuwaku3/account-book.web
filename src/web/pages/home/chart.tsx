@@ -45,7 +45,7 @@ const mapStateToProps: StateMapperWithRouter<
   Props,
   Param,
   OwnProps
-> = ({ accounts, dashboard }, {}) => {
+> = ({ accounts, dashboard }, _) => {
   const { daily } = new DashboardSelectors(dashboard);
   const { resources, localizer } = new AccountsSelectors(accounts);
 

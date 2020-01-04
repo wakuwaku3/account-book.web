@@ -67,7 +67,7 @@ const mapStateToProps: StateMapperWithRouter<
   OwnProps
 > = ({ accounts }, { history, match }) => {
   const qs = parse(
-    location.search ? location.search.substring(1) : '',
+    window.location.search ? window.location.search.substring(1) : '',
   ) as ActualKey;
   if (qs.month) {
     qs.month = new Date(qs.month);
@@ -103,20 +103,25 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const [model, setModel] = React.useState(getDefault());
   const { actualAmount, planAmount, planName: name } = model;
   const [loading, setLoading] = React.useState(true);
-  const reset = async () => {
+  const reset = React.useCallback(async () => {
     setLoading(true);
     try {
-      const newModel = await getActualAsync(qs);
+      const newModel = await getActualAsync({
+        actualId,
+        planId,
+        dashboardId,
+        month,
+      });
       if (newModel) {
         setModel(newModel);
       }
     } finally {
       setLoading(false);
     }
-  };
+  }, [getActualAsync, actualId, planId, dashboardId, month]);
   React.useEffect(() => {
     reset();
-  }, [actualId, planId, dashboardId, month ? month.getTime() : undefined]);
+  }, [reset]);
   const submit = async () => {
     setLoading(true);
     try {

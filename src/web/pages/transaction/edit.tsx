@@ -104,28 +104,25 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { root, btnRow, btn, progressContainer } = classes;
   const [model, setModel] = React.useState(getDefaultState());
   const { amount, categoryId, notes, date } = model;
-  const resetById = async (tid: string) => {
-    const newModel = await getTransactionAsync(tid);
-    if (newModel) {
-      setModel(newModel);
-    }
-  };
-  React.useEffect(() => {
-    reset();
-  }, [id]);
   const handleChange = <K extends keyof TransactionEditModel>(
     key: K,
     value: TransactionEditModel[K],
   ) => {
     setModel({ ...model, [key]: value });
   };
-  const reset = async () => {
+  const reset = React.useCallback(async () => {
+    const resetById = async (tid: string) => {
+      const newModel = await getTransactionAsync(tid);
+      if (newModel) {
+        setModel(newModel);
+      }
+    };
     if (id) {
       resetById(id);
       return;
     }
     setModel(getDefaultState());
-  };
+  }, [getTransactionAsync, id]);
   const disableSubmit =
     !(amount || amount === 0) || !(categoryId || categoryId === '0');
   const submit = async () => {
@@ -139,6 +136,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       history.push(Url.transaction);
     }
   };
+  React.useEffect(() => {
+    reset();
+  }, [reset]);
   return id && !date ? (
     <div className={progressContainer}>
       <CircularProgress />

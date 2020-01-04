@@ -102,15 +102,6 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { root, btnRow, btn, progressContainer } = classes;
   const [model, setModel] = React.useState(getDefault());
   const { name: planName, isIncome, amount, interval, start, end } = model;
-  const resetById = async (tid: string) => {
-    const newModel = await getPlanAsync(tid);
-    if (newModel) {
-      setModel(newModel);
-    }
-  };
-  React.useEffect(() => {
-    reset();
-  }, [id]);
   const handleChange = <K extends keyof PlanEditModel>(
     key: K,
     valueSelector?: (v: string) => PlanEditModel[K],
@@ -121,14 +112,19 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       [key]: valueSelector ? valueSelector(value) : (value as PlanEditModel[K]),
     });
   };
-
-  const reset = async () => {
+  const reset = React.useCallback(async () => {
+    const resetById = async (tid: string) => {
+      const newModel = await getPlanAsync(tid);
+      if (newModel) {
+        setModel(newModel);
+      }
+    };
     if (id) {
       resetById(id);
       return;
     }
     setModel(getDefault());
-  };
+  }, [getPlanAsync, id]);
   const submit = async () => {
     const hasError = id
       ? await editPlanAsync(id, model)
@@ -137,6 +133,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       history.push(Url.plan);
     }
   };
+  React.useEffect(() => {
+    reset();
+  }, [reset]);
 
   const disableSubmit =
     !(amount || amount === 0) ||

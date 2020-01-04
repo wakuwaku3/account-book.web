@@ -54,7 +54,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { root, addBtn } = classes;
   React.useEffect(() => {
     loadAsync();
-  }, []);
+  }, [loadAsync]);
   return (
     <Container className={root}>
       <Row>

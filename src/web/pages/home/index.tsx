@@ -104,7 +104,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   };
   React.useEffect(() => {
     getModelAsync();
-  }, []);
+  }, [getModelAsync]);
   return (
     <Container className={root}>
       <Row>
