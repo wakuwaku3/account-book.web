@@ -7,11 +7,12 @@ import { LabelCard } from 'src/web/components/layout/label-card';
 import { Localizer } from 'src/enterprise/models/location/localizer';
 
 const styles = createStyles({
-  root: {
+  card: {
     minWidth: 150,
     padding: 5,
     marginRight: 10,
     marginBottom: 10,
+    position: 'inherit',
     '&:last-child': {
       marginRight: 0,
     },
@@ -27,11 +28,11 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
   const { localizer, classes, name, isIncome, amount } = createPropagationProps(
     props,
   );
-  const { root } = classes;
+  const { card } = classes;
   const color =
     amount === 0 ? 'yellow' : isIncome && amount > 0 ? 'indigo' : 'red';
   return (
-    <LabelCard color={color} className={root}>
+    <LabelCard color={color} className={card}>
       <Typography variant="subtitle1">{name}</Typography>
       <Typography variant="body2" align="right" color="inherit">
         {localizer.formatMoney(amount)}
