@@ -11,19 +11,19 @@ import {
 } from 'src/infrastructures/styles/styles-helper';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { EventMapper } from 'src/infrastructures/stores/types';
-import { RefElement } from '../types';
 import { connect } from 'react-redux';
+import { ReferenceObject } from 'popper.js';
 
 const styles = createStyles({
   popper: {},
 });
 interface Props {
-  anchorEl?: RefElement;
+  anchorEl?: ReferenceObject | null;
   popperProps: Partial<PopperProps>;
 }
 interface Param {}
 export interface PopupProps {
-  anchorEl?: RefElement;
+  anchorEl?: ReferenceObject | null;
   popperProps?: Partial<PopperProps>;
 }
 const mapStateToProps: StateMapperWithRouter<
@@ -42,12 +42,14 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { popperProps, children, classes, anchorEl } = createPropagationProps(
     props,
   );
-  const [anchorEl1, setAnchorEl1] = React.useState<RefElement>(undefined);
+  const [anchorEl1, setAnchorEl1] = React.useState<
+    ReferenceObject | undefined | null
+  >(null);
   const { popper } = classes;
   const open1 = Boolean(anchorEl1);
   const appendedPopper = appendClassName(popper, popperProps.className);
   const handleClose = React.useCallback(() => {
-    setAnchorEl1(undefined);
+    setAnchorEl1(null);
   }, []);
   React.useEffect(() => {
     setAnchorEl1(anchorEl);

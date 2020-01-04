@@ -30,7 +30,7 @@ const styles = (theme: Theme) =>
       height: 'inherit',
     },
     closeIcon: {
-      fontSize: theme.typography.title.fontSize,
+      fontSize: theme.typography.h5.fontSize,
     },
   });
 export interface MessageBarProps {

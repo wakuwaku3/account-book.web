@@ -26,6 +26,7 @@ import { ValidationPopup } from 'src/web/components/forms-controls/validation-po
 import { TextBox } from 'src/web/components/forms-controls/text-box';
 import { connect } from 'react-redux';
 import { accountsUseCase } from 'src/application/use-cases/di/container';
+import { ReferenceObject } from 'popper.js';
 
 const styles = createStyles({
   root: {
@@ -116,7 +117,7 @@ interface State {
   email: string;
   model: ResetPasswordModel;
   validationState: ValidationState<ResetPasswordModel>;
-  anchor?: null | { key: keyof ResetPasswordModel; el: HTMLInputElement };
+  anchor?: null | { key: keyof ResetPasswordModel; el: ReferenceObject };
 }
 
 class ModelValidator extends Validator<ResetPasswordModel> {

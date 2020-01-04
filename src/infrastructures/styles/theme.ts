@@ -40,14 +40,10 @@ const secondary = pink;
 const type = isLight ? 'light' : 'dark';
 const muiThemeOption: MuiThemeOptions = {
   palette: { primary, secondary, type, background: { default: '#fff' } },
-  typography: {
-    useNextVariants: true,
-  },
+  typography: {},
 };
 const customThemeOption = {
-  typography: {
-    useNextVariants: true,
-  },
+  typography: {},
   shared: {
     fontWeight: { bold: 'bold' as FontWeightProperty },
     borderWidth: { thick: 4 },

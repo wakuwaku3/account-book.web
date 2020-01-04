@@ -17,7 +17,7 @@ const styles = createStyles({
   select: {},
 });
 interface SelectProps {
-  items: MenuItemProps[];
+  items: Omit<MenuItemProps, 'button'>[];
   label: string;
 }
 export const Select = decorate(styles)<SelectProps & MuiSelectProps>(props => {
@@ -27,9 +27,9 @@ export const Select = decorate(styles)<SelectProps & MuiSelectProps>(props => {
     <FormControl className={root}>
       <InputLabel>{label}</InputLabel>
       <MuiSelect {...others} className={select}>
-        {items.map(x => (
-          <MenuItem {...x} />
-        ))}
+        {items.map(x => {
+          return <MenuItem {...x} />;
+        })}
       </MuiSelect>
     </FormControl>
   );

@@ -20,10 +20,11 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { StateMapperWithRouter } from 'src/infrastructures/routing/types';
 import { StoredState } from 'src/enterprise/stores/stored-state';
 import { Url } from 'src/infrastructures/routing/url';
-import { RefElement } from 'src/web/components/types';
 import { connect } from 'react-redux';
 import { withRouter } from 'src/infrastructures/routing/routing-helper';
 import { accountsUseCase } from 'src/application/use-cases/di/container';
+
+export type RefElement = null | undefined | HTMLElement;
 
 const styles = createStyles({
   root: {

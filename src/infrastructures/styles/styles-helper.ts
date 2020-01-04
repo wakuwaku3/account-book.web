@@ -6,7 +6,6 @@ import {
   Classes,
 } from './types';
 import injectSheet from 'react-jss';
-import { Omit } from '../helpers/types';
 
 export const decorate = <TStyles extends Styles>(style: TStyles) => <
   TProps = {}
