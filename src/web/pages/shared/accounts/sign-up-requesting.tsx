@@ -94,7 +94,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   return (
     <Container className={root}>
       <Row>
-        <Typography variant="h4">{resources.entryUser}</Typography>
+        <Typography variant="h4" color="textPrimary">{resources.entryUser}</Typography>
       </Row>
       <Row>
         <Typography variant="subtitle2">

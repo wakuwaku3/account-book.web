@@ -58,7 +58,9 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   return (
     <Container className={root}>
       <Row>
-        <Typography variant="h4">{resources.transactionIndex}</Typography>
+        <Typography variant="h4" color="textPrimary">
+          {resources.transactionIndex}
+        </Typography>
         <Fab
           size="small"
           color="primary"

@@ -15,6 +15,7 @@ export class Messages {
     '指定のメールアドレスに新しいユーザーを作成するためのメールを送信しました。';
   public notSamePreviousPassword = '前回設定したパスワードが正しくありません。';
   public passwordDescription = 'ログインに使用するパスワードです。';
+  public userNameDescription = 'アプリケーションで表示される名前です';
   public passwordLength = 'パスワードは8文字以上入力してください。';
   public passwordFormat =
     'パスワードには、半角英小文字、大文字、数字をそれぞれ1種類以上使用してください';

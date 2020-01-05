@@ -57,6 +57,7 @@ const styles = createStyles({
     margin: 0,
     border: 0,
   },
+  row: { paddingTop: 30 },
   btn: { width: '100%' },
   popover: { top: -25, left: -5, position: 'relative' },
   dialogAction: { margin: 16 },
@@ -175,7 +176,7 @@ class ModelValidator extends Validator<SignUpModel> {
     ],
     userName: [
       {
-        text: this.messages.passwordDescription,
+        text: this.messages.userNameDescription,
         state: 'description',
       },
       {
@@ -285,7 +286,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
   };
   public render() {
     const { resources, classes } = createPropagationProps(this.props);
-    const { root, form, hidden, btn, popover, dialogAction } = classes;
+    const { root, form, hidden, btn, popover, dialogAction, row } = classes;
     const { email, model, anchor, validationState } = this.state;
     const { password, confirmPassword, userName } = model;
     const validationMessages =
@@ -295,7 +296,9 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     return (
       <Container className={root}>
         <Row>
-          <Typography variant="h4">{resources.resetPassword}</Typography>
+          <Typography variant="h4" color="textPrimary">
+            {resources.signUp}
+          </Typography>
         </Row>
         <Row>
           <Form onSubmit={this.handleClickOpen} className={form}>
@@ -303,7 +306,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
               <Typography variant="body1">{`${resources.email}:${email}`}</Typography>
               <input type="text" defaultValue={email} className={hidden} />
             </Row>
-            <Row>
+            <Row className={row}>
               <TextBox
                 variant="outlined"
                 value={password}
@@ -317,7 +320,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 error={this.validator.hasError('password', validationState)}
               />
             </Row>
-            <Row>
+            <Row className={row}>
               <TextBox
                 variant="outlined"
                 value={confirmPassword}
@@ -334,7 +337,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 )}
               />
             </Row>
-            <Row>
+            <Row className={row}>
               <TextBox
                 variant="outlined"
                 value={userName}
@@ -347,7 +350,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 error={this.validator.hasError('userName', validationState)}
               />
             </Row>
-            <Row>
+            <Row className={row}>
               <Cell xs={8} />
               <Cell xs={4}>
                 <Button

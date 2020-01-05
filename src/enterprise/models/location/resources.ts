@@ -6,6 +6,7 @@ export class Resources {
   public password = 'パスワード';
   public confirmPassword = 'パスワード(入力確認用)';
   public signIn = 'サインイン';
+  public signUp = 'サインアップ';
   public profile = 'プロフィール';
   public signOut = 'サインアウト';
   public cancel = 'キャンセル';

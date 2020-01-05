@@ -270,7 +270,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     return (
       <Container className={root}>
         <Row>
-          <Typography variant="h4">{resources.resetPassword}</Typography>
+          <Typography variant="h4" color="textPrimary">{resources.resetPassword}</Typography>
         </Row>
         <Row>
           <Form onSubmit={this.submit} className={form}>

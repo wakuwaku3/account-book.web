@@ -151,7 +151,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     <Container className={root}>
       <Form onSubmit={submit}>
         <Row>
-          <Typography variant="h4">
+          <Typography variant="h4" color="textPrimary">
             {id ? resources.planEdit : resources.planCreate}
           </Typography>
           <div className={btnRow}>

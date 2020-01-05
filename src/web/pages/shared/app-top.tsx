@@ -27,7 +27,7 @@ import { accountsUseCase } from 'src/application/use-cases/di/container';
 export type RefElement = null | undefined | HTMLElement;
 
 const styles = createStyles({
-  root: {
+  bar: {
     position: 'absolute',
   },
   grow: {},
@@ -53,7 +53,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     history,
   } = createPropagationProps(props);
   const [anchorEl, setAnchorEl] = React.useState<RefElement>(undefined);
-  const { root, grow, subMenuAria } = classes;
+  const { bar, grow, subMenuAria } = classes;
   const open = Boolean(anchorEl);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -66,7 +66,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   };
 
   return (
-    <AppBar position="static" className={root}>
+    <AppBar position="static" className={bar}>
       <Toolbar>
         <Button color="inherit" onClick={() => history.push(Url.root)}>
           <Apps style={{ marginRight: 5 }} />

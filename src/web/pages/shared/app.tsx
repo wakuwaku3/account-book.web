@@ -38,15 +38,13 @@ const mapEventToProps: EventMapper<{}> = () => {
 };
 const mapStateToProps = ({ theme }: StoredState) => {
   const { createTheme } = new ThemeSelectors(theme);
+  const newTheme = createTheme();
   return {
-    theme: createTheme(),
+    theme: newTheme,
   };
 };
 const initialState = getInitialStoredState();
-const ConnectedInner = connect(
-  mapStateToProps,
-  mapEventToProps,
-)(Inner);
+const ConnectedInner = connect(mapStateToProps, mapEventToProps)(Inner);
 export const App: React.SFC<{}> = () => {
   return (
     <StoreProvider initialState={initialState}>

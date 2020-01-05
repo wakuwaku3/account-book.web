@@ -67,6 +67,6 @@ export const createPropagationProps = <
   'theme' | 'className' | 'injectClasses'
 > => {
   const c = getInjectClasses(props, ...appendClasses);
-  const { theme, className, injectClasses, ...others } = props as any;
+  const { theme, className, injectClasses, ...others } = props;
   return { ...others, classes: c };
 };

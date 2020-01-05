@@ -108,7 +108,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   return (
     <Container className={root}>
       <Row>
-        <Typography variant="h4" className={subject}>
+        <Typography variant="h4" className={subject} color="textPrimary">
           {resources.dashboard}
         </Typography>
         {selectedMonth && (canApprove || canCancelApprove) && (

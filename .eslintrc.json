@@ -14,6 +14,9 @@
   },
   "rules": {
     "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "eslint:recommended/no-useless-escape": "off"
   }
 }

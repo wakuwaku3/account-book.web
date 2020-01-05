@@ -62,7 +62,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   return (
     <Container className={root}>
       <Row>
-        <Typography variant="h4">{resources.signIn}</Typography>
+        <Typography variant="h4" color="textPrimary">{resources.signIn}</Typography>
       </Row>
       <Row>
         <Form onSubmit={() => signIn(model)} className={form}>
