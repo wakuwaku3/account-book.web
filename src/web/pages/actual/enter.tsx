@@ -32,7 +32,7 @@ import { connect } from 'react-redux';
 import { actualUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: { padding: 20, maxWidth: 1024, margin: 'auto' },
+  enter: { padding: 20, maxWidth: 1024, margin: 'auto' },
   btnRow: { justifyContent: 'flex-end', flexGrow: 1, textAlign: 'right' },
   btn: {
     maxWidth: 120,
@@ -138,13 +138,13 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const copy = () => {
     setModel({ ...model, actualAmount: planAmount });
   };
-  const { root, progressContainer, btnRow, btn } = classes;
+  const { enter, progressContainer, btnRow, btn } = classes;
   return loading ? (
     <div className={progressContainer}>
       <CircularProgress />
     </div>
   ) : (
-    <Container className={root}>
+    <Container className={enter}>
       <Form onSubmit={submit}>
         <Row>
           <Typography variant="h4" color="textPrimary">

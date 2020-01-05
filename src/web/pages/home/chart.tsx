@@ -30,7 +30,7 @@ import { now } from 'src/infrastructures/helpers/date-helper';
 import { connect } from 'react-redux';
 
 const styles = createStyles({
-  root: { width: '100%', paddingTop: 20 },
+  chart: { width: '100%', paddingTop: 20 },
   container: { width: '100%', height: 200, paddingTop: 20 },
 });
 interface Props {
@@ -75,7 +75,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { localizer, resources, classes, daily } = createPropagationProps(
     props,
   );
-  const { root, container } = classes;
+  const { chart, container } = classes;
   const data = daily.map(({ date, balance, income, expense }) => ({
     localizeDate: localizer.formatGraphDate(new Date(date)),
     [resources.balance]: balance,
@@ -95,7 +95,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     averageBorderColor,
   } = defaultThemeOption.shared.chart;
   return (
-    <div className={root}>
+    <div className={chart}>
       <div className={container}>
         <ResponsiveContainer>
           <ComposedChart data={data}>

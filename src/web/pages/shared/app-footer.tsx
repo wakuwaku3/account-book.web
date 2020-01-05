@@ -22,7 +22,6 @@ import { ThemeOption } from 'src/infrastructures/styles/theme';
 import { connect } from 'react-redux';
 
 const styles = createStyles({
-  root: {},
   dummy: { height: 56 },
 });
 interface Props {
@@ -51,7 +50,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { resources, authenticated, classes, history } = createPropagationProps(
     props,
   );
-  const { root, dummy } = classes;
+  const { dummy } = classes;
   if (!authenticated) {
     return <div className={dummy} />;
   }
@@ -63,7 +62,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const theme = createMuiTheme(opt);
   return (
     <ThemeProvider theme={theme}>
-      <BottomNavigation showLabels={true} className={root}>
+      <BottomNavigation showLabels={true}>
         <BottomNavigationAction
           label={resources.input}
           icon={<Atm />}

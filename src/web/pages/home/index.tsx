@@ -23,7 +23,7 @@ import { connect } from 'react-redux';
 import { dashboardUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: { padding: 20 },
+  homeIndex: { padding: 20 },
   subject: { paddingRight: 20 },
 });
 interface Props {
@@ -98,7 +98,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     id,
   } = createPropagationProps(props);
   const { showGraph, showPlans } = showState;
-  const { root, subject } = classes;
+  const { homeIndex, subject } = classes;
   const handleChange = (newShowState: DashboardShowState) => {
     setShowState({ ...newShowState });
   };
@@ -106,7 +106,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     getModelAsync();
   }, [getModelAsync]);
   return (
-    <Container className={root}>
+    <Container className={homeIndex}>
       <Row>
         <Typography variant="h4" className={subject} color="textPrimary">
           {resources.dashboard}

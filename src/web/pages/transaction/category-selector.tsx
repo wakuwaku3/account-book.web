@@ -11,7 +11,7 @@ import {
 import { categoryIds } from 'src/enterprise/models/transaction/category';
 
 const styles = createStyles({
-  root: { paddingTop: 20 },
+  categorySelector: { paddingTop: 20 },
 });
 interface Props {
   resources: Resources;
@@ -20,10 +20,10 @@ interface Props {
 }
 const Inner: StyledSFC<typeof styles, Props> = props => {
   const { resources, classes, value, onChange } = createPropagationProps(props);
-  const { root } = classes;
+  const { categorySelector } = classes;
   return (
     <RadioGroup
-      className={root}
+      className={categorySelector}
       label={resources.category}
       onChange={(event, v) => onChange && onChange(v)}
       required={true}

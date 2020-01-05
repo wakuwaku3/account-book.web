@@ -27,7 +27,7 @@ import { connect } from 'react-redux';
 import { transactionUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: { width: '100%', overflow: 'auto' },
+  transactionList: { width: '100%', overflow: 'none' },
   editBtn: { marginRight: 0 },
   btnColumn: { width: 110, minWidth: 110 },
   dateColumn: { width: 150, minWidth: 150 },
@@ -80,7 +80,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     return null;
   }
   const {
-    root,
+    transactionList,
     editBtn,
     btnColumn,
     dateColumn,
@@ -89,7 +89,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     notesColumn,
   } = classes;
   return (
-    <div className={root}>
+    <div className={transactionList}>
       <Table>
         <TableHead>
           <TableRow>

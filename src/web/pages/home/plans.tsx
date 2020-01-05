@@ -27,7 +27,7 @@ import { TableCell } from 'src/web/components/table/table-cell';
 import { connect } from 'react-redux';
 
 const styles = createStyles({
-  root: { width: '100%', overflow: 'auto' },
+  plansRoot: { width: '100%', overflow: 'auto' },
 });
 interface Props {
   resources: Resources;
@@ -75,12 +75,12 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     readonly,
     id,
   } = createPropagationProps(props);
-  const { root } = classes;
+  const { plansRoot } = classes;
   if (!plans || !selectedMonth) {
     return null;
   }
   return (
-    <div className={root}>
+    <div className={plansRoot}>
       <Table>
         <TableHead>
           <TableRow>

@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 import { transactionUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: { padding: 20 },
+  transactionIndex: { padding: 20 },
   addBtn: { marginLeft: 20 },
 });
 interface Props {
@@ -51,12 +51,12 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   const { resources, classes, loadAsync, history } = createPropagationProps(
     props,
   );
-  const { root, addBtn } = classes;
+  const { transactionIndex, addBtn } = classes;
   React.useEffect(() => {
     loadAsync();
   }, [loadAsync]);
   return (
-    <Container className={root}>
+    <Container className={transactionIndex}>
       <Row>
         <Typography variant="h4" color="textPrimary">
           {resources.transactionIndex}

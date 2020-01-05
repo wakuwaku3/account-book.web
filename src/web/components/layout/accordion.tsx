@@ -7,7 +7,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { ThemeColorScope } from '../styles/theme-color-scope';
 
 const styles = createStyles({
-  root: { width: '100%' },
+  accordion: { width: '100%' },
   btn: {},
 });
 interface Props {
@@ -25,7 +25,7 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
     onChange,
     defaultShow,
   } = createPropagationProps(props);
-  const { root, btn } = classes;
+  const { accordion, btn } = classes;
   const [show, setShow] = React.useState(defaultShow);
   const handleCheck = () => {
     if (onChange) {
@@ -35,7 +35,7 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
   };
   return (
     <ThemeColorScope themeColor={themeColor}>
-      <div className={root}>
+      <div className={accordion}>
         <Button
           className={btn}
           onClick={handleCheck}

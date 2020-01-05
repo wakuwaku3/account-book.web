@@ -33,7 +33,7 @@ import { connect } from 'react-redux';
 import { planUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: { padding: 20, maxWidth: 1024, margin: 'auto' },
+  planEdit: { padding: 20, maxWidth: 1024, margin: 'auto' },
   btnRow: { justifyContent: 'flex-end', flexGrow: 1, textAlign: 'right' },
   btn: {
     maxWidth: 120,
@@ -99,7 +99,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     history,
     localizer,
   } = createPropagationProps(props);
-  const { root, btnRow, btn, progressContainer } = classes;
+  const { planEdit, btnRow, btn, progressContainer } = classes;
   const [model, setModel] = React.useState(getDefault());
   const { name: planName, isIncome, amount, interval, start, end } = model;
   const handleChange = <K extends keyof PlanEditModel>(
@@ -148,7 +148,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       <CircularProgress />
     </div>
   ) : (
-    <Container className={root}>
+    <Container className={planEdit}>
       <Form onSubmit={submit}>
         <Row>
           <Typography variant="h4" color="textPrimary">

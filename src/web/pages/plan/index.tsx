@@ -32,8 +32,8 @@ import { connect } from 'react-redux';
 import { planUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: { padding: 20 },
-  tableContainer: { width: '100%', overflow: 'auto' },
+  planIndex: { padding: 20 },
+  tableContainer: { width: '100%', overflow: 'none' },
   addBtn: { marginLeft: 20 },
   editBtn: { marginRight: 0 },
   btnColumn: { width: 110, minWidth: 110 },
@@ -83,7 +83,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     localizer,
   } = createPropagationProps(props);
   const {
-    root,
+    planIndex,
     tableContainer,
     editBtn,
     btnColumn,
@@ -98,7 +98,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     loadAsync();
   }, [loadAsync]);
   return (
-    <Container className={root}>
+    <Container className={planIndex}>
       <Row>
         <Typography variant="h4" color="textPrimary">
           {resources.planIndex}

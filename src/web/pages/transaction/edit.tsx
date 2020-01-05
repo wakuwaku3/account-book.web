@@ -32,7 +32,7 @@ import { connect } from 'react-redux';
 import { transactionUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: { padding: 20, maxWidth: 1024, margin: 'auto' },
+  transactionEdit: { padding: 20, maxWidth: 1024, margin: 'auto' },
   btnRow: { justifyContent: 'flex-end', flexGrow: 1, textAlign: 'right' },
   btn: {
     maxWidth: 120,
@@ -101,7 +101,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     createTransactionAsync,
     history,
   } = createPropagationProps(props);
-  const { root, btnRow, btn, progressContainer } = classes;
+  const { transactionEdit, btnRow, btn, progressContainer } = classes;
   const [model, setModel] = React.useState(getDefaultState());
   const { amount, categoryId, notes, date } = model;
   const handleChange = <K extends keyof TransactionEditModel>(
@@ -144,7 +144,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
       <CircularProgress />
     </div>
   ) : (
-    <Container className={root}>
+    <Container className={transactionEdit}>
       <Form onSubmit={submit}>
         <Row>
           <Typography variant="h4" color="textPrimary">
