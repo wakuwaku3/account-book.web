@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
 import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: {
+  signUpRequesting: {
     padding: 20,
     maxWidth: 550,
     margin: 'auto',
@@ -82,7 +82,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     email: getDefaultEmail(),
   });
   const { email } = model;
-  const { root, form, btn } = classes;
+  const { signUpRequesting, form, btn } = classes;
   const handleChange = (name: keyof SignUpRequestingRequest) => (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -92,9 +92,11 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     });
   };
   return (
-    <Container className={root}>
+    <Container className={signUpRequesting}>
       <Row>
-        <Typography variant="h4" color="textPrimary">{resources.entryUser}</Typography>
+        <Typography variant="h4" color="textPrimary">
+          {resources.entryUser}
+        </Typography>
       </Row>
       <Row>
         <Typography variant="subtitle2">

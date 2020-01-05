@@ -11,7 +11,7 @@ import { Message } from 'src/enterprise/models/messages/message';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
+    messageBar: {
       position: 'relative',
       marginBottom: 5,
     },
@@ -45,7 +45,7 @@ export const MessageBar = decorate(styles)<MessageBarProps>(props => {
   );
   const { showDuration } = message;
   const {
-    root,
+    messageBar,
     content,
     contentMessage,
     contentAction,
@@ -57,7 +57,7 @@ export const MessageBar = decorate(styles)<MessageBarProps>(props => {
   }
   return (
     <Snackbar
-      className={root}
+      className={messageBar}
       ContentProps={{
         className: content,
         classes: {

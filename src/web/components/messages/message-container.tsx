@@ -12,7 +12,7 @@ import { Message } from 'src/enterprise/models/messages/message';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
+    messageContainer: {
       position: 'fixed',
       zIndex: theme.zIndex.snackbar,
       width: 0,
@@ -45,8 +45,8 @@ export const MessageContainer = decorate(styles)<MessageContainerProps>(
       anchorOrigin,
       classes,
     } = createPropagationProps(props);
-    const { root, bar } = classes;
-    const classNames = [root];
+    const { messageContainer, bar } = classes;
+    const classNames = [messageContainer];
     if (anchorOrigin) {
       classNames.push(classes['root-vertical-' + anchorOrigin.vertical]);
       classNames.push(classes['root-horizontal-' + anchorOrigin.horizontal]);
