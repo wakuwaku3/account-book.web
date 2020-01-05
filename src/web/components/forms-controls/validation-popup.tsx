@@ -13,7 +13,7 @@ import { ValidationMessageContent } from 'src/infrastructures/validation/validat
 import { Popup, PopupProps } from '../layout/popup';
 
 const styles = createStyles({
-  root: {
+  validationPopup: {
     padding: 10,
     maxWidth: 400,
   },
@@ -26,10 +26,10 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
   const { classes, validationMessages, popupProps } = createPropagationProps(
     props,
   );
-  const { root } = classes;
+  const { validationPopup } = classes;
   return (
     <Popup {...popupProps}>
-      <Paper className={root}>
+      <Paper className={validationPopup}>
         {validationMessages.map(({ text, state }, i) => {
           if (state === 'description') {
             return <Typography key={i}>{text}</Typography>;

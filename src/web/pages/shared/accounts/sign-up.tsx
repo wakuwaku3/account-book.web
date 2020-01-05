@@ -38,7 +38,7 @@ import { SignUpRequest } from 'src/enterprise/models/accounts/account';
 import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: {
+  signUpRoot: {
     padding: 20,
     paddingTop: 50,
     maxWidth: 800,
@@ -286,7 +286,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
   };
   public render() {
     const { resources, classes } = createPropagationProps(this.props);
-    const { root, form, hidden, btn, popover, dialogAction, row } = classes;
+    const { signUpRoot, form, hidden, btn, popover, dialogAction, row } = classes;
     const { email, model, anchor, validationState } = this.state;
     const { password, confirmPassword, userName } = model;
     const validationMessages =
@@ -294,7 +294,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
         ? validationState[anchor.key]
         : undefined;
     return (
-      <Container className={root}>
+      <Container className={signUpRoot}>
         <Row>
           <Typography variant="h4" color="textPrimary">
             {resources.signUp}

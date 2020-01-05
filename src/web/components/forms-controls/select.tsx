@@ -11,7 +11,7 @@ import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 
 const styles = createStyles({
-  root: {
+  selector: {
     width: '100%',
   },
   select: {},
@@ -22,9 +22,9 @@ interface SelectProps {
 }
 export const Select = decorate(styles)<SelectProps & MuiSelectProps>(props => {
   const { items, label, classes, ...others } = createPropagationProps(props);
-  const { root, select } = classes;
+  const { selector, select } = classes;
   return (
-    <FormControl className={root}>
+    <FormControl className={selector}>
       <InputLabel>{label}</InputLabel>
       <MuiSelect {...others} className={select}>
         {items.map(x => {

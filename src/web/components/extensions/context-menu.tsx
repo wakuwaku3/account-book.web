@@ -8,7 +8,7 @@ import {
 } from 'src/infrastructures/styles/styles-helper';
 
 const styles = createStyles({
-  root: {
+  contextMenu: {
     flexDirection: 'column',
     display: 'flex',
   },
@@ -20,7 +20,7 @@ const Inner: StyledSFC<
   Props & PopoverProps & Events
 > = props => {
   const { anchorEl, classes, ...others } = createPropagationProps(props);
-  const { root } = classes;
+  const { contextMenu } = classes;
   const open = Boolean(anchorEl);
   return (
     <Popover
@@ -34,7 +34,7 @@ const Inner: StyledSFC<
       }}
       open={open}
       {...others}
-      classes={{ paper: root }}
+      classes={{ paper: contextMenu }}
     />
   );
 };

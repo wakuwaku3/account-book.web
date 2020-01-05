@@ -3,13 +3,6 @@ import { Typography, createStyles } from '@material-ui/core';
 import { decorate } from 'src/infrastructures/styles/styles-helper';
 
 const styles = createStyles({
-  root: {
-    padding: 20,
-    paddingTop: 50,
-    maxWidth: 800,
-    margin: 'auto',
-    paddingBottom: 50,
-  },
   form: {
     paddingTop: 20,
   },

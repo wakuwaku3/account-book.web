@@ -29,7 +29,7 @@ import { accountsUseCase } from 'src/application/use-cases/di/container';
 import { ReferenceObject } from 'popper.js';
 
 const styles = createStyles({
-  root: {
+  resetPassword: {
     padding: 20,
     paddingTop: 50,
     maxWidth: 800,
@@ -261,7 +261,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     const { resources, classes, passwordResetToken } = createPropagationProps(
       this.props,
     );
-    const { root, form, hidden, btn, popover, row } = classes;
+    const { resetPassword, form, hidden, btn, popover, row } = classes;
     const { email, model, anchor, validationState } = this.state;
     const { password, previousPassword, confirmPassword } = model;
     const validationMessages =
@@ -269,7 +269,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
         ? validationState[anchor.key]
         : undefined;
     return (
-      <Container className={root}>
+      <Container className={resetPassword}>
         <Row>
           <Typography variant="h4" color="textPrimary">
             {resources.resetPassword}

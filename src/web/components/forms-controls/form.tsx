@@ -5,7 +5,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { FormProps } from '../types';
 
 const styles = createStyles({
-  root: {
+  form: {
     width: '100%',
   },
 });
@@ -14,7 +14,7 @@ export interface Props {
 }
 export const Form = decorate(styles)<Props & FormProps>(props => {
   const { onSubmit, classes, ...others } = createPropagationProps(props);
-  const { root } = classes;
+  const { form } = classes;
   const onSubmitInner = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (onSubmit) {
@@ -25,7 +25,7 @@ export const Form = decorate(styles)<Props & FormProps>(props => {
   return (
     <form
       {...others}
-      className={root}
+      className={form}
       onSubmit={onSubmitInner}
       noValidate={true}
     />

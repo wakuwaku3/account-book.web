@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: {
+  signInRoot: {
     padding: 20,
     maxWidth: 350,
     margin: 'auto',
@@ -51,7 +51,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     password: '',
   });
   const { email, password } = model;
-  const { form, root, btn, fullWidth } = classes;
+  const { form, signInRoot, btn, fullWidth } = classes;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setModel({
@@ -60,7 +60,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     });
   };
   return (
-    <Container className={root}>
+    <Container className={signInRoot}>
       <Row>
         <Typography variant="h4" color="textPrimary">{resources.signIn}</Typography>
       </Row>

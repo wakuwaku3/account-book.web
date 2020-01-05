@@ -13,7 +13,7 @@ import { createPropagationProps } from 'src/infrastructures/styles/styles-helper
 import { RadioProps as MuiRadioProps } from '@material-ui/core/Radio';
 
 const styles = createStyles({
-  root: {
+  radioGroup: {
     width: '100%',
   },
   group: { flexDirection: 'row' },
@@ -38,9 +38,9 @@ export const RadioGroup = decorate(styles)<
     classes,
     ...others
   } = createPropagationProps(props);
-  const { root, group } = classes;
+  const { radioGroup, group } = classes;
   return (
-    <FormControl className={root}>
+    <FormControl className={radioGroup}>
       <FormLabel required={required}>{label}</FormLabel>
       <MuiRadioGroup {...others} className={group}>
         {items &&

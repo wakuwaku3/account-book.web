@@ -5,13 +5,13 @@ import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 
 const styles = createStyles({
-  root: {
+  cell: {
     display: 'flex',
   },
 });
 interface CellProps {}
 export const Cell = decorate(styles)<CellProps & GridProps>(props => {
   const { classes, ...others } = createPropagationProps(props);
-  const { root } = classes;
-  return <Grid {...others} className={root} item={true} />;
+  const { cell } = classes;
+  return <Grid {...others} className={cell} item={true} />;
 });

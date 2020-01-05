@@ -5,7 +5,7 @@ import { decorate } from 'src/infrastructures/styles/styles-helper';
 import { createPropagationProps } from 'src/infrastructures/styles/styles-helper';
 
 const styles = createStyles({
-  root: {
+  textBox: {
     width: '100%',
   },
 });
@@ -21,12 +21,12 @@ export const TextBox = decorate(styles)<TextBoxProps>(props => {
     variant,
     ...others
   } = createPropagationProps(props);
-  const { root } = classes;
+  const { textBox } = classes;
   return (
     <TextField
       variant="standard"
       {...others}
-      className={root}
+      className={textBox}
       onChange={e =>
         onChange
           ? maxLength

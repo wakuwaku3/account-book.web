@@ -17,7 +17,7 @@ import { DashboardSelectors } from 'src/enterprise/stores/dashboard/selectors';
 import { connect } from 'react-redux';
 
 const styles = createStyles({
-  root: {
+  summaryRoot: {
     display: 'flex',
     padding: 5,
     flexWrap: 'wrap',
@@ -57,12 +57,12 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   if (!summary) {
     return null;
   }
-  const { root } = classes;
+  const { summaryRoot } = classes;
   const { income, expense, previousBalance } = summary;
   const currentBalance = income - expense;
   const balance = currentBalance + (previousBalance ? previousBalance : 0);
   return (
-    <div className={root}>
+    <div className={summaryRoot}>
       <Amount
         name={resources.income}
         amount={income}

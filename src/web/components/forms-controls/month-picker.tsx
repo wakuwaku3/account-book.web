@@ -20,7 +20,7 @@ export interface MonthPickerModel {
 }
 
 const styles = createStyles({
-  root: {
+  monthPickerRoot: {
     display: 'flex',
     alignItems: 'center',
     flexGrow: 1,
@@ -48,9 +48,9 @@ const Inner: StyledSFC<typeof styles, Props> = props => {
   const index = selectableMonths.findIndex(x => equalMonth(x, selectedMonth));
   const beforeDisabled = index <= 0;
   const nextDisabled = index >= selectableMonths.length - 1;
-  const { root, btn } = classes;
+  const { monthPickerRoot, btn } = classes;
   return (
-    <div className={root}>
+    <div className={monthPickerRoot}>
       <IconButton
         disabled={beforeDisabled}
         onClick={() => onChange(selectableMonths[index - 1])}

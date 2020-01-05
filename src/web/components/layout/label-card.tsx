@@ -10,7 +10,7 @@ import { Theme } from 'src/infrastructures/styles/theme';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
+    labelCard: {
       borderLeftStyle: 'solid',
       borderLeftWidth: 10,
     },
@@ -21,9 +21,11 @@ interface Props {
 }
 const Inner: StyledSFC<typeof styles, Props> = props => {
   const { children, classes, color } = createPropagationProps(props);
-  const { root, yellow } = classes;
+  const { labelCard, yellow } = classes;
   return (
-    <Paper className={appendClassName(root, color ? classes[color] : yellow)}>
+    <Paper
+      className={appendClassName(labelCard, color ? classes[color] : yellow)}
+    >
       {children}
     </Paper>
   );

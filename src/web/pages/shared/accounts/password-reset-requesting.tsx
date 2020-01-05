@@ -21,7 +21,7 @@ import { PasswordResetRequestingRequest } from 'src/enterprise/models/accounts/a
 import { accountsUseCase } from 'src/application/use-cases/di/container';
 
 const styles = createStyles({
-  root: {
+  passwordResetRequesting: {
     padding: 20,
     maxWidth: 550,
     margin: 'auto',
@@ -83,7 +83,7 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
   } = createPropagationProps(props);
   const [model, setModel] = React.useState({ email: getDefaultEmail() });
   const { email } = model;
-  const { root, form, btn } = classes;
+  const { passwordResetRequesting, form, btn } = classes;
   const handleChange = (name: keyof PasswordResetRequestingRequest) => (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -93,9 +93,11 @@ const Inner: StyledSFC<typeof styles, Props & Events> = props => {
     });
   };
   return (
-    <Container className={root}>
+    <Container className={passwordResetRequesting}>
       <Row>
-        <Typography variant="h4" color="textPrimary">{resources.resetPassword}</Typography>
+        <Typography variant="h4" color="textPrimary">
+          {resources.resetPassword}
+        </Typography>
       </Row>
       <Row>
         <Typography variant="subtitle2">
