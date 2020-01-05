@@ -49,6 +49,7 @@ const styles = createStyles({
     border: 0,
   },
   btn: { width: '100%' },
+  row: { paddingTop: 30 },
   popover: { top: -25, left: -5, position: 'relative' },
 });
 interface Props {
@@ -260,7 +261,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     const { resources, classes, passwordResetToken } = createPropagationProps(
       this.props,
     );
-    const { root, form, hidden, btn, popover } = classes;
+    const { root, form, hidden, btn, popover, row } = classes;
     const { email, model, anchor, validationState } = this.state;
     const { password, previousPassword, confirmPassword } = model;
     const validationMessages =
@@ -270,7 +271,9 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
     return (
       <Container className={root}>
         <Row>
-          <Typography variant="h4" color="textPrimary">{resources.resetPassword}</Typography>
+          <Typography variant="h4" color="textPrimary">
+            {resources.resetPassword}
+          </Typography>
         </Row>
         <Row>
           <Form onSubmit={this.submit} className={form}>
@@ -279,7 +282,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
               <input type="text" defaultValue={email} className={hidden} />
             </Row>
             {!passwordResetToken && (
-              <Row>
+              <Row className={row}>
                 <TextBox
                   variant="outlined"
                   value={previousPassword}
@@ -297,7 +300,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 />
               </Row>
             )}
-            <Row>
+            <Row className={row}>
               <TextBox
                 variant="outlined"
                 value={password}
@@ -311,7 +314,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 error={this.validator.hasError('password', validationState)}
               />
             </Row>
-            <Row>
+            <Row className={row}>
               <TextBox
                 variant="outlined"
                 value={confirmPassword}
@@ -328,7 +331,7 @@ class Inner extends StyledComponentBase<typeof styles, Props & Events, State> {
                 )}
               />
             </Row>
-            <Row>
+            <Row className={row}>
               <Cell xs={8} />
               <Cell xs={4}>
                 <Button
